@@ -133,24 +133,24 @@ void floodCenter(void) {
 			else if ( (distW < distE) && (distW < distS) && (distW < distN) )
 				nextMove = MOVEW;
 			 
-			// 2. If multiple equally short routes, choose untraced route N > E > S > W
-			else if ( !hasNorth(tempBlock[yPos][xPos]) && !hasTrace(tempBlock[yPos + 1][xPos]))
+			// 2. If multiple equally short routes, go straight if possible
+			else if ( orientation == 'N' && !hasNorth(block[yPos][xPos]) )
 				nextMove = MOVEN;
-			else if ( !hasEast(tempBlock[yPos][xPos]) && !hasTrace(tempBlock[yPos][xPos + 1]))
+			else if ( orientation == 'E' && !hasEast(block[yPos][xPos]) )
 				nextMove = MOVEE;
-			else if ( !hasSouth(tempBlock[yPos][xPos]) && !hasTrace(tempBlock[yPos - 1][xPos]))
+			else if ( orientation == 'S' && !hasSouth(block[yPos][xPos]) )
 				nextMove = MOVES;
-			else if ( !hasWest(tempBlock[yPos][xPos]) && !hasTrace(tempBlock[yPos][xPos - 1]))
+			else if ( orientation == 'W' && !hasWest(block[yPos][xPos]) )
 				nextMove = MOVEW;
 			 
 			// 3. Otherwise prioritize N > E > S > W
-			else if (!hasNorth(tempBlock[yPos][xPos]))
+			else if (!hasNorth(block[yPos][xPos]))
 				nextMove = MOVEN;
-			else if (!hasEast(tempBlock[yPos][xPos]))
+			else if (!hasEast(block[yPos][xPos]))
 				nextMove = MOVEE;
-			else if (!hasSouth(tempBlock[yPos][xPos]))
+			else if (!hasSouth(block[yPos][xPos]))
 				nextMove = MOVES;
-			else if (!hasWest(tempBlock[yPos][xPos]))
+			else if (!hasWest(block[yPos][xPos]))
 				nextMove = MOVEW;
 			
 			else {
