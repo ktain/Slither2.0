@@ -134,23 +134,23 @@ void floodCenter(void) {
 				nextMove = MOVEW;
 			 
 			// 2. If multiple equally short routes, go straight if possible
-			else if ( orientation == 'N' && !hasNorth(block[yPos][xPos]) )
+			else if ( orientation == 'N' && !hasNorth(tempBlock[yPos][xPos]) )
 				nextMove = MOVEN;
-			else if ( orientation == 'E' && !hasEast(block[yPos][xPos]) )
+			else if ( orientation == 'E' && !hasEast(tempBlock[yPos][xPos]) )
 				nextMove = MOVEE;
-			else if ( orientation == 'S' && !hasSouth(block[yPos][xPos]) )
+			else if ( orientation == 'S' && !hasSouth(tempBlock[yPos][xPos]) )
 				nextMove = MOVES;
-			else if ( orientation == 'W' && !hasWest(block[yPos][xPos]) )
+			else if ( orientation == 'W' && !hasWest(tempBlock[yPos][xPos]) )
 				nextMove = MOVEW;
 			 
 			// 3. Otherwise prioritize N > E > S > W
-			else if (!hasNorth(block[yPos][xPos]))
+			else if (!hasNorth(tempBblock[yPos][xPos]))
 				nextMove = MOVEN;
-			else if (!hasEast(block[yPos][xPos]))
+			else if (!hasEast(tempBlock[yPos][xPos]))
 				nextMove = MOVEE;
-			else if (!hasSouth(block[yPos][xPos]))
+			else if (!hasSouth(tempBlock[yPos][xPos]))
 				nextMove = MOVES;
-			else if (!hasWest(block[yPos][xPos]))
+			else if (!hasWest(tempBlock[yPos][xPos]))
 				nextMove = MOVEW;
 			
 			else {
