@@ -426,10 +426,16 @@ void button3_interrupt(void) {
 			beep(3);
 			break;
 		case 2:
-			
+			while(1) {
+				delay_ms(1);
+				printInfo();
+			}
 			break;	
 		case 3:
-			
+			while(1) {
+				delay_ms(1);
+				printInfo();
+			}
 			break;			
 		default:
 			;
