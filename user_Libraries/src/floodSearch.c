@@ -379,7 +379,7 @@ void floodStart(void) {
 			distW = hasWest(tempBlock[yPos][xPos])? 500 : tempDistance[yPos][xPos - 1];
 			if (DEBUG) printf("distN %d, distE %d, distS %d, distW %d\n\r", distN, distE, distS, distW);
 			
-			// Decide next movement
+			// Decide next movement, flooding to start
 			if (DEBUG) printf("Deciding next movement\n\r");
 			// 1. Pick the shortest route
 			if ( (distN < distE) && (distN < distS) && (distN < distW) )
@@ -391,14 +391,14 @@ void floodStart(void) {
 			else if ( (distW < distE) && (distW < distS) && (distW < distN) )
 				nextMove = MOVEW;
 			 
-			// 2. If multiple equally short routes, go straight if possible
-			else if ( orientation == 'N' && !hasNorth(tempBlock[yPos][xPos]) )
+			// 2. If multiple equally short routes, choose untraced route N > E > S > W
+			else if ( !hasNorth(tempBlock[yPos][xPos]) && !hasTrace(tempBlock[yPos + 1][xPos]))
 				nextMove = MOVEN;
-			else if ( orientation == 'E' && !hasEast(tempBlock[yPos][xPos]) )
+			else if ( !hasEast(tempBlock[yPos][xPos]) && !hasTrace(tempBlock[yPos][xPos + 1]))
 				nextMove = MOVEE;
-			else if ( orientation == 'S' && !hasSouth(tempBlock[yPos][xPos]) )
+			else if ( !hasSouth(tempBlock[yPos][xPos]) && !hasTrace(tempBlock[yPos - 1][xPos]))
 				nextMove = MOVES;
-			else if ( orientation == 'W' && !hasWest(tempBlock[yPos][xPos]) )
+			else if ( !hasWest(tempBlock[yPos][xPos]) && !hasTrace(tempBlock[yPos][xPos - 1]))
 				nextMove = MOVEW;
 			 
 			// 3. Else, go straight if possible
@@ -423,7 +423,7 @@ void floodStart(void) {
 			
 			else {
 				if (DEBUG) {
-					printf("Stuck... Can't find center.\n\r");
+					printf("Stuck... Can't find start.\n\r");
 				}
 				nextMove = STOP;
 				useSpeedProfile = 0;
