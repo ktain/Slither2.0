@@ -414,6 +414,12 @@ void button3_interrupt(void) {
 					block[i][j] = tempBlock[i][j];
 				}
 			}
+			// Save tempDistance to distance
+			for (int i = 0; i < SIZE; i++) {
+				for (int j = 0; j < SIZE; j++) {
+					distance[i][j] = tempDistance[i][j];
+				}
+			}
 			beep(3);
 			break;
 		case 1:
@@ -423,18 +429,26 @@ void button3_interrupt(void) {
 					tempBlock[i][j] = block[i][j];
 				}
 			}
+			// Reset tempDistance to distance
+			for (int i = 0; i < SIZE; i++) {
+				for (int j = 0; j < SIZE; j++) {
+					tempDistance[i][j] = distance[i][j];
+				}
+			}
 			beep(3);
 			break;
 		case 2:
 			while(1) {
-				delay_ms(1);
+				readSensor();
 				printInfo();
+				delay_ms(1);
 			}
 			break;	
 		case 3:
 			while(1) {
-				delay_ms(1);
+				readSensor();
 				printInfo();
+				delay_ms(1);
 			}
 			break;			
 		default:

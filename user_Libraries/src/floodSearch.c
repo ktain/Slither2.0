@@ -144,7 +144,7 @@ void floodCenter(void) {
 				nextMove = MOVEW;
 			 
 			// 3. Otherwise prioritize N > E > S > W
-			else if (!hasNorth(tempBblock[yPos][xPos]))
+			else if (!hasNorth(tempBlock[yPos][xPos]))
 				nextMove = MOVEN;
 			else if (!hasEast(tempBlock[yPos][xPos]))
 				nextMove = MOVEE;
