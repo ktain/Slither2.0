@@ -18,13 +18,19 @@ void moveN() {
 
   }
   else if ( orientation == 'W' ) {
-    pivotTurn(turnRight90);
+		if (isCurveTurning)
+			curveTurnRight();
+    else
+			pivotTurn(turnRight90);
   }
   else if ( orientation == 'E' ) {
-    pivotTurn(turnLeft90);
+		if (isCurveTurning)
+			curveTurnLeft();
+    else
+			pivotTurn(turnLeft90);
   }
   else if ( orientation == 'S' ) {
-    pivotTurn(turnLeft180);
+			pivotTurn(turnLeft180);
   }
 
   // Update orientation
@@ -38,16 +44,22 @@ void moveE() {
 	if (DEBUG) printf("Moving east\n\r");
 	
   if ( orientation == 'N' ) {
-    pivotTurn(turnRight90);
+		if (isCurveTurning)
+			curveTurnRight();
+    else
+			pivotTurn(turnRight90);
   }
   else if ( orientation == 'W' ) {
-    pivotTurn(turnLeft180);
-
+		pivotTurn(turnLeft180);
   }
   else if ( orientation == 'E' ) {
 
-  }  else if ( orientation == 'S' ) {
-    pivotTurn(turnLeft90);
+  }  
+	else if ( orientation == 'S' ) {
+		if (isCurveTurning)
+			curveTurnLeft();
+    else
+			pivotTurn(turnLeft90);
   }
 
   // Update orientation
@@ -60,13 +72,19 @@ void moveS() {
 	if (DEBUG) printf("Moving south\n\r");
 
   if ( orientation == 'N' ) {
-    pivotTurn(turnLeft180);
+		pivotTurn(turnLeft180);
   }
   else if ( orientation == 'W' ) {
-    pivotTurn(turnLeft90);
+		if (isCurveTurning)
+			curveTurnLeft();
+    else
+			pivotTurn(turnLeft90);
   }
   else if ( orientation == 'E' ) {
-    pivotTurn(turnRight90);
+		if (isCurveTurning)
+			curveTurnRight();
+		else
+			pivotTurn(turnRight90);
   }
   else if ( orientation == 'S' ) {
 
@@ -83,16 +101,22 @@ void moveW() {
 	if (DEBUG) printf("Moving west\n\r");
 	
   if ( orientation == 'N' ) {
-    pivotTurn(turnLeft90);
+		if (isCurveTurning)
+			curveTurnLeft();
+    else
+			pivotTurn(turnLeft90);
   }
   else if ( orientation == 'W' ) {
 
   }
   else if ( orientation == 'E' ) {
-    pivotTurn(turnLeft180);
+			pivotTurn(turnLeft180);
   }
   else if ( orientation == 'S' ) {
-    pivotTurn(turnRight90);
+		if (isCurveTurning)
+			curveTurnRight();
+    else
+			pivotTurn(turnRight90);
   }
 
   // Update orientation

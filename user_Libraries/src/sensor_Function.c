@@ -100,13 +100,13 @@ void readGyro(void)
 	int sampleNum = 40;
 	aSpeed = 0;
 	for(i = 0; i < sampleNum; i++){
-		aSpeed += read_Outz;
+		aSpeed += read_Rate;
 	}
 	
   aSpeed *= 50000/sampleNum;	// scale by 50000 before dividing by number of samples
-	aSpeed -= 93040000;					// 1861 scaled by 50000
+	aSpeed -= 105091500;					// 1861 scaled by 50000
 	aSpeed /= 50000;						// readjust scale
-	aSpeed /= 8;								// Scale to degrees * 100, lower = higher degrees
+	aSpeed *= 2;
 	angle += aSpeed; 
 	
 	//while( (micros() - curt) < 1000 );	// Uncomment when not in 1ms ISR

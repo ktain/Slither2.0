@@ -107,7 +107,7 @@ void randomMovement(void) {
 			
 		// If has front wall or needs to turn, decelerate to 0 within half a cell distance
 		if (hasFrontWall || nextMove == TURNLEFT || nextMove == TURNRIGHT || nextMove == TURNBACK) {
-			if(needToDecelerate(remainingDist, (int)mm_to_counts(curSpeedX), (int)mm_to_counts(stopSpeed)) < decX) {
+			if(getDecNeeded(counts_to_mm(remainingDist), curSpeedX, stopSpeed) < decX) {
 				targetSpeedX = searchSpeed;
 			}
 			else {
@@ -254,7 +254,6 @@ void speedRun(void)
 {
 	isSpeedRunning = 1;
 	resetSpeedProfile();
-	useIRSensors = 1;
 	useSpeedProfile = 1;
 
   int nextDir[100] = {0};
@@ -308,6 +307,7 @@ void speedRun(void)
 	orientation = 'N';
 	
 	// Run path
+	useIRSensors = 1;
   for (int i = 0; distances[i] != 0; i++) {
 		moveForward(distances[i]);
 		
@@ -359,6 +359,108 @@ void closeUntracedCells(void) {
 		}
 	}
 }
+
+
+void speedRunCurve(void) 
+{
+
+  int nextDir[100] = {0};
+	int length = 0;
+  
+  xPos = 0;
+  yPos = 0;
+	orientation = 'N';
+
+	// Close off untraced routes
+	closeUntracedCells();
+  updateDistanceToCenter();
+  visualizeGrid();
+	
+	// Simulate path
+	for (int i = 0; !atCenter(); i++) {
+		if (orientation == 'N') {
+			while (!hasNorth(tempBlock[yPos][xPos]) && (tempDistance[yPos + 1][xPos] == tempDistance[yPos][xPos] - 1)) {
+				length++;
+				yPos++;
+			}
+		}
+		else if (orientation == 'E') {
+			while (!hasEast(tempBlock[yPos][xPos]) && (tempDistance[yPos][xPos + 1] == tempDistance[yPos][xPos] - 1)) {
+				length++;
+				xPos++;
+			}
+		}
+		else if (orientation == 'S') {
+			while (!hasSouth(tempBlock[yPos][xPos]) && (tempDistance[yPos - 1][xPos] == tempDistance[yPos][xPos] - 1)) {
+				length++;
+				yPos--;
+			}
+		}
+		else if (orientation == 'W') {
+			while (!hasWest(tempBlock[yPos][xPos]) && (tempDistance[yPos][xPos - 1] == tempDistance[yPos][xPos] - 1)) {
+				length++;
+				xPos--;
+			}
+		}
+		distances[i] = length;
+		nextDir[i] = getNextDirection();
+		length = 0;
+	}
+	
+	
+	
+	/* Print values
+	for (int i = 0; distances[i]; i++)
+		printf("distances[%d] = %d | nextDir[%d] = %d\n\r", i, distances[i], i, nextDir[i]);
+	*/
+	
+	orientation = 'N';
+	
+	// Run path
+	isSpeedRunning = 1;
+	resetSpeedProfile();
+	useIRSensors = 0;
+	useSpeedProfile = 1;
+	
+	moveForwardHalf();
+	
+	useIRSensors = 1;
+  for (int i = 0; distances[i] != 0; i++) {
+		moveForward(distances[i] - 1);
+		
+		readSensor();
+		if (LFSensor > LFvalue2 && RFSensor > RFvalue2) {
+			alignFrontWall(LFvalue1, RFvalue1, alignTime);
+		}
+		
+		isCurveTurning = 1;
+    if (nextDir[i] == MOVEN) {
+      moveN();
+    }
+    else if (nextDir[i] == MOVEE) {
+      moveE();
+    }
+    else if (nextDir[i] == MOVES) {
+      moveS();
+    }
+    else if (nextDir[i] == MOVEW) {
+      moveW();
+    }
+		isCurveTurning = 0;
+		
+  }
+	
+	useIRSensors = 0;
+	
+	moveForwardHalf();
+	
+	useSpeedProfile = 0;
+	turnMotorOff;
+	beep(3);
+	
+	isSpeedRunning = 0;
+}
+
 
 
 bool hasFrontWallInMem(void) {

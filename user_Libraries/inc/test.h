@@ -13,6 +13,7 @@ int getNextDirection(void);
 void speedRunOld(void);
 void closeUntracedCells(void);
 bool hasFrontWallInMem(void);
+void speedRunCurve(void);
 #endif
 
 

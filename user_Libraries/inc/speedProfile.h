@@ -18,5 +18,6 @@ float abs(float number);
 float getDecNeeded(float Vi, float Vf, float d);
 
 void moveForward(int cells);
+void moveForwardHalf(void);
 
 #endif

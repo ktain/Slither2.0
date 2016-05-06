@@ -36,8 +36,8 @@ float kpW2 = 1;						//used for T2 in curve turn
 float kdW2 = 36;
 float accX = 50;					// acc/dec in mm/ms/ms
 float decX = 50; 				 
-float accW = 1; 					// cm/s^2
-float decW = 1;	
+float accW = 2; 					// cm/s^2
+float decW = 2;	
 
 int leftBaseSpeed = 0;
 int rightBaseSpeed = 0;
@@ -166,6 +166,7 @@ void calculateMotorPwm(void) { // encoder PD controller
  *				 			endSpd - counts/ms
  *	Return: positive deceleration in cm/s
  */
+/*
 int needToDecelerate(int32_t dist, int16_t curSpd, int16_t endSpd) 
 {
 	if (curSpd<0) 
@@ -181,7 +182,7 @@ int needToDecelerate(int32_t dist, int16_t curSpd, int16_t endSpd)
 	
 	return (estimatedDecX < 0)? -estimatedDecX : estimatedDecX;	// cm/s/s
 }
-
+*/
 
 
 
@@ -225,7 +226,7 @@ float getDecNeeded (float d, float Vf, float Vi) {
 	}
 	
 	return abs( (Vf*Vf - Vi*Vi)/d/8 );
-}	
+}
 
 // convert counts/ms to speed in mm/ms
 float counts_to_mm (int counts) {
@@ -249,36 +250,54 @@ float abs (float number) {
  *	Straight movement
  */
 void moveForward(int cells) {
-	resetSpeedProfile();
+	
 	useIRSensors = 1;
 	useSpeedProfile = 1;
 	
+	int startEncCount = (getLeftEncCount() + getRightEncCount()) / 2;
 	int remainingDist = cells*cellDistance;
 
-	while( encCount < cells*cellDistance ) {
-		remainingDist = cells*cellDistance - encCount;
+	while( encCount - startEncCount < cells*cellDistance ) {
+		remainingDist = cells*cellDistance - (encCount - startEncCount);
 		if (remainingDist < cellDistance/2) {
 			useIRSensors = 0;
 		}
-		if (getDecNeeded(counts_to_mm(remainingDist), curSpeedX, 0) < decX) {
+		if (getDecNeeded(counts_to_mm(remainingDist), curSpeedX, stopSpeed) < decX) {
 			targetSpeedX = moveSpeed;
 		}
 		else {
-			targetSpeedX = 0;
+			targetSpeedX = stopSpeed;
 		}
 	}
-	targetSpeedX = 0;
+	targetSpeedX = stopSpeed;
 }
 
+/**
+ *	Move half cell at stopspeed
+ */
+void moveForwardHalf(void) {
+	useIRSensors = 0;
+	useSpeedProfile = 1;
+
+	targetSpeedX = stopSpeed;
+	int startEncCount = (getLeftEncCount() + getRightEncCount()) / 2;
+	while( (getLeftEncCount() + getRightEncCount()) / 2 < startEncCount + cellDistance/2 ) {
+		targetSpeedX = stopSpeed;
+	}
+	targetSpeedX = stopSpeed;
+}
 
 
 void getSensorError(void)
 {
-	if (LDSensor > LDMiddleValue && RDSensor > RDMiddleValue)
+	// Both side walls
+	if (LDSensor > LDvalue1 && RDSensor > RDvalue1)
 		sensorError = RDSensor - LDSensor;
-	if(LDSensor > LDMiddleValue)
+	// Closer to left wall
+	if(LDSensor > LDvalue1)
 		sensorError = LDMiddleValue - LDSensor;
-	else if(RDSensor > RDMiddleValue)
+	// Closer to right wall
+	else if(RDSensor > RDvalue1)
 		sensorError = RDSensor - RDMiddleValue;
 	else
 		sensorError = 0;

@@ -81,6 +81,7 @@ void floodCenter(void) {
 			if (orientation == 'W') {
 				xPos -= 1;
 			}
+		
 		}
 		
 		// Reached quarter cell
@@ -531,6 +532,8 @@ void floodStart(void) {
 	
 	useSpeedProfile = 0;
 	turnMotorOff;
+	
+	updateDistanceToCenter();
 			
   //isolateDeadEnds();
 	visualizeGrid();

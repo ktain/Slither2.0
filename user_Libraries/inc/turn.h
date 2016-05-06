@@ -2,6 +2,7 @@
 #define TURN_H
 
 
-void pivotTurn(float degrees);
-
+void pivotTurn(int degrees);
+void curveTurnRight(void);
+void curveTurnLeft(void);
 #endif

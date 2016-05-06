@@ -12,6 +12,7 @@
 extern bool isWaiting;
 extern bool isSearching;
 extern bool isSpeedRunning;
+extern bool isCurveTurning;
 
 // Mechanical settings
 extern int encResolution;
@@ -87,6 +88,9 @@ extern int LFvalue1;
 extern int RFvalue1;
 extern int LFvalue2;
 extern int RFvalue2;
+
+extern int LDvalue1;
+extern int RDvalue1;
 
 // PID
 extern int32_t errorD;
