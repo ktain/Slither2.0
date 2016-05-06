@@ -36,8 +36,8 @@ float kpW2 = 1;						//used for T2 in curve turn
 float kdW2 = 36;
 float accX = 50;					// acc/dec in mm/ms/ms
 float decX = 50; 				 
-float accW = 2; 					// cm/s^2
-float decW = 2;	
+float accW = 8; 					// cm/s^2
+float decW = 8;	
 
 int leftBaseSpeed = 0;
 int rightBaseSpeed = 0;
@@ -276,7 +276,7 @@ void moveForward(int cells) {
  *	Move half cell at stopspeed
  */
 void moveForwardHalf(void) {
-	useIRSensors = 0;
+	useIRSensors = 1;
 	useSpeedProfile = 1;
 
 	targetSpeedX = stopSpeed;

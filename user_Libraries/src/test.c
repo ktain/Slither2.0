@@ -171,7 +171,7 @@ void randomMovement(void) {
 		if ((!fullCellFlag && (remainingDist <= 0)) || (LFSensor > 2000) || (RFSensor > 2000)) {
 			fullCellFlag = 1;
 			cellCount++;
-			shortBeep(200, 1000);
+			//shortBeep(200, 1000);
 			
 			// If has front wall, align with front wall
 			if (hasFrontWall) {

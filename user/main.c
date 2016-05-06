@@ -65,8 +65,8 @@ int rightWallThreshold = 240;
 int LDMiddleValue = 690;
 int RDMiddleValue = 740;
 
-int LFvalue1 = 3200;	// for front wall alignment, when mouse is at the center
-int RFvalue1 = 3050;
+int LFvalue1 = 3250;	// for front wall alignment, when mouse is at the center
+int RFvalue1 = 2810;
 int LFvalue2 = 500;		// for front wall detection during speedrun
 int RFvalue2 = 500;
 
@@ -84,7 +84,18 @@ int distances[100] = {0};
 // Interface
 int select = 0;
 
+// Debug variables
+int debugMaxSpeed = 0;
+int debugMaxEncCountsPerMs = 0;
+
+// Curve turn settings
+int speedW;
+int t0, t1, t2, t3, t4;
+
 void systick(void) {
+	
+	debugMaxSpeed = (curSpeedX > debugMaxSpeed) ? curSpeedX : debugMaxSpeed;
+	debugMaxEncCountsPerMs = (encChange > debugMaxEncCountsPerMs) ? encChange : debugMaxEncCountsPerMs;
 	
 	// check voltage
 	lowBatCheck();	// check if < 7.00V
@@ -124,8 +135,8 @@ int main(void) {
 	
 	
 	//Initial Speed Profile
-	maxPwm = 800;
-	alignPwm = 70;
+	maxPwm = 999;
+	alignPwm = 100;
 	moveSpeed = 50*2;
 	maxSpeed = 100*2;			
 	turnSpeed = 40*2;
@@ -134,8 +145,8 @@ int main(void) {
 	alignTime = 100;
 	turnDelay = 50;
 	
-	turnLeft90 = -834000;
-	turnRight90 = 818000;
+	turnLeft90 = -820000;
+	turnRight90 = 775000;
 	turnLeft180 = -1700000;
 	turnRight180 = 1700000;
 
@@ -410,6 +421,32 @@ void button3_interrupt(void) {
 	
 	switch (select) {
 		case 0:
+		
+			resetSpeedProfile();
+		
+			alignPwm = 100;
+			moveSpeed = 300*2;
+			maxSpeed = 500*2;
+			turnSpeed = 40*2;
+			searchSpeed = 70*2;
+			stopSpeed = 60*2;
+			alignTime = 10;
+			turnDelay = 25;
+			sensorScale = 30;
+			accX = 90;
+			decX = 90;
+		
+			speedW = 81;
+			t0 = 60;
+			t1 = 40;
+			t2 = 164;
+			t3 = 40;
+			t4 = 60;
+		
+			speedRunCurve();
+			
+			
+			/*
 			// Save tempBlock to block
 			for (int i = 0; i < SIZE; i++) {
 				for (int j = 0; j < SIZE; j++) {
@@ -423,8 +460,59 @@ void button3_interrupt(void) {
 				}
 			}
 			beep(3);
+			*/
 			break;
 		case 1:
+			
+			resetSpeedProfile();
+		
+			alignPwm = 100;
+			moveSpeed = 500*2;
+			maxSpeed = 500*2;
+			turnSpeed = 40*2;
+			searchSpeed = 70*2;
+			stopSpeed = 60*2;
+			alignTime = 10;
+			turnDelay = 25;
+			sensorScale = 30;
+			accX = 100;
+			decX = 100;
+		
+			speedW = 81;
+			t0 = 60;
+			t1 = 40;
+			t2 = 164;
+			t3 = 40;
+			t4 = 60;
+		
+			speedRunCurve();
+		/*
+			resetSpeedProfile();
+		
+			alignPwm = 100;
+			moveSpeed = 300*2;
+			maxSpeed = 500*2;
+			turnSpeed = 40*2;
+			searchSpeed = 70*2;
+			stopSpeed = 60*2;
+			alignTime = 10;
+			turnDelay = 25;
+			sensorScale = 30;
+			accX = 90;
+			decX = 90;
+		
+			speedW = 48;
+			t0 = 0;
+			t1 = 40;
+			t2 = 290;
+			t3 = 40;
+			t4 = 0;
+		
+			speedRunCurve();
+			
+		*/
+			
+			/*
 			// Reset tempBlock to block
 			for (int i = 0; i < SIZE; i++) {
 				for (int j = 0; j < SIZE; j++) {
@@ -438,6 +526,7 @@ void button3_interrupt(void) {
 				}
 			}
 			beep(3);
+			*/
 			break;
 		case 2:
 			while(1) {
@@ -451,24 +540,59 @@ void button3_interrupt(void) {
 			resetSpeedProfile();
 		
 			alignPwm = 100;
-			moveSpeed = 600*2;
+			moveSpeed = 200*2;
 			maxSpeed = 600*2;
-			turnSpeed = 40*2;
+			turnSpeed = 70*2;
 			searchSpeed = 70*2;
-			stopSpeed = 30*2;
+			stopSpeed = 60*2;
 			alignTime = 10;
 			turnDelay = 25;
 			sensorScale = 30;
 			accX = 60;
 			decX = 60;
-			
+		
+			t0 = 60;
+			t1 = 40;
+			t2 = 164;
+			t3 = 40;
+			t4 = 60;
+		
 			moveForwardHalf();
-			speedRunCurve();
-			moveForwardHalf();
+			speedW = 81;
+			//curveTurnRight();
+			curveTurnLeft();
+			curveTurnLeft();
+			curveTurnLeft();
+			curveTurnLeft();
+			//moveForwardHalf();
 		
 			useSpeedProfile = 0;
 			turnMotorOff;
-
+		
+			/*
+			moveE();
+			delay_ms(1000);
+			moveS();
+			delay_ms(1000);
+			moveW();
+			delay_ms(1000);
+			moveN();
+			
+			delay_ms(1000);
+			
+			moveW();
+			delay_ms(1000);
+			moveS();
+			delay_ms(1000);
+			moveE();
+			delay_ms(1000);
+			moveN();
+			
+			delay_ms(1000);
+			moveS();
+			delay_ms(1000);
+			moveN();
+			*/
 			break;
 		default:
 			;

@@ -202,7 +202,7 @@ void floodCenter(void) {
 			if (DEBUG) printf("Reached full cell\n\r");
 			fullCellFlag = 1;
 			cellCount++;
-			shortBeep(200, 1000);
+			//shortBeep(200, 1000);
 			
 			// Place trace
 			if (!hasTrace(tempBlock[yPos][xPos])) {
@@ -252,6 +252,8 @@ void floodCenter(void) {
 			targetSpeedX = stopSpeed;
 		}
 	}
+	
+	//shortBeep(200, 1000);
 	
 	// Place trace
 	if (!hasTrace(tempBlock[yPos][xPos])) {
@@ -470,7 +472,7 @@ void floodStart(void) {
 			if (DEBUG) printf("Reached full cell\n\r");
 			fullCellFlag = 1;
 			cellCount++;
-			shortBeep(200, 1000);
+			//shortBeep(200, 1000);
 			
 			// Place trace
 			if (!hasTrace(tempBlock[yPos][xPos])) {

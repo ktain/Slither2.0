@@ -183,7 +183,7 @@ void EXTI9_5_IRQHandler(void) {
 	if(EXTI_GetITStatus(EXTI_Line5) != RESET) {
 		
 		// Disregard short button presses
-		delay_ms(10);
+		delay_ms(50);
 		
 		if (EXTI_GetITStatus(EXTI_Line5) != RESET) {
 			//debounce the button
@@ -197,7 +197,7 @@ void EXTI9_5_IRQHandler(void) {
 	if(EXTI_GetITStatus(EXTI_Line6) != RESET) {
 		
 		// Disregard short button presses
-		delay_ms(10);
+		delay_ms(50);
 		
 		if(EXTI_GetITStatus(EXTI_Line6) != RESET) {
 			//debounce the button
@@ -217,7 +217,7 @@ void EXTI15_10_IRQHandler(void) {
   {
 		
 		// Disregard short button presses
-		delay_ms(10);
+		delay_ms(50);
 		
 		if(EXTI_GetITStatus(EXTI_Line14) != RESET)  {
 			//debounce the button
@@ -231,7 +231,7 @@ void EXTI15_10_IRQHandler(void) {
   {
 
 		// Disregard short button presses
-		delay_ms(10);
+		delay_ms(50);
 
 		if(EXTI_GetITStatus(EXTI_Line15) != RESET)  {
 			//debounce the button

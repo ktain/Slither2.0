@@ -16,7 +16,7 @@ void alignFrontWall(int LSensorVal, int RSensorVal, int duration){
 		int curt = micros();
 		setLeftPwm(LSensorVal - LFSensor);
 		setRightPwm(RSensorVal - RFSensor);
-		while(micros() - curt < 1000);
+		while(micros() - curt < alignTime);
 	}
 	// Ignore encoder count changes
 	setLeftEncCount(leftEncCount);

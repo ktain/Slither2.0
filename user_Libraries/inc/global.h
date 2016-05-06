@@ -131,4 +131,13 @@ extern int distances[100];
 // Interface
 extern int select;
 
+// Debug variables
+extern int debugMaxSpeed;
+extern int debugMaxEncCountsPerMs;
+
+
+// Curve turn settings
+extern int speedW;
+extern int t0, t1, t2, t3, t4;
+
 #endif

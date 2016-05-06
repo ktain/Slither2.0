@@ -3,11 +3,11 @@
 <title>Static Call Graph - [..\obj\micromouse_test.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\obj\micromouse_test.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.02 [Build 28]: Last Updated: Thu May 05 17:31:41 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.02 [Build 28]: Last Updated: Fri May 06 04:37:43 2016
 <BR><P>
 <H3>Maximum Stack Usage =        672 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-EXTI15_10_IRQHandler &rArr; button2_interrupt &rArr; speedRun &rArr; visualizeGrid &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+EXTI9_5_IRQHandler &rArr; button3_interrupt &rArr; speedRunCurve &rArr; visualizeGrid &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 <P>
 <H3>
 Functions with no stack information
@@ -321,7 +321,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphResetCmd
 </UL>
 
-<P><STRONG><a name="[ef]"></a>ADC_Init</STRONG> (Thumb, 66 bytes, Stack size 12 bytes, stm32f4xx_adc.o(.text))
+<P><STRONG><a name="[f0]"></a>ADC_Init</STRONG> (Thumb, 66 bytes, Stack size 12 bytes, stm32f4xx_adc.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = ADC_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Config
@@ -329,7 +329,7 @@ Global Symbols
 
 <P><STRONG><a name="[167]"></a>ADC_StructInit</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_adc.o(.text), UNUSED)
 
-<P><STRONG><a name="[ee]"></a>ADC_CommonInit</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, stm32f4xx_adc.o(.text))
+<P><STRONG><a name="[ef]"></a>ADC_CommonInit</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, stm32f4xx_adc.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ADC_CommonInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Config
@@ -337,7 +337,7 @@ Global Symbols
 
 <P><STRONG><a name="[168]"></a>ADC_CommonStructInit</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_adc.o(.text), UNUSED)
 
-<P><STRONG><a name="[f1]"></a>ADC_Cmd</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_adc.o(.text))
+<P><STRONG><a name="[f2]"></a>ADC_Cmd</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_adc.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Config
 </UL>
 
@@ -351,13 +351,13 @@ Global Symbols
 
 <P><STRONG><a name="[16d]"></a>ADC_VBATCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_adc.o(.text), UNUSED)
 
-<P><STRONG><a name="[f2]"></a>ADC_RegularChannelConfig</STRONG> (Thumb, 116 bytes, Stack size 16 bytes, stm32f4xx_adc.o(.text))
+<P><STRONG><a name="[f3]"></a>ADC_RegularChannelConfig</STRONG> (Thumb, 116 bytes, Stack size 16 bytes, stm32f4xx_adc.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = ADC_RegularChannelConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readADC
 </UL>
 
-<P><STRONG><a name="[f3]"></a>ADC_SoftwareStartConv</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f4xx_adc.o(.text))
+<P><STRONG><a name="[f4]"></a>ADC_SoftwareStartConv</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f4xx_adc.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readADC
 </UL>
 
@@ -371,7 +371,7 @@ Global Symbols
 
 <P><STRONG><a name="[172]"></a>ADC_DiscModeCmd</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_adc.o(.text), UNUSED)
 
-<P><STRONG><a name="[f5]"></a>ADC_GetConversionValue</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_adc.o(.text))
+<P><STRONG><a name="[f6]"></a>ADC_GetConversionValue</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_adc.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readADC
 </UL>
 
@@ -403,11 +403,11 @@ Global Symbols
 
 <P><STRONG><a name="[180]"></a>ADC_GetInjectedConversionValue</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f4xx_adc.o(.text), UNUSED)
 
-<P><STRONG><a name="[f0]"></a>ADC_ITConfig</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_adc.o(.text))
+<P><STRONG><a name="[f1]"></a>ADC_ITConfig</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_adc.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Config
 </UL>
 
-<P><STRONG><a name="[f4]"></a>ADC_GetFlagStatus</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f4xx_adc.o(.text))
+<P><STRONG><a name="[f5]"></a>ADC_GetFlagStatus</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f4xx_adc.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readADC
 </UL>
 
@@ -472,17 +472,17 @@ Global Symbols
 <P><STRONG><a name="[18e]"></a>GPIO_ReadOutputData</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(.text), UNUSED)
 
 <P><STRONG><a name="[ad]"></a>GPIO_SetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lowBatCheck
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledTest
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledTest
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readSensor
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lowBatCheck
 </UL>
 
 <P><STRONG><a name="[a9]"></a>GPIO_ResetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Configuration
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Config
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledTest
+<LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledTest
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readSensor
 </UL>
 
@@ -657,7 +657,7 @@ Global Symbols
 
 <P><STRONG><a name="[1bc]"></a>TIM_SetCounter</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_tim.o(.text), UNUSED)
 
-<P><STRONG><a name="[ec]"></a>TIM_SetAutoreload</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_tim.o(.text))
+<P><STRONG><a name="[ed]"></a>TIM_SetAutoreload</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_tim.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Encoder_Configuration
 </UL>
 
@@ -888,7 +888,7 @@ Global Symbols
 
 <P><STRONG><a name="[1f4]"></a>TIM_SelectMasterSlaveMode</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f4xx_tim.o(.text), UNUSED)
 
-<P><STRONG><a name="[ed]"></a>TIM_EncoderInterfaceConfig</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, stm32f4xx_tim.o(.text))
+<P><STRONG><a name="[ee]"></a>TIM_EncoderInterfaceConfig</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, stm32f4xx_tim.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = TIM_EncoderInterfaceConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Encoder_Configuration
@@ -986,23 +986,21 @@ Global Symbols
 
 <P><STRONG><a name="[20b]"></a>USART_ClearITPendingBit</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_usart.o(.text), UNUSED)
 
-<P><STRONG><a name="[9c]"></a>systick</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, main.o(.text))
+<P><STRONG><a name="[9c]"></a>systick</STRONG> (Thumb, 86 bytes, Stack size 8 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = systick &rArr; readSensor &rArr; readADC &rArr; ADC_RegularChannelConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readGyro
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lowBatCheck
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedProfile
+<BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedProfile
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readSensor
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readGyro
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lowBatCheck
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
 </UL>
 
-<P><STRONG><a name="[7c]"></a>main</STRONG> (Thumb, 342 bytes, Stack size 0 bytes, main.o(.text))
+<P><STRONG><a name="[7c]"></a>main</STRONG> (Thumb, 340 bytes, Stack size 0 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = main &rArr; usart1_Configuration &rArr; USART_Init &rArr; RCC_GetClocksFreq
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getLeftEncCount
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_Configuration
+<BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_Configuration
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button_Configuration
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM4_PWM_Init
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Systick_Configuration
@@ -1013,6 +1011,8 @@ Global Symbols
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_Configuration
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shortBeep
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getLeftEncCount
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
@@ -1021,13 +1021,13 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 256 + Unknown Stack Size
 <LI>Call Chain = button0_interrupt &rArr; floodStart &rArr; visualizeGrid &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initializeGrid
+<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;visualizeGrid
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shortBeep
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initializeGrid
 <LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
 <LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;visualizeGrid
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shortBeep
 </UL>
 <BR>[Called By]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI9_5_IRQHandler
 </UL>
@@ -1036,53 +1036,53 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 656 + Unknown Stack Size
 <LI>Call Chain = button1_interrupt &rArr; speedRun &rArr; visualizeGrid &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shortBeep
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI15_10_IRQHandler
 </UL>
 
-<P><STRONG><a name="[b6]"></a>button2_interrupt</STRONG> (Thumb, 202 bytes, Stack size 40 bytes, main.o(.text))
+<P><STRONG><a name="[b6]"></a>button2_interrupt</STRONG> (Thumb, 394 bytes, Stack size 40 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 656 + Unknown Stack Size
 <LI>Call Chain = button2_interrupt &rArr; speedRun &rArr; visualizeGrid &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shortBeep
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI15_10_IRQHandler
 </UL>
 
-<P><STRONG><a name="[b7]"></a>printInfo</STRONG> (Thumb, 288 bytes, Stack size 56 bytes, main.o(.text))
+<P><STRONG><a name="[b7]"></a>printInfo</STRONG> (Thumb, 98 bytes, Stack size 56 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 192 + Unknown Stack Size
 <LI>Call Chain = printInfo &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readADC
+<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readADC
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getRightEncCount
 <LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getLeftEncCount
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
 </UL>
 
-<P><STRONG><a name="[ba]"></a>button3_interrupt</STRONG> (Thumb, 326 bytes, Stack size 24 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 640 + Unknown Stack Size
+<P><STRONG><a name="[ba]"></a>button3_interrupt</STRONG> (Thumb, 348 bytes, Stack size 48 bytes, main.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 664 + Unknown Stack Size
 <LI>Call Chain = button3_interrupt &rArr; speedRunCurve &rArr; visualizeGrid &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForwardHalf
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;beep
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printInfo
+<BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printInfo
 <LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shortBeep
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setRightPwm
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setLeftPwm
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readSensor
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForwardHalf
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnLeft
 </UL>
 <BR>[Called By]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI9_5_IRQHandler
 </UL>
@@ -1135,14 +1135,14 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
 </UL>
 <P><STRONG><a name="[24]"></a>EXTI9_5_IRQHandler</STRONG> (Thumb, 92 bytes, Stack size 8 bytes, stm32f4xx_it.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 648 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 672 + Unknown Stack Size
 <LI>Call Chain = EXTI9_5_IRQHandler &rArr; button3_interrupt &rArr; speedRunCurve &rArr; visualizeGrid &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
+<BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button0_interrupt
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_ClearITPendingBit
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_GetITStatus
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
 </UL>
@@ -1150,11 +1150,11 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 672 + Unknown Stack Size
 <LI>Call Chain = EXTI15_10_IRQHandler &rArr; button2_interrupt &rArr; speedRun &rArr; visualizeGrid &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button2_interrupt
+<BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button2_interrupt
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button1_interrupt
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_ClearITPendingBit
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_GetITStatus
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
 </UL>
@@ -1170,30 +1170,30 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[c7]"></a>micros</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, delay.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
-<LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hugFrontWall
+<BR><BR>[Called By]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
+<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hugFrontWall
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elapseMicros
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readSensor
 </UL>
 
-<P><STRONG><a name="[102]"></a>millis</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, delay.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnLeft
-<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnRight
-<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pivotTurn
-<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
-<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;randomMovement
+<P><STRONG><a name="[103]"></a>millis</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, delay.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnRight
+<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pivotTurn
+<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
+<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;randomMovement
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnLeft
 </UL>
 
 <P><STRONG><a name="[aa]"></a>delay_ms</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, delay.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;beep
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
+<BR><BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button2_interrupt
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button1_interrupt
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button0_interrupt
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pivotTurn
-<LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wheelOffsetTest
+<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pivotTurn
+<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wheelOffsetTest
+<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;beep
 <LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI15_10_IRQHandler
 <LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI9_5_IRQHandler
 </UL>
@@ -1207,7 +1207,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;micros
 </UL>
-<BR>[Called By]<UL><LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hugFrontWall
+<BR>[Called By]<UL><LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hugFrontWall
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readSensor
 </UL>
 
@@ -1338,29 +1338,29 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[bf]"></a>setLeftPwm</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, pwm.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
+<BR><BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calculateMotorPwm
-<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
-<LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wheelOffsetTest
-<LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hugFrontWall
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
+<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wheelOffsetTest
+<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hugFrontWall
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
 <P><STRONG><a name="[c0]"></a>setRightPwm</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, pwm.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
+<BR><BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calculateMotorPwm
-<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
-<LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wheelOffsetTest
-<LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hugFrontWall
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
+<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wheelOffsetTest
+<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hugFrontWall
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
 <P><STRONG><a name="[a7]"></a>buzzer_Configuration</STRONG> (Thumb, 140 bytes, Stack size 56 bytes, buzzer.o(.text))
@@ -1378,38 +1378,34 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[bb]"></a>beep</STRONG> (Thumb, 66 bytes, Stack size 24 bytes, buzzer.o(.text))
+<P><STRONG><a name="[ec]"></a>beep</STRONG> (Thumb, 66 bytes, Stack size 24 bytes, buzzer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = beep
 </UL>
 <BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
 <P><STRONG><a name="[ab]"></a>shortBeep</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, buzzer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = shortBeep
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lowBatCheck
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
+<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button2_interrupt
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button1_interrupt
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button0_interrupt
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;randomMovement
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lowBatCheck
 </UL>
 
 <P><STRONG><a name="[a6]"></a>Encoder_Configuration</STRONG> (Thumb, 160 bytes, Stack size 24 bytes, encoder.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = Encoder_Configuration &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_EncoderInterfaceConfig
+<BR>[Calls]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_EncoderInterfaceConfig
 <LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
-<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SetAutoreload
+<LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SetAutoreload
 <LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_PinAFConfig
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
@@ -1418,38 +1414,38 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[b9]"></a>getRightEncCount</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, encoder.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForwardHalf
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printInfo
+<BR><BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printInfo
 <LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getEncoderStatus
-<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForward
-<LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wheelOffsetTest
+<LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForward
+<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wheelOffsetTest
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForwardHalf
 </UL>
 
 <P><STRONG><a name="[ac]"></a>getLeftEncCount</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, encoder.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForwardHalf
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printInfo
+<BR><BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printInfo
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getEncoderStatus
-<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForward
-<LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wheelOffsetTest
+<LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForward
+<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wheelOffsetTest
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForwardHalf
 </UL>
 
-<P><STRONG><a name="[fe]"></a>resetRightEncCount</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, encoder.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wheelOffsetTest
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
+<P><STRONG><a name="[ff]"></a>resetRightEncCount</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, encoder.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wheelOffsetTest
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
 </UL>
 
-<P><STRONG><a name="[fd]"></a>resetLeftEncCount</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, encoder.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wheelOffsetTest
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
+<P><STRONG><a name="[fe]"></a>resetLeftEncCount</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, encoder.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wheelOffsetTest
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
 </UL>
 
 <P><STRONG><a name="[118]"></a>setRightEncCount</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, encoder.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
+<BR><BR>[Called By]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
 </UL>
 
 <P><STRONG><a name="[117]"></a>setLeftEncCount</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, encoder.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
+<BR><BR>[Called By]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
 </UL>
 
 <P><STRONG><a name="[a8]"></a>ADC_Config</STRONG> (Thumb, 184 bytes, Stack size 64 bytes, adc.o(.text))
@@ -1458,10 +1454,10 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
-<LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_ITConfig
-<LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Cmd
-<LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_CommonInit
-<LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Init
+<LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_ITConfig
+<LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Cmd
+<LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_CommonInit
+<LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1469,30 +1465,30 @@ Global Symbols
 <P><STRONG><a name="[b8]"></a>readADC</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, adc.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = readADC &rArr; ADC_RegularChannelConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetFlagStatus
-<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetConversionValue
-<LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_SoftwareStartConv
-<LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_RegularChannelConfig
+<BR>[Calls]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetFlagStatus
+<LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetConversionValue
+<LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_SoftwareStartConv
+<LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_RegularChannelConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readGyro
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printInfo
-<LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readVolMeter
+<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printInfo
+<LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readVolMeter
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readSensor
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readGyro
 </UL>
 
 <P><STRONG><a name="[9f]"></a>readSensor</STRONG> (Thumb, 316 bytes, Stack size 32 bytes, sensor_function.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = readSensor &rArr; readADC &rArr; ADC_RegularChannelConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readADC
-<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
+<BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elapseMicros
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;micros
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readADC
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systick
-<LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hugFrontWall
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hugFrontWall
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
 </UL>
 
@@ -1504,28 +1500,28 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systick
 </UL>
 
-<P><STRONG><a name="[f6]"></a>readVolMeter</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, sensor_function.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = readVolMeter &rArr; __aeabi_d2iz
+<P><STRONG><a name="[f7]"></a>readVolMeter</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, sensor_function.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = readVolMeter &rArr; __aeabi_ddiv
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readADC
-<LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
-<LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
-<LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+<BR>[Calls]<UL><LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readADC
+<LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+<LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lowBatCheck
 </UL>
 
 <P><STRONG><a name="[9d]"></a>lowBatCheck</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, sensor_function.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = lowBatCheck &rArr; readVolMeter &rArr; __aeabi_d2iz
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = lowBatCheck &rArr; readVolMeter &rArr; __aeabi_ddiv
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
-<LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readVolMeter
+<LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readVolMeter
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shortBeep
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systick
 </UL>
 
-<P><STRONG><a name="[fa]"></a>hugFrontWall</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, test.o(.text), UNUSED)
+<P><STRONG><a name="[fb]"></a>hugFrontWall</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, test.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elapseMicros
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;micros
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setRightPwm
@@ -1533,168 +1529,168 @@ Global Symbols
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readSensor
 </UL>
 
-<P><STRONG><a name="[fb]"></a>ledTest</STRONG> (Thumb, 124 bytes, Stack size 8 bytes, test.o(.text), UNUSED)
+<P><STRONG><a name="[fc]"></a>ledTest</STRONG> (Thumb, 124 bytes, Stack size 8 bytes, test.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
 </UL>
 
-<P><STRONG><a name="[fc]"></a>wheelOffsetTest</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, test.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getRightEncCount
-<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getLeftEncCount
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetLeftEncCount
-<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetRightEncCount
+<P><STRONG><a name="[fd]"></a>wheelOffsetTest</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, test.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetLeftEncCount
+<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetRightEncCount
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setRightPwm
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setLeftPwm
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getRightEncCount
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getLeftEncCount
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
 
-<P><STRONG><a name="[ff]"></a>randomMovement</STRONG> (Thumb, 480 bytes, Stack size 16 bytes, test.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pivotTurn
-<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDecNeeded
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;counts_to_mm
-<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
-<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;millis
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shortBeep
+<P><STRONG><a name="[100]"></a>randomMovement</STRONG> (Thumb, 470 bytes, Stack size 16 bytes, test.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pivotTurn
+<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDecNeeded
+<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;counts_to_mm
+<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
+<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;millis
 </UL>
 
-<P><STRONG><a name="[105]"></a>getNextDirection</STRONG> (Thumb, 262 bytes, Stack size 40 bytes, test.o(.text))
+<P><STRONG><a name="[106]"></a>getNextDirection</STRONG> (Thumb, 262 bytes, Stack size 40 bytes, test.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = getNextDirection
 </UL>
-<BR>[Calls]<UL><LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
-<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasSouth
-<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
-<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasEast
+<BR>[Calls]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
+<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasSouth
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasEast
 </UL>
-<BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
 </UL>
 
-<P><STRONG><a name="[10a]"></a>closeUntracedCells</STRONG> (Thumb, 270 bytes, Stack size 24 bytes, test.o(.text))
+<P><STRONG><a name="[10b]"></a>closeUntracedCells</STRONG> (Thumb, 266 bytes, Stack size 24 bytes, test.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = closeUntracedCells
 </UL>
-<BR>[Calls]<UL><LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasTrace
+<BR>[Calls]<UL><LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasTrace
 </UL>
-<BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
 </UL>
 
-<P><STRONG><a name="[b5]"></a>speedRun</STRONG> (Thumb, 560 bytes, Stack size 440 bytes, test.o(.text))
+<P><STRONG><a name="[b5]"></a>speedRun</STRONG> (Thumb, 558 bytes, Stack size 440 bytes, test.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 616 + Unknown Stack Size
 <LI>Call Chain = speedRun &rArr; visualizeGrid &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;beep
-<LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
-<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateDistanceToCenter
-<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
-<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
-<LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
-<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForward
-<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
-<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
-<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasSouth
-<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
-<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasEast
-<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atCenter
-<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
-<LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeUntracedCells
-<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getNextDirection
+<BR>[Calls]<UL><LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateDistanceToCenter
+<LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
+<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
+<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
+<LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForward
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
+<LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
+<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasSouth
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasEast
+<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atCenter
+<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
+<LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeUntracedCells
+<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getNextDirection
+<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;beep
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;visualizeGrid
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setRightPwm
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setLeftPwm
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readSensor
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button2_interrupt
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button1_interrupt
 </UL>
 
-<P><STRONG><a name="[be]"></a>speedRunCurve</STRONG> (Thumb, 650 bytes, Stack size 440 bytes, test.o(.text))
+<P><STRONG><a name="[bc]"></a>speedRunCurve</STRONG> (Thumb, 650 bytes, Stack size 440 bytes, test.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 616 + Unknown Stack Size
 <LI>Call Chain = speedRunCurve &rArr; visualizeGrid &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForwardHalf
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;beep
-<LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
-<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateDistanceToCenter
-<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
-<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
-<LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
-<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForward
-<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
-<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
-<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasSouth
-<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
-<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasEast
-<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atCenter
-<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
-<LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeUntracedCells
-<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getNextDirection
+<BR>[Calls]<UL><LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateDistanceToCenter
+<LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
+<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
+<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
+<LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForward
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
+<LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
+<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasSouth
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasEast
+<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atCenter
+<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
+<LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeUntracedCells
+<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getNextDirection
+<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;beep
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;visualizeGrid
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setRightPwm
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setLeftPwm
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readSensor
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForwardHalf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
 </UL>
 
-<P><STRONG><a name="[114]"></a>hasFrontWallInMem</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, test.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
-<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasSouth
-<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
-<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasEast
+<P><STRONG><a name="[115]"></a>hasFrontWallInMem</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, test.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
+<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasSouth
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasEast
 </UL>
 
-<P><STRONG><a name="[104]"></a>pivotTurn</STRONG> (Thumb, 140 bytes, Stack size 40 bytes, turn.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = pivotTurn
+<P><STRONG><a name="[105]"></a>pivotTurn</STRONG> (Thumb, 226 bytes, Stack size 48 bytes, turn.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = pivotTurn
 </UL>
-<BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;millis
+<BR>[Calls]<UL><LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;millis
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
-<BR>[Called By]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
-<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
-<LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
-<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
-<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;randomMovement
+<BR>[Called By]<UL><LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
+<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
+<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
+<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;randomMovement
 </UL>
 
-<P><STRONG><a name="[115]"></a>curveTurnRight</STRONG> (Thumb, 106 bytes, Stack size 32 bytes, turn.o(.text))
+<P><STRONG><a name="[116]"></a>curveTurnRight</STRONG> (Thumb, 130 bytes, Stack size 32 bytes, turn.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = curveTurnRight
 </UL>
-<BR>[Calls]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;millis
+<BR>[Calls]<UL><LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;millis
 </UL>
-<BR>[Called By]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
-<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
-<LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
-<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
+<BR>[Called By]<UL><LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
+<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
+<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
 </UL>
 
-<P><STRONG><a name="[116]"></a>curveTurnLeft</STRONG> (Thumb, 98 bytes, Stack size 32 bytes, turn.o(.text))
+<P><STRONG><a name="[be]"></a>curveTurnLeft</STRONG> (Thumb, 126 bytes, Stack size 32 bytes, turn.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = curveTurnLeft
 </UL>
-<BR>[Calls]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;millis
+<BR>[Calls]<UL><LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;millis
 </UL>
-<BR>[Called By]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
-<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
-<LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
-<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
+<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
+<LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
+<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
+<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
 </UL>
 
-<P><STRONG><a name="[103]"></a>alignFrontWall</STRONG> (Thumb, 132 bytes, Stack size 48 bytes, align.o(.text))
+<P><STRONG><a name="[104]"></a>alignFrontWall</STRONG> (Thumb, 130 bytes, Stack size 48 bytes, align.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = alignFrontWall
 </UL>
 <BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setLeftEncCount
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setRightEncCount
-<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;millis
+<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;millis
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;micros
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setRightPwm
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setLeftPwm
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;randomMovement
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<BR>[Called By]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;randomMovement
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
 <P><STRONG><a name="[11a]"></a>getSensorError</STRONG> (Thumb, 60 bytes, Stack size 12 bytes, speedprofile.o(.text))
@@ -1736,185 +1732,185 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systick
 </UL>
 
-<P><STRONG><a name="[bc]"></a>resetSpeedProfile</STRONG> (Thumb, 100 bytes, Stack size 8 bytes, speedprofile.o(.text))
+<P><STRONG><a name="[bb]"></a>resetSpeedProfile</STRONG> (Thumb, 100 bytes, Stack size 8 bytes, speedprofile.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = resetSpeedProfile
 </UL>
-<BR>[Calls]<UL><LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetLeftEncCount
-<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetRightEncCount
+<BR>[Calls]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetLeftEncCount
+<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetRightEncCount
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setRightPwm
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setLeftPwm
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
-<P><STRONG><a name="[101]"></a>getDecNeeded</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, speedprofile.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<P><STRONG><a name="[102]"></a>getDecNeeded</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, speedprofile.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForward
+<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;randomMovement
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
 <LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForward
-<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;randomMovement
 </UL>
 
-<P><STRONG><a name="[100]"></a>counts_to_mm</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, speedprofile.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<P><STRONG><a name="[101]"></a>counts_to_mm</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, speedprofile.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForward
+<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;randomMovement
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
 <LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveForward
-<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;randomMovement
 </UL>
 
 <P><STRONG><a name="[20d]"></a>mm_to_counts</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, speedprofile.o(.text), UNUSED)
 
 <P><STRONG><a name="[20e]"></a>abs</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, speedprofile.o(.text), UNUSED)
 
-<P><STRONG><a name="[10f]"></a>moveForward</STRONG> (Thumb, 144 bytes, Stack size 32 bytes, speedprofile.o(.text))
+<P><STRONG><a name="[110]"></a>moveForward</STRONG> (Thumb, 144 bytes, Stack size 32 bytes, speedprofile.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = moveForward
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getRightEncCount
+<BR>[Calls]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDecNeeded
+<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;counts_to_mm
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getRightEncCount
 <LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getLeftEncCount
-<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDecNeeded
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;counts_to_mm
 </UL>
-<BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
 </UL>
 
-<P><STRONG><a name="[bd]"></a>moveForwardHalf</STRONG> (Thumb, 164 bytes, Stack size 24 bytes, speedprofile.o(.text))
+<P><STRONG><a name="[bd]"></a>moveForwardHalf</STRONG> (Thumb, 162 bytes, Stack size 24 bytes, speedprofile.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = moveForwardHalf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getRightEncCount
 <LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getLeftEncCount
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button3_interrupt
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 </UL>
 
-<P><STRONG><a name="[110]"></a>moveN</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, move.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = moveN &rArr; pivotTurn
+<P><STRONG><a name="[111]"></a>moveN</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, move.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = moveN &rArr; pivotTurn
 </UL>
-<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnLeft
-<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnRight
-<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pivotTurn
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnRight
+<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pivotTurn
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnLeft
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveBack
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<BR>[Called By]<UL><LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveBack
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
-<P><STRONG><a name="[111]"></a>moveE</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, move.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = moveE &rArr; pivotTurn
+<P><STRONG><a name="[112]"></a>moveE</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, move.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = moveE &rArr; pivotTurn
 </UL>
-<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnLeft
-<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnRight
-<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pivotTurn
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnRight
+<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pivotTurn
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnLeft
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveBack
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<BR>[Called By]<UL><LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveBack
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
-<P><STRONG><a name="[112]"></a>moveS</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, move.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = moveS &rArr; pivotTurn
+<P><STRONG><a name="[113]"></a>moveS</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, move.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = moveS &rArr; pivotTurn
 </UL>
-<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnLeft
-<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnRight
-<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pivotTurn
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnRight
+<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pivotTurn
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnLeft
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveBack
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<BR>[Called By]<UL><LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveBack
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
-<P><STRONG><a name="[113]"></a>moveW</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, move.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = moveW &rArr; pivotTurn
+<P><STRONG><a name="[114]"></a>moveW</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, move.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = moveW &rArr; pivotTurn
 </UL>
-<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnLeft
-<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnRight
-<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pivotTurn
+<BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnRight
+<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pivotTurn
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;curveTurnLeft
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveBack
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<BR>[Called By]<UL><LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveBack
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
 <P><STRONG><a name="[11d]"></a>moveBack</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, move.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = moveBack &rArr; moveW &rArr; pivotTurn
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = moveBack &rArr; moveW &rArr; pivotTurn
 </UL>
-<BR>[Calls]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
-<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
-<LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
-<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
+<BR>[Calls]<UL><LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
+<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
+<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
 </UL>
 
-<P><STRONG><a name="[106]"></a>hasNorth</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, lookup.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isolateDeadEnds
-<LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasFrontWallInMem
-<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getNextDirection
+<P><STRONG><a name="[107]"></a>hasNorth</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, lookup.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isolateDeadEnds
+<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasFrontWallInMem
+<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getNextDirection
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;visualizeGrid
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
-<P><STRONG><a name="[107]"></a>hasEast</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, lookup.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isolateDeadEnds
-<LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasFrontWallInMem
-<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getNextDirection
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<P><STRONG><a name="[108]"></a>hasEast</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, lookup.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isolateDeadEnds
+<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasFrontWallInMem
+<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getNextDirection
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
-<P><STRONG><a name="[108]"></a>hasSouth</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, lookup.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isolateDeadEnds
-<LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasFrontWallInMem
-<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getNextDirection
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<P><STRONG><a name="[109]"></a>hasSouth</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, lookup.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isolateDeadEnds
+<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasFrontWallInMem
+<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getNextDirection
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
-<P><STRONG><a name="[109]"></a>hasWest</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, lookup.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isolateDeadEnds
-<LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasFrontWallInMem
-<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getNextDirection
+<P><STRONG><a name="[10a]"></a>hasWest</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, lookup.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isolateDeadEnds
+<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasFrontWallInMem
+<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getNextDirection
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;visualizeGrid
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
-<P><STRONG><a name="[10b]"></a>hasTrace</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, lookup.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeUntracedCells
+<P><STRONG><a name="[10c]"></a>hasTrace</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, lookup.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeUntracedCells
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;visualizeGrid
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
 <P><STRONG><a name="[11f]"></a>isDeadEnd</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, lookup.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;visualizeGrid
 </UL>
 
-<P><STRONG><a name="[10e]"></a>atCenter</STRONG> (Thumb, 180 bytes, Stack size 0 bytes, lookup.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<P><STRONG><a name="[10f]"></a>atCenter</STRONG> (Thumb, 180 bytes, Stack size 0 bytes, lookup.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
 <P><STRONG><a name="[124]"></a>atStart</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, lookup.o(.text))
@@ -1924,10 +1920,10 @@ Global Symbols
 <P><STRONG><a name="[120]"></a>getMin</STRONG> (Thumb, 94 bytes, Stack size 8 bytes, lookup.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = getMin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<BR>[Called By]<UL><LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateDistanceToStart
+<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateDistanceToCenter
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
 <LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateDistanceToStart
-<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateDistanceToCenter
 </UL>
 
 <P><STRONG><a name="[11e]"></a>printGrid</STRONG> (Thumb, 50 bytes, Stack size 24 bytes, graphics.o(.text), UNUSED)
@@ -1940,15 +1936,15 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isDeadEnd
-<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
-<LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasTrace
-<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
+<LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
+<LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasTrace
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button0_interrupt
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button0_interrupt
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
 <P><STRONG><a name="[b0]"></a>initializeGrid</STRONG> (Thumb, 182 bytes, Stack size 12 bytes, initializegrid.o(.text))
@@ -1962,15 +1958,15 @@ Global Symbols
 <LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
-<P><STRONG><a name="[10d]"></a>updateDistanceToCenter</STRONG> (Thumb, 86 bytes, Stack size 24 bytes, floodsearch.o(.text))
+<P><STRONG><a name="[10e]"></a>updateDistanceToCenter</STRONG> (Thumb, 86 bytes, Stack size 24 bytes, floodsearch.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = updateDistanceToCenter &rArr; getMin
 </UL>
 <BR>[Calls]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getMin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
 <P><STRONG><a name="[121]"></a>detectWalls</STRONG> (Thumb, 406 bytes, Stack size 20 bytes, floodsearch.o(.text))
@@ -1980,38 +1976,37 @@ Global Symbols
 <LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
-<P><STRONG><a name="[b2]"></a>floodCenter</STRONG> (Thumb, 1734 bytes, Stack size 48 bytes, floodsearch.o(.text))
+<P><STRONG><a name="[b2]"></a>floodCenter</STRONG> (Thumb, 1724 bytes, Stack size 48 bytes, floodsearch.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 224 + Unknown Stack Size
 <LI>Call Chain = floodCenter &rArr; visualizeGrid &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;beep
-<LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;detectWalls
+<BR>[Calls]<UL><LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;detectWalls
 <LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;willTurn
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getMin
-<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateDistanceToCenter
-<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
-<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
-<LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
-<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
-<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
-<LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasTrace
-<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasSouth
-<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
-<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasEast
-<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDecNeeded
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;counts_to_mm
-<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atCenter
-<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
+<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateDistanceToCenter
+<LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
+<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
+<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
+<LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
+<LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasTrace
+<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasSouth
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasEast
+<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDecNeeded
+<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;counts_to_mm
+<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atCenter
+<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
+<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;beep
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;visualizeGrid
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shortBeep
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setRightPwm
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setLeftPwm
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button0_interrupt
 </UL>
 
-<P><STRONG><a name="[123]"></a>updateDistanceToStart</STRONG> (Thumb, 62 bytes, Stack size 24 bytes, floodsearch.o(.text))
+<P><STRONG><a name="[123]"></a>updateDistanceToStart</STRONG> (Thumb, 64 bytes, Stack size 24 bytes, floodsearch.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = updateDistanceToStart &rArr; getMin
 </UL>
 <BR>[Calls]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getMin
@@ -2019,44 +2014,43 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
 </UL>
 
-<P><STRONG><a name="[b3]"></a>floodStart</STRONG> (Thumb, 1872 bytes, Stack size 48 bytes, floodsearch.o(.text))
+<P><STRONG><a name="[b3]"></a>floodStart</STRONG> (Thumb, 1860 bytes, Stack size 48 bytes, floodsearch.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 224 + Unknown Stack Size
 <LI>Call Chain = floodStart &rArr; visualizeGrid &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;beep
-<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateDistanceToStart
+<BR>[Calls]<UL><LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateDistanceToStart
 <LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;detectWalls
 <LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;willTurn
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getMin
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atStart
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveBack
-<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateDistanceToCenter
-<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
-<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
-<LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
-<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
-<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
-<LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasTrace
-<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasSouth
-<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
-<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasEast
-<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDecNeeded
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;counts_to_mm
-<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
+<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateDistanceToCenter
+<LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveW
+<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveS
+<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
+<LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
+<LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasTrace
+<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasSouth
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasEast
+<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getDecNeeded
+<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;counts_to_mm
+<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alignFrontWall
+<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;beep
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;visualizeGrid
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shortBeep
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setRightPwm
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setLeftPwm
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSpeedProfile
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button0_interrupt
 </UL>
 
 <P><STRONG><a name="[125]"></a>isolateDeadEnds</STRONG> (Thumb, 284 bytes, Stack size 32 bytes, floodsearch.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
-<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasSouth
-<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
-<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasEast
+<BR><BR>[Calls]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
+<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasSouth
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasEast
 </UL>
 
 <P><STRONG><a name="[3]"></a>Reset_Handler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, startup_stm32f4xx.o(.text))
@@ -2405,10 +2399,10 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__vfscanf
 </UL>
 
-<P><STRONG><a name="[10c]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 4 bytes, rt_memclr_w.o(.text))
+<P><STRONG><a name="[10d]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 4 bytes, rt_memclr_w.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = __aeabi_memclr4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
+<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRunCurve
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speedRun
 </UL>
 
@@ -2585,10 +2579,10 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rt_ctype_table.o(.text)
 </UL>
-<P><STRONG><a name="[f8]"></a>__aeabi_ddiv</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv))
+<P><STRONG><a name="[f9]"></a>__aeabi_ddiv</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_ddiv
 </UL>
-<BR>[Called By]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readVolMeter
+<BR>[Called By]<UL><LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readVolMeter
 </UL>
 
 <P><STRONG><a name="[13d]"></a>_ddiv</STRONG> (Thumb, 552 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv), UNUSED)
@@ -2596,25 +2590,25 @@ Global Symbols
 <LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
 </UL>
 
-<P><STRONG><a name="[f9]"></a>__aeabi_d2iz</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dfix.o(x$fpl$dfix))
+<P><STRONG><a name="[fa]"></a>__aeabi_d2iz</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dfix.o(x$fpl$dfix))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_d2iz
 </UL>
-<BR>[Called By]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readVolMeter
+<BR>[Called By]<UL><LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readVolMeter
 </UL>
 
 <P><STRONG><a name="[140]"></a>_dfix</STRONG> (Thumb, 94 bytes, Stack size 32 bytes, dfix.o(x$fpl$dfix), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
 </UL>
 
-<P><STRONG><a name="[f7]"></a>__aeabi_i2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt))
-<BR><BR>[Called By]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readVolMeter
+<P><STRONG><a name="[f8]"></a>__aeabi_i2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt))
+<BR><BR>[Called By]<UL><LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readVolMeter
 </UL>
 
 <P><STRONG><a name="[21b]"></a>_dflt</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt), UNUSED)
 
 <P><STRONG><a name="[13f]"></a>__fpl_dnaninf</STRONG> (Thumb, 156 bytes, Stack size 16 bytes, dnaninf.o(x$fpl$dnaninf), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dfix
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_ddiv
+<BR><BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_ddiv
+<LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dfix
 </UL>
 
 <P><STRONG><a name="[13e]"></a>__fpl_dretinf</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, dretinf.o(x$fpl$dretinf), UNUSED)
