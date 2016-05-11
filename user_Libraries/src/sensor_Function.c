@@ -104,7 +104,7 @@ void readGyro(void)
 	}
 	
   aSpeed *= 50000/sampleNum;	// scale by 50000 before dividing by number of samples
-	aSpeed -= 105091500;					// 1861 scaled by 50000
+	aSpeed -= 105054500;					// 1861 scaled by 50000
 	aSpeed /= 50000;						// readjust scale
 	aSpeed *= 2;
 	angle += aSpeed; 
@@ -137,9 +137,6 @@ void lowBatCheck(void)
 	{	
 		// Turn on all LEDs
 		ALL_LED_ON;
-		
-		// Keep buzzer on
-		shortBeep(200, 1000); //1kHz tone
 	}
 }
 

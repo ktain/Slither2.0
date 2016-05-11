@@ -14,7 +14,7 @@
 void printGrid() {
   for (int i = SIZE - 1; i >= 0; i--) {
     for (int j = 0; j < SIZE; j++) {
-      printf("%3d", tempBlock[i][j]);
+      printf("%3d", cell[i][j]);
     }
 		printf("\n\r");
   }
@@ -33,7 +33,7 @@ void visualizeGrid() {
 
     // Print north cell wall 
     for (int j = 0; j < SIZE; j++) {
-      if ( hasNorth(tempBlock[i][j]) )
+      if ( hasNorth(cell[i][j]) )
         if (HIDEEAST)
           printf("+---");
         else 
@@ -59,7 +59,7 @@ void visualizeGrid() {
     for (int j = 0; j < SIZE; j++) {
       
       // Print west wall
-      if ( hasWest(tempBlock[i][j]) )
+      if ( hasWest(cell[i][j]) )
         printf("|");
       else
         printf(" ");
@@ -77,18 +77,18 @@ void visualizeGrid() {
       }
       
       // Print markers
-      else if ( isDeadEnd(tempBlock[i][j]) )
+      else if ( isDeadEnd(cell[i][j]) )
         printf(" x ");
-      else if ( hasTrace(tempBlock[i][j]) ) {
-        printf("%3d", tempDistance[i][j]);
+      else if ( hasTrace(cell[i][j]) ) {
+        printf("%3d", distance[i][j]);
       }
       else {
-        printf("%3d", tempDistance[i][j]);
+        printf("%3d", distance[i][j]);
       }
       
       // Opt to print east wall
       if (!HIDEEAST) {
-        if ( hasEast(tempBlock[i][j]) )
+        if ( hasEast(cell[i][j]) )
           printf("|");
         else
           printf(" ");
@@ -105,7 +105,7 @@ void visualizeGrid() {
     // Opt to print south wall
     if (!HIDESOUTH) {
       for (int j = 0; j < SIZE; j++) {
-        if ( hasSouth(tempBlock[i][j]) ) {
+        if ( hasSouth(cell[i][j]) ) {
           if (HIDEEAST) 
             printf("+---");
           else

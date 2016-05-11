@@ -42,34 +42,34 @@ int atCenter() {
          
     // not at southwest
     if ( !((yPos == (SIZE-1)/2) && (xPos == (SIZE-1)/2)) ) {
-      tempBlock[(SIZE-1)/2][(SIZE-1)/2] |= 12;  // Place pseudo walls on all sides
+      cell[(SIZE-1)/2][(SIZE-1)/2] |= 12;  // Place pseudo walls on all sides
       // Update adjacent walls
-      tempBlock[(SIZE - 1) / 2 - 1][(SIZE - 1) / 2] |= 1;
-      tempBlock[(SIZE - 1) / 2][(SIZE - 1) / 2 - 1] |= 2;
+      cell[(SIZE - 1) / 2 - 1][(SIZE - 1) / 2] |= 1;
+      cell[(SIZE - 1) / 2][(SIZE - 1) / 2 - 1] |= 2;
     }
     
     // not at northwest
     if ( !((yPos == SIZE/2) && (xPos == (SIZE-1)/2)) ) {
-      tempBlock[SIZE/2][(SIZE-1)/2] |= 9;     // Place pseudo walls on all sides     
+      cell[SIZE/2][(SIZE-1)/2] |= 9;     // Place pseudo walls on all sides     
       // Update adjacent walls
-      tempBlock[SIZE / 2 + 1][(SIZE - 1) / 2] |= 4;
-      tempBlock[SIZE / 2][(SIZE - 1) / 2 - 1] |= 2;
+      cell[SIZE / 2 + 1][(SIZE - 1) / 2] |= 4;
+      cell[SIZE / 2][(SIZE - 1) / 2 - 1] |= 2;
     }
     
     // not at northeast
     if ( !((yPos == SIZE/2) && (xPos == SIZE/2)) ) {
-      tempBlock[SIZE/2][SIZE/2] |= 3;        // Place pseudo walls on all sides
+      cell[SIZE/2][SIZE/2] |= 3;        // Place pseudo walls on all sides
       // Update adjacent walls
-      tempBlock[SIZE / 2 + 1][SIZE / 2] |= 4;
-      tempBlock[SIZE / 2][SIZE / 2 + 1] |= 8; 
+      cell[SIZE / 2 + 1][SIZE / 2] |= 4;
+      cell[SIZE / 2][SIZE / 2 + 1] |= 8; 
     }
     
     // not at southeast
     if ( !((yPos == (SIZE-1)/2) && (xPos == SIZE/2)) ) {
-      tempBlock[(SIZE-1)/2][SIZE/2] |= 4;    // Place pseudo walls on all sides     
+      cell[(SIZE-1)/2][SIZE/2] |= 4;    // Place pseudo walls on all sides     
       // Update adjacent walls
-      tempBlock[(SIZE - 1) / 2 - 1][SIZE / 2] |= 1;
-      tempBlock[(SIZE - 1) / 2][SIZE / 2 + 1] |= 8;
+      cell[(SIZE - 1) / 2 - 1][SIZE / 2] |= 1;
+      cell[(SIZE - 1) / 2][SIZE / 2 + 1] |= 8;
     }
     
     return 1;
@@ -99,10 +99,10 @@ int getMin(int x, int y) {
    int distS;
    int distW;
    
-   distN = hasNorth(tempBlock[y][x])? MAX_DIST : tempDistance[y + 1][x];
-   distE = hasEast(tempBlock[y][x])? MAX_DIST : tempDistance[y][x + 1];
-   distS = hasSouth(tempBlock[y][x])? MAX_DIST : tempDistance[y - 1][x];
-   distW = hasWest(tempBlock[y][x])? MAX_DIST : tempDistance[y][x - 1];
+   distN = hasNorth(cell[y][x])? MAX_DIST : distance[y + 1][x];
+   distE = hasEast(cell[y][x])? MAX_DIST : distance[y][x + 1];
+   distS = hasSouth(cell[y][x])? MAX_DIST : distance[y - 1][x];
+   distW = hasWest(cell[y][x])? MAX_DIST : distance[y][x - 1];
    
    min = distN;
    min = (distE < min)? distE : min;

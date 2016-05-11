@@ -17,7 +17,7 @@
 #define HIDEEAST 1    // Hide east cell wall when printing
 
 /* Constants */
-#define SIZE 12      // size of maze
+#define SIZE 16      // size of maze
 #define MAX_DIST 252  // max distance for flood search
 
 /* Function declarations */
@@ -37,6 +37,7 @@ void moveBack(void);
 void treeSearch(char);
 void floodCenter(void);
 void floodStart(void);
+void floodCenterCurve(void);
 void updateDistanceToCenter(void);      // to center
 void updateDistanceToStart(void);  // to start
 
@@ -54,14 +55,13 @@ bool willTurn(void);
 
 /* Global variables */
 
-extern int block[SIZE][SIZE]; //  ... 0 0 0 0       0 0 0 0
+extern unsigned char cell[SIZE][SIZE]; //  ... 0 0 0 0       0 0 0 0
                               //         DE TRACE   W S E N
                               // [row] [col]
                               // [ y ] [ x ]
-extern int distance[SIZE][SIZE];
-
-extern int tempBlock[SIZE][SIZE];
-extern int tempDistance[SIZE][SIZE];
+extern unsigned char distance[SIZE][SIZE];
+extern unsigned char cell_backup[SIZE][SIZE];
+extern unsigned char distance_backup[SIZE][SIZE];
 
 extern int xPos;   // 0-15
 extern int yPos;   // 0-15

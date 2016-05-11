@@ -14,10 +14,10 @@ float dist_mm_to_counts(float mm);
 float counts_to_mm(int counts);
 float mm_to_counts (float speed);
 void getSensorError(void);
-float abs(float number);
+inline float abs(float number);
 float getDecNeeded(float Vi, float Vf, float d);
 
-void moveForward(int cells);
+void moveForward(float cells);
 void moveForwardHalf(void);
 
 #endif

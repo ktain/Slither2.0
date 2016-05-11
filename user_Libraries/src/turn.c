@@ -8,12 +8,14 @@
 #include "speedProfile.h"
 #include "maze.h"
 #include "sensor_Function.h"
+#include "buzzer.h"
 #include <stdio.h>
 
 void pivotTurn(int degrees) {
 	useIRSensors = 0;
 	useSpeedProfile = 1;
 	targetSpeedX = 0;
+	
 	int tempAccW = accW;
 	int tempDecW = decW;
 	
@@ -27,10 +29,10 @@ void pivotTurn(int degrees) {
 	if (degrees > 0)
 		while( angle < degrees ) {
 			targetSpeedW = -turnSpeed;
+			delay_ms(1);
 			if (millis() - curt > 1000) {
 				break;
 			}
-			delay_ms(1);
 		}
 	else
 		while( angle > degrees ) {
@@ -52,12 +54,23 @@ void pivotTurn(int degrees) {
 
 
 void curveTurnRight(void) {
-	useIRSensors = 0;
 	useSpeedProfile = 1;
+	useIRSensors = 0;
 	targetSpeedX = stopSpeed;
 	
+	//int startLeftEncCount = leftEncCount;
+	//int startRightEncCount = rightEncCount;
+	
 	int curt = millis();
-	while(millis() - curt < t0);
+	while(millis() - curt < t0) {
+		// Turn earlier if too close to front wall
+		readSensor();
+		if (LFSensor > LFvalue2 && RFSensor > RFvalue2) {
+			shortBeep(50, 4000);
+			break;
+		}
+		delay_ms(1);
+	}
 	
 	targetSpeedW = -speedW;
 	
@@ -70,16 +83,29 @@ void curveTurnRight(void) {
 	while (millis() - curt < t3 + t4);
 	
 	useSpeedProfile = 1;
+	
+	//setLeftEncCount(startLeftEncCount);
+	//setRightEncCount(startRightEncCount);
 }
 
 void curveTurnLeft(void) {
-	useIRSensors = 0;
 	useSpeedProfile = 1;
+	useIRSensors = 0;
 	targetSpeedX = stopSpeed;
 	
+	//int startLeftEncCount = leftEncCount;
+	//int startRightEncCount = rightEncCount;
+	
 	int curt = millis();
-	while(millis() - curt < t0);
-
+	while(millis() - curt < t0) {
+		// Turn earlier if too close to front wall
+		readSensor();
+		if (LFSensor > LFvalue2 && RFSensor > RFvalue2)			{
+			shortBeep(50, 4000);
+			break;
+		}
+		delay_ms(1);
+	}
 	targetSpeedW = speedW;
 	
 	curt = millis();
@@ -90,4 +116,7 @@ void curveTurnLeft(void) {
 	while (millis() - curt < t3 + t4);
 	
 	useSpeedProfile = 1;
+
+	//setLeftEncCount(startLeftEncCount);
+	//setRightEncCount(startRightEncCount);
 }

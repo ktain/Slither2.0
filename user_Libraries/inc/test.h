@@ -14,6 +14,9 @@ void speedRunOld(void);
 void closeUntracedCells(void);
 bool hasFrontWallInMem(void);
 void speedRunCurve(void);
+void saveData(void);
+void loadData(void);
+void waitForSignal(void);
 #endif
 
 

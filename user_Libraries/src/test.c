@@ -212,37 +212,37 @@ void randomMovement(void) {
 //Returns which direction to move in and sets the orientation to next move
 int getNextDirection(void)
 {
-  int currDistance = tempDistance[yPos][xPos];
+  int currDistance = distance[yPos][xPos];
   int distN = MAX_DIST;
   int distE = MAX_DIST;
   int distS = MAX_DIST;
   int distW = MAX_DIST;
 
   if(yPos < SIZE - 1)
-    distN = tempDistance[yPos+1][xPos];
+    distN = distance[yPos+1][xPos];
   if(xPos < SIZE - 1)
-    distE = tempDistance[yPos][xPos+1];
+    distE = distance[yPos][xPos+1];
   if(xPos > 0)
-    distS = tempDistance[yPos-1][xPos];
+    distS = distance[yPos-1][xPos];
   if(yPos > 0)
-    distW = tempDistance[yPos][xPos-1];
+    distW = distance[yPos][xPos-1];
 
-  if(!hasNorth(tempBlock[yPos][xPos]) && (distN == currDistance - 1))
+  if(!hasNorth(cell[yPos][xPos]) && (distN == currDistance - 1))
   {
     orientation = 'N';
     return MOVEN;
   }
-  if(!hasEast(tempBlock[yPos][xPos]) && (distE == currDistance - 1))
+  if(!hasEast(cell[yPos][xPos]) && (distE == currDistance - 1))
   {
     orientation = 'E';
     return MOVEE;
   }
-  if(!hasSouth(tempBlock[yPos][xPos]) && (distS == currDistance - 1))
+  if(!hasSouth(cell[yPos][xPos]) && (distS == currDistance - 1))
   {
     orientation = 'S';
     return MOVES;
   }
-  if(!hasWest(tempBlock[yPos][xPos]) && (distW == currDistance - 1))
+  if(!hasWest(cell[yPos][xPos]) && (distW == currDistance - 1))
   {
     orientation = 'W';
     return MOVEW;
@@ -252,9 +252,6 @@ int getNextDirection(void)
 
 void speedRun(void) 
 {
-	isSpeedRunning = 1;
-	resetSpeedProfile();
-	useSpeedProfile = 1;
 
   int nextDir[100] = {0};
 	int length = 0;
@@ -268,28 +265,38 @@ void speedRun(void)
   updateDistanceToCenter();
   visualizeGrid();
 	
+	resetSpeedProfile();
+	isSpeedRunning = 1;
+	useSpeedProfile = 1;
+
 	// Simulate path
 	for (int i = 0; !atCenter(); i++) {
+		
+		// Error check
+		if (distance[yPos][xPos] >= MAX_DIST) {
+			beep(10);
+			break;
+		}
 		if (orientation == 'N') {
-			while (!hasNorth(tempBlock[yPos][xPos]) && (tempDistance[yPos + 1][xPos] == tempDistance[yPos][xPos] - 1)) {
+			while (!hasNorth(cell[yPos][xPos]) && (distance[yPos + 1][xPos] == distance[yPos][xPos] - 1)) {
 				length++;
 				yPos++;
 			}
 		}
 		else if (orientation == 'E') {
-			while (!hasEast(tempBlock[yPos][xPos]) && (tempDistance[yPos][xPos + 1] == tempDistance[yPos][xPos] - 1)) {
+			while (!hasEast(cell[yPos][xPos]) && (distance[yPos][xPos + 1] == distance[yPos][xPos] - 1)) {
 				length++;
 				xPos++;
 			}
 		}
 		else if (orientation == 'S') {
-			while (!hasSouth(tempBlock[yPos][xPos]) && (tempDistance[yPos - 1][xPos] == tempDistance[yPos][xPos] - 1)) {
+			while (!hasSouth(cell[yPos][xPos]) && (distance[yPos - 1][xPos] == distance[yPos][xPos] - 1)) {
 				length++;
 				yPos--;
 			}
 		}
 		else if (orientation == 'W') {
-			while (!hasWest(tempBlock[yPos][xPos]) && (tempDistance[yPos][xPos - 1] == tempDistance[yPos][xPos] - 1)) {
+			while (!hasWest(cell[yPos][xPos]) && (distance[yPos][xPos - 1] == distance[yPos][xPos] - 1)) {
 				length++;
 				xPos--;
 			}
@@ -309,9 +316,20 @@ void speedRun(void)
 	// Run path
 	useIRSensors = 1;
   for (int i = 0; distances[i] != 0; i++) {
-		moveForward(distances[i]);
+		if (i == 0) {
+			moveForward(distances[i] + (0.5 - mm_to_counts(motorToBackDist)/cellDistance));
+		}
+		else if (distances[i+1] == 0) {
+			int tempSpeed = stopSpeed;
+			stopSpeed = 0;
+			moveForward(distances[i]);
+			stopSpeed = tempSpeed;
+		}
+		else {
+			moveForward(distances[i]);
+		}
 		
-		readSensor();
+		//readSensor();
 		if (LFSensor > LFvalue2 && RFSensor > RFvalue2) {
 			alignFrontWall(LFvalue1, RFvalue1, alignTime);
 		}
@@ -344,17 +362,17 @@ void closeUntracedCells(void) {
 	int j, k;
 	for (j = 0; j < SIZE; j++) {
 		for (k = 0; k < SIZE; k++) {
-			if (!hasTrace(tempBlock[j][k]))
+			if (!hasTrace(cell[j][k]))
       {
-				tempBlock[j][k] |= 15;
+				cell[j][k] |= 15;
         if(j < SIZE - 1)
-          tempBlock[j+1][k] |= 4;
+          cell[j+1][k] |= 4;
         if(j > 0)
-          tempBlock[j-1][k] |= 1;
+          cell[j-1][k] |= 1;
         if(k < SIZE - 1)
-          tempBlock[j][k+1] |= 8;
+          cell[j][k+1] |= 8;
         if(k > 0)
-          tempBlock[j][k-1] |= 2;
+          cell[j][k-1] |= 2;
       }
 		}
 	}
@@ -375,29 +393,40 @@ void speedRunCurve(void)
 	closeUntracedCells();
   updateDistanceToCenter();
   visualizeGrid();
+
+	resetSpeedProfile();
+	isSpeedRunning = 1;
+	useSpeedProfile = 1;
 	
 	// Simulate path
 	for (int i = 0; !atCenter(); i++) {
+		
+		// Error check
+		if (distance[yPos][xPos] >= MAX_DIST) {
+			beep(10);
+			break;
+		}
+		
 		if (orientation == 'N') {
-			while (!hasNorth(tempBlock[yPos][xPos]) && (tempDistance[yPos + 1][xPos] == tempDistance[yPos][xPos] - 1)) {
+			while (!hasNorth(cell[yPos][xPos]) && (distance[yPos + 1][xPos] == distance[yPos][xPos] - 1)) {
 				length++;
 				yPos++;
 			}
 		}
 		else if (orientation == 'E') {
-			while (!hasEast(tempBlock[yPos][xPos]) && (tempDistance[yPos][xPos + 1] == tempDistance[yPos][xPos] - 1)) {
+			while (!hasEast(cell[yPos][xPos]) && (distance[yPos][xPos + 1] == distance[yPos][xPos] - 1)) {
 				length++;
 				xPos++;
 			}
 		}
 		else if (orientation == 'S') {
-			while (!hasSouth(tempBlock[yPos][xPos]) && (tempDistance[yPos - 1][xPos] == tempDistance[yPos][xPos] - 1)) {
+			while (!hasSouth(cell[yPos][xPos]) && (distance[yPos - 1][xPos] == distance[yPos][xPos] - 1)) {
 				length++;
 				yPos--;
 			}
 		}
 		else if (orientation == 'W') {
-			while (!hasWest(tempBlock[yPos][xPos]) && (tempDistance[yPos][xPos - 1] == tempDistance[yPos][xPos] - 1)) {
+			while (!hasWest(cell[yPos][xPos]) && (distance[yPos][xPos - 1] == distance[yPos][xPos] - 1)) {
 				length++;
 				xPos--;
 			}
@@ -408,8 +437,8 @@ void speedRunCurve(void)
 	}
 	
 	
-	
-	/* Print values
+	/*
+	//Print values
 	for (int i = 0; distances[i]; i++)
 		printf("distances[%d] = %d | nextDir[%d] = %d\n\r", i, distances[i], i, nextDir[i]);
 	*/
@@ -422,15 +451,19 @@ void speedRunCurve(void)
 	useIRSensors = 0;
 	useSpeedProfile = 1;
 	
-	moveForwardHalf();
-	
 	useIRSensors = 1;
   for (int i = 0; distances[i] != 0; i++) {
-		moveForward(distances[i] - 1);
-		
-		readSensor();
-		if (LFSensor > LFvalue2 && RFSensor > RFvalue2) {
-			alignFrontWall(LFvalue1, RFvalue1, alignTime);
+		if (i == 0) {
+			moveForward(distances[i] - 0.5 + mm_to_counts(motorToBackDist)/cellDistance);
+		}
+		else if (distances[i+1] == 0) {
+			int tempSpeed = stopSpeed;
+			stopSpeed = 0;
+			moveForward(distances[i] - 0.5);
+			stopSpeed = tempSpeed;
+		}
+		else {
+			moveForward(distances[i] - 1);
 		}
 		
 		isCurveTurning = 1;
@@ -452,8 +485,6 @@ void speedRunCurve(void)
 	
 	useIRSensors = 0;
 	
-	moveForwardHalf();
-	
 	useSpeedProfile = 0;
 	turnMotorOff;
 	beep(3);
@@ -464,10 +495,65 @@ void speedRunCurve(void)
 
 
 bool hasFrontWallInMem(void) {
-	int curBlock = tempBlock[yPos][xPos];
+	int curBlock = cell[yPos][xPos];
 	if ( (orientation == 'N' && hasNorth(curBlock)) || (orientation == 'E' && hasEast(curBlock)) ||
 			 (orientation == 'S' && hasSouth(curBlock)) || (orientation == 'W' && hasWest(curBlock)) )
 		return 1;
 	else
 		return 0;
 }
+
+void saveData(void) {
+	// Save cell data
+	for (int i = 0; i < SIZE; i++) {
+		for (int j = 0; j < SIZE; j++) {
+			cell_backup[i][j] = cell[i][j];
+		}
+	}
+	
+	// Save distance data
+	for (int i = 0; i < SIZE; i++) {
+		for (int j = 0; j < SIZE; j++) {
+			distance_backup[i][j] = distance[i][j];
+		}
+	}
+	
+	return;
+}
+
+void loadData(void) {
+	// Load cell data
+	for (int i = 0; i < SIZE; i++) {
+		for (int j = 0; j < SIZE; j++) {
+			cell[i][j] = cell_backup[i][j];
+		}
+	}
+	
+	// Load distance data
+	for (int i = 0; i < SIZE; i++) {
+		for (int j = 0; j < SIZE; j++) {
+			distance[i][j] = distance_backup[i][j];
+		}
+	}
+	
+	return;
+}
+
+void waitForSignal(void) {
+	
+	// Wait for left forward sensor signal
+	while(LFSensor < 200) {
+		readSensor();
+		delay_ms(5);
+	}
+	beep(2);
+	
+	// Wait for right forward sensor signal
+	while(RFSensor < 200) {
+		readSensor();
+		delay_ms(5);
+	}
+	beep(2);
+
+}
+

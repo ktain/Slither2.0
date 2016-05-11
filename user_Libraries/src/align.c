@@ -7,6 +7,8 @@
 #include "sensor_Function.h"
 
 void alignFrontWall(int LSensorVal, int RSensorVal, int duration){
+	int startLeftEncCount = getLeftEncCount();
+	int startRightEncCount = getRightEncCount();
 	int tempPwm = maxPwm;
 	maxPwm = alignPwm;
 	useIRSensors = 1;
@@ -19,7 +21,7 @@ void alignFrontWall(int LSensorVal, int RSensorVal, int duration){
 		while(micros() - curt < alignTime);
 	}
 	// Ignore encoder count changes
-	setLeftEncCount(leftEncCount);
-	setRightEncCount(rightEncCount);
+	setLeftEncCount(startLeftEncCount);
+	setRightEncCount(startRightEncCount);
 	maxPwm = tempPwm;
 }

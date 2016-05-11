@@ -21,6 +21,7 @@ extern float wheelCircumference;
 extern float wheelBase;
 extern int cellDistance;
 extern float countspermm;
+extern int motorToBackDist;
 
 // Speed settings
 extern int leftBaseSpeed;
@@ -105,6 +106,8 @@ extern int leftWallThreshold;
 extern int rightWallThreshold;
 extern int frontWallThresholdL;
 extern int frontWallThresholdR;
+extern int leftPostThreshold;
+extern int rightPostThreshold;
 
 // Gyro
 extern int reflectionRate;
@@ -125,16 +128,13 @@ extern int turnLeft90;
 extern int turnRight90;
 extern int turnLeft180;
 extern int turnRight180;
+extern int turnLeft45;
+extern int turnRight45;
 
 extern int distances[100];
 
 // Interface
 extern int select;
-
-// Debug variables
-extern int debugMaxSpeed;
-extern int debugMaxEncCountsPerMs;
-
 
 // Curve turn settings
 extern int speedW;

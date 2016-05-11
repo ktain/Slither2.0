@@ -127,12 +127,7 @@ void calculateMotorPwm(void) { // encoder PD controller
 	
 	gyroFeedback = aSpeed/gyroFeedbackRatio; 	//gyroFeedbackRatio mentioned in curve turn lecture
 
-	if(useOnlyGyroFeedback)
-		rotationalFeedback = gyroFeedback;
-	else if(useOnlyEncoderFeedback)
-		rotationalFeedback = encoderFeedbackW;
-	else
-		rotationalFeedback = encoderFeedbackW + gyroFeedback;
+	rotationalFeedback = encoderFeedbackW + gyroFeedback;
 	
 	// option to include sensor feedback
 		
@@ -159,37 +154,9 @@ void calculateMotorPwm(void) { // encoder PD controller
 }
 
 
-/**
- *	Function: needToDecelerate
- *	Parameters: dist - encoder counts
- *				 			curSpd - counts/ms
- *				 			endSpd - counts/ms
- *	Return: positive deceleration in cm/s
- */
-/*
-int needToDecelerate(int32_t dist, int16_t curSpd, int16_t endSpd) 
-{
-	if (curSpd<0) 
-		curSpd = -curSpd;	// take absolute value
-	if (endSpd<0) 
-		endSpd = -endSpd;
-	if (dist<0) 
-		dist = 1;			// prevent negative distance
-	if (dist == 0) 
-		dist = 1;  // prevent dividing by 0
-	
-	int estimatedDecX = ((curSpd*curSpd - endSpd*endSpd)*100/counts_to_mm(dist)/4);
-	
-	return (estimatedDecX < 0)? -estimatedDecX : estimatedDecX;	// cm/s/s
-}
-*/
-
-
 
 void resetSpeedProfile(void)
 {
-	//resetEverything;
-	
 	//disable sensor data collecting functions running in 1ms interrupt
  	useIRSensors = 0;
 	useSpeedProfile = 0;
@@ -220,6 +187,8 @@ void resetSpeedProfile(void)
 	resetRightEncCount();
 }
 
+
+// Get deceleration needed given distance left to travel, final speed, and current speed
 float getDecNeeded (float d, float Vf, float Vi) {
 	if (d <= 0) {
 		d = 1;
@@ -241,7 +210,7 @@ float mm_to_counts (float speed) {
 
 
 // get absolute value
-float abs (float number) {
+inline float abs (float number) {
 	return (number<0)? -number : number;
 }
 
@@ -249,7 +218,7 @@ float abs (float number) {
 /**
  *	Straight movement
  */
-void moveForward(int cells) {
+void moveForward(float cells) {
 	
 	useIRSensors = 1;
 	useSpeedProfile = 1;
@@ -294,11 +263,18 @@ void getSensorError(void)
 	if (LDSensor > LDvalue1 && RDSensor > RDvalue1)
 		sensorError = RDSensor - LDSensor;
 	// Closer to left wall
-	if(LDSensor > LDvalue1)
+	else if (LDSensor > LDvalue1)
 		sensorError = LDMiddleValue - LDSensor;
 	// Closer to right wall
-	else if(RDSensor > RDvalue1)
+	else if (RDSensor > RDvalue1)
 		sensorError = RDSensor - RDMiddleValue;
+	
+	/*
+	else if (RDSensor > rightPostThreshold && LDSensor < leftPostThreshold)
+		sensorError = 2*(RDSensor - LDSensor);
+	else if (RDSensor < rightPostThreshold && LDSensor > leftPostThreshold)
+		sensorError = 2*(RDSensor - LDSensor);
+	*/
 	else
 		sensorError = 0;
 }

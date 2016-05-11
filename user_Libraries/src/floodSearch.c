@@ -41,8 +41,8 @@ void floodCenter(void) {
 	orientation = 'N';
 	
 	// Place trace at starting position
-  if (!hasTrace(tempBlock[yPos][xPos])) {
-    tempBlock[yPos][xPos] |= 16;
+  if (!hasTrace(cell[yPos][xPos])) {
+    cell[yPos][xPos] |= 16;
     traceCount++;
 	}
 	
@@ -58,7 +58,7 @@ void floodCenter(void) {
 			useSpeedProfile = 1;
 			
 			// Error check
-			if (tempDistance[yPos][xPos] >= MAX_DIST) {
+			if (distance[yPos][xPos] >= MAX_DIST) {
 				if (DEBUG) {
 					printf("Stuck... Can't find center.\n\r");
 				}
@@ -66,6 +66,8 @@ void floodCenter(void) {
 				useSpeedProfile = 0;
 				turnMotorOff;
 				beep(10);
+				visualizeGrid();
+				return;
 			}
 			
 			// Update position
@@ -87,17 +89,17 @@ void floodCenter(void) {
 		// Reached quarter cell
 		if (!quarterCellFlag && (remainingDist <= cellDistance*3/4))	{	// run once
 			quarterCellFlag = 1;
+		}
+		
+		// Reached half cell
+		if (!halfCellFlag && (remainingDist <= cellDistance/2)) {		// Run once
+			halfCellFlag = 1;
 			
 			// Detect left and right wall
 			if (LDSensor > leftWallThreshold)
 				hasLeftWall = 1;
 			if (RDSensor > rightWallThreshold)
 				hasRightWall = 1;		
-		}
-		
-		// Reached half cell
-		if (!halfCellFlag && (remainingDist <= cellDistance/2)) {		// Run once
-			halfCellFlag = 1;
 			
 			// Detect front wall
 			if ((LFSensor > frontWallThresholdL) && (RFSensor > frontWallThresholdR))
@@ -109,17 +111,17 @@ void floodCenter(void) {
 			
 			// Update distance for current block
 			if (DEBUG) printf("Updating distance for current block\n\r");
-			tempDistance[yPos][xPos] = getMin(xPos, yPos) + 1;
+			distance[yPos][xPos] = getMin(xPos, yPos) + 1;
 			
 			// Update distances for every other block
 			if (DEBUG) printf("Updating distances\n\r");
 			updateDistanceToCenter();
 			
 			// Get distances around current block
-			distN = hasNorth(tempBlock[yPos][xPos])? 500 : tempDistance[yPos + 1][xPos];
-			distE = hasEast(tempBlock[yPos][xPos])? 500 : tempDistance[yPos][xPos + 1];
-			distS = hasSouth(tempBlock[yPos][xPos])? 500 : tempDistance[yPos - 1][xPos];
-			distW = hasWest(tempBlock[yPos][xPos])? 500 : tempDistance[yPos][xPos - 1];
+			distN = hasNorth(cell[yPos][xPos])? MAX_DIST : distance[yPos + 1][xPos];
+			distE = hasEast(cell[yPos][xPos])? MAX_DIST : distance[yPos][xPos + 1];
+			distS = hasSouth(cell[yPos][xPos])? MAX_DIST : distance[yPos - 1][xPos];
+			distW = hasWest(cell[yPos][xPos])? MAX_DIST : distance[yPos][xPos - 1];
 			if (DEBUG) printf("distN %d, distE %d, distS %d, distW %d\n\r", distN, distE, distS, distW);
 			
 			// Decide next movement
@@ -135,23 +137,23 @@ void floodCenter(void) {
 				nextMove = MOVEW;
 			 
 			// 2. If multiple equally short routes, go straight if possible
-			else if ( orientation == 'N' && !hasNorth(tempBlock[yPos][xPos]) )
+			else if ( orientation == 'N' && !hasNorth(cell[yPos][xPos]) )
 				nextMove = MOVEN;
-			else if ( orientation == 'E' && !hasEast(tempBlock[yPos][xPos]) )
+			else if ( orientation == 'E' && !hasEast(cell[yPos][xPos]) )
 				nextMove = MOVEE;
-			else if ( orientation == 'S' && !hasSouth(tempBlock[yPos][xPos]) )
+			else if ( orientation == 'S' && !hasSouth(cell[yPos][xPos]) )
 				nextMove = MOVES;
-			else if ( orientation == 'W' && !hasWest(tempBlock[yPos][xPos]) )
+			else if ( orientation == 'W' && !hasWest(cell[yPos][xPos]) )
 				nextMove = MOVEW;
 			 
 			// 3. Otherwise prioritize N > E > S > W
-			else if (!hasNorth(tempBlock[yPos][xPos]))
+			else if (!hasNorth(cell[yPos][xPos]))
 				nextMove = MOVEN;
-			else if (!hasEast(tempBlock[yPos][xPos]))
+			else if (!hasEast(cell[yPos][xPos]))
 				nextMove = MOVEE;
-			else if (!hasSouth(tempBlock[yPos][xPos]))
+			else if (!hasSouth(cell[yPos][xPos]))
 				nextMove = MOVES;
-			else if (!hasWest(tempBlock[yPos][xPos]))
+			else if (!hasWest(cell[yPos][xPos]))
 				nextMove = MOVEW;
 			
 			else {
@@ -162,6 +164,8 @@ void floodCenter(void) {
 				useSpeedProfile = 0;
 				turnMotorOff;
 				beep(10);
+				visualizeGrid();
+				return;
 			}
 			
 			if (DEBUG) printf("nextMove %d\n\r", nextMove);
@@ -175,11 +179,11 @@ void floodCenter(void) {
 					
 			// If has front wall or needs to turn, decelerate to 0 within half a cell distance
 			if (hasFrontWall || willTurn()) {
-				if(getDecNeeded(counts_to_mm(remainingDist), curSpeedX, stopSpeed) < decX) {
+				if(getDecNeeded(counts_to_mm(remainingDist), curSpeedX, 0) < decX) {
 					targetSpeedX = searchSpeed;
 				}
 				else {
-					targetSpeedX = stopSpeed;
+					targetSpeedX = 0;
 				}
 			}
 			else 
@@ -205,8 +209,8 @@ void floodCenter(void) {
 			//shortBeep(200, 1000);
 			
 			// Place trace
-			if (!hasTrace(tempBlock[yPos][xPos])) {
-				tempBlock[yPos][xPos] |= 16;
+			if (!hasTrace(cell[yPos][xPos])) {
+				cell[yPos][xPos] |= 16;
 				traceCount++;
 			}
 			
@@ -245,19 +249,19 @@ void floodCenter(void) {
 		if (remainingDist < cellDistance/2)
 			useIRSensors = 0;
 		remainingDist = cellCount*cellDistance - encCount;
-		if(getDecNeeded(counts_to_mm(remainingDist), curSpeedX, stopSpeed) < decX) {
+		if(getDecNeeded(counts_to_mm(remainingDist), curSpeedX, 0) < decX) {
 			targetSpeedX = searchSpeed;
 		}
 		else {
-			targetSpeedX = stopSpeed;
+			targetSpeedX = 0;
 		}
 	}
 	
 	//shortBeep(200, 1000);
 	
 	// Place trace
-	if (!hasTrace(tempBlock[yPos][xPos])) {
-		tempBlock[yPos][xPos] |= 16;
+	if (!hasTrace(cell[yPos][xPos])) {
+		cell[yPos][xPos] |= 16;
 		traceCount++;
 	}
 	
@@ -298,7 +302,7 @@ void floodStart(void) {
   for(i = 0; i < SIZE; i++) {
     k = 0;
     for (j = 0; j < SIZE; j++) {
-      tempDistance[i][j] = k + i;
+      distance[i][j] = k + i;
       k++;
     }
   }
@@ -319,7 +323,7 @@ void floodStart(void) {
 			useSpeedProfile = 1;
 			
 			// Error check
-			if (tempDistance[yPos][xPos] >= MAX_DIST) {
+			if (distance[yPos][xPos] >= MAX_DIST) {
 				if (DEBUG) {
 					printf("Stuck... Can't find start.\n\r");
 				}
@@ -327,6 +331,8 @@ void floodStart(void) {
 				useSpeedProfile = 0;
 				turnMotorOff;
 				beep(10);
+				visualizeGrid();
+				return;
 			}
 			
 			// Update position
@@ -346,18 +352,18 @@ void floodStart(void) {
 		
 		// Reached quarter cell
 		if (!quarterCellFlag && (remainingDist <= cellDistance*3/4))	{	// run once
-			quarterCellFlag = 1;
-			
-			// Detect left and right wall
-			if (LDSensor > leftWallThreshold)
-				hasLeftWall = 1;
-			if (RDSensor > rightWallThreshold)
-				hasRightWall = 1;		
+			quarterCellFlag = 1;	
 		}
 		
 		// Reached half cell
 		if (!halfCellFlag && (remainingDist <= cellDistance/2)) {		// Run once
 			halfCellFlag = 1;
+						
+			// Detect left and right wall
+			if (LDSensor > leftWallThreshold)
+				hasLeftWall = 1;
+			if (RDSensor > rightWallThreshold)
+				hasRightWall = 1;	
 			
 			// Detect front wall
 			if ((LFSensor > frontWallThresholdL) && (RFSensor > frontWallThresholdR))
@@ -369,17 +375,17 @@ void floodStart(void) {
 			
 			// Update distance for current block
 			if (DEBUG) printf("Updating distance for current block\n\r");
-			tempDistance[yPos][xPos] = getMin(xPos, yPos) + 1;
+			distance[yPos][xPos] = getMin(xPos, yPos) + 1;
 			
 			// Update distances for every other block
 			if (DEBUG) printf("Updating distances\n\r");
 			updateDistanceToStart();
 			
 			// Get distances around current block
-			distN = hasNorth(tempBlock[yPos][xPos])? 500 : tempDistance[yPos + 1][xPos];
-			distE = hasEast(tempBlock[yPos][xPos])? 500 : tempDistance[yPos][xPos + 1];
-			distS = hasSouth(tempBlock[yPos][xPos])? 500 : tempDistance[yPos - 1][xPos];
-			distW = hasWest(tempBlock[yPos][xPos])? 500 : tempDistance[yPos][xPos - 1];
+			distN = hasNorth(cell[yPos][xPos])? MAX_DIST : distance[yPos + 1][xPos];
+			distE = hasEast(cell[yPos][xPos])? MAX_DIST : distance[yPos][xPos + 1];
+			distS = hasSouth(cell[yPos][xPos])? MAX_DIST : distance[yPos - 1][xPos];
+			distW = hasWest(cell[yPos][xPos])? MAX_DIST : distance[yPos][xPos - 1];
 			if (DEBUG) printf("distN %d, distE %d, distS %d, distW %d\n\r", distN, distE, distS, distW);
 			
 			// Decide next movement, flooding to start
@@ -395,33 +401,33 @@ void floodStart(void) {
 				nextMove = MOVEW;
 			 
 			// 2. If multiple equally short routes, choose untraced route N > E > S > W
-			else if ( !hasNorth(tempBlock[yPos][xPos]) && !hasTrace(tempBlock[yPos + 1][xPos]))
+			else if ( !hasNorth(cell[yPos][xPos]) && !hasTrace(cell[yPos + 1][xPos]))
 				nextMove = MOVEN;
-			else if ( !hasEast(tempBlock[yPos][xPos]) && !hasTrace(tempBlock[yPos][xPos + 1]))
+			else if ( !hasEast(cell[yPos][xPos]) && !hasTrace(cell[yPos][xPos + 1]))
 				nextMove = MOVEE;
-			else if ( !hasSouth(tempBlock[yPos][xPos]) && !hasTrace(tempBlock[yPos - 1][xPos]))
+			else if ( !hasSouth(cell[yPos][xPos]) && !hasTrace(cell[yPos - 1][xPos]))
 				nextMove = MOVES;
-			else if ( !hasWest(tempBlock[yPos][xPos]) && !hasTrace(tempBlock[yPos][xPos - 1]))
+			else if ( !hasWest(cell[yPos][xPos]) && !hasTrace(cell[yPos][xPos - 1]))
 				nextMove = MOVEW;
 			 
 			// 3. Else, go straight if possible
-			else if ( orientation == 'N' && !hasNorth(tempBlock[yPos][xPos]) )
+			else if ( orientation == 'N' && !hasNorth(cell[yPos][xPos]) )
 				nextMove = MOVEN;
-			else if ( orientation == 'E' && !hasEast(tempBlock[yPos][xPos]) )
+			else if ( orientation == 'E' && !hasEast(cell[yPos][xPos]) )
 				nextMove = MOVEE;
-			else if ( orientation == 'S' && !hasSouth(tempBlock[yPos][xPos]) )
+			else if ( orientation == 'S' && !hasSouth(cell[yPos][xPos]) )
 				nextMove = MOVES;
-			else if ( orientation == 'W' && !hasWest(tempBlock[yPos][xPos]) )
+			else if ( orientation == 'W' && !hasWest(cell[yPos][xPos]) )
 				nextMove = MOVEW;
 			
 			// 4. Otherwise prioritize N > E > S > W
-			else if (!hasNorth(tempBlock[yPos][xPos]))
+			else if (!hasNorth(cell[yPos][xPos]))
 				nextMove = MOVEN;
-			else if (!hasEast(tempBlock[yPos][xPos]))
+			else if (!hasEast(cell[yPos][xPos]))
 				nextMove = MOVEE;
-			else if (!hasSouth(tempBlock[yPos][xPos]))
+			else if (!hasSouth(cell[yPos][xPos]))
 				nextMove = MOVES;
-			else if (!hasWest(tempBlock[yPos][xPos]))
+			else if (!hasWest(cell[yPos][xPos]))
 				nextMove = MOVEW;
 			
 			else {
@@ -432,6 +438,8 @@ void floodStart(void) {
 				useSpeedProfile = 0;
 				turnMotorOff;
 				beep(10);
+				visualizeGrid();
+				return;
 			}
 			
 			if (DEBUG) printf("nextMove %d\n\r", nextMove);
@@ -445,11 +453,11 @@ void floodStart(void) {
 					
 			// If has front wall or needs to turn, decelerate to 0 within half a cell distance
 			if (hasFrontWall || willTurn()) {
-				if(getDecNeeded(counts_to_mm(remainingDist), curSpeedX, stopSpeed) < decX) {
+				if(getDecNeeded(counts_to_mm(remainingDist), curSpeedX, 0) < decX) {
 					targetSpeedX = searchSpeed;
 				}
 				else {
-					targetSpeedX = stopSpeed;
+					targetSpeedX = 0;
 				}
 			}
 			else 
@@ -475,8 +483,8 @@ void floodStart(void) {
 			//shortBeep(200, 1000);
 			
 			// Place trace
-			if (!hasTrace(tempBlock[yPos][xPos])) {
-				tempBlock[yPos][xPos] |= 16;
+			if (!hasTrace(cell[yPos][xPos])) {
+				cell[yPos][xPos] |= 16;
 				traceCount++;
 			}
 			
@@ -515,17 +523,17 @@ void floodStart(void) {
 		if (remainingDist < cellDistance/2)
 			useIRSensors = 0;
 		remainingDist = cellCount*cellDistance - encCount;
-		if(getDecNeeded(counts_to_mm(remainingDist), curSpeedX, stopSpeed) < decX) {
+		if(getDecNeeded(counts_to_mm(remainingDist), curSpeedX, 0) < decX) {
 			targetSpeedX = searchSpeed;
 		}
 		else {
-			targetSpeedX = stopSpeed;
+			targetSpeedX = 0;
 		}
 	}
 	
 	// Place trace
-	if (!hasTrace(tempBlock[yPos][xPos])) {
-		tempBlock[yPos][xPos] |= 16;
+	if (!hasTrace(cell[yPos][xPos])) {
+		cell[yPos][xPos] |= 16;
 		traceCount++;
 	}
 	
@@ -545,6 +553,316 @@ void floodStart(void) {
 	isSearching = 0;
 }
 
+/*
+ * Flood fill search to center using curve turns
+ */
+void floodCenterCurve(void) {
+	isSearching = 1;
+	resetSpeedProfile();
+	
+	//int cellCount = 1;						// number of explored cells
+	int remainingDist = 0;					// remaining distance in encoder counts
+	int accumulatedDist = encCount;	// accumulate encoder counts per move
+	bool beginCellFlag = 0;
+	bool quarterCellFlag = 0;
+	bool halfCellFlag = 0;
+	bool threeQuarterCellFlag = 0;
+	bool fullCellFlag = 0;
+	bool performedCurveTurn = 0;
+
+	int distN = 0;   // distances around current position
+  int distE = 0;
+  int distS = 0;
+  int distW = 0;
+	
+	// Starting cell
+	xPos = 0;
+	yPos = 0;
+	orientation = 'N';
+	
+	// Place trace at starting position
+  if (!hasTrace(cell[yPos][xPos])) {
+    cell[yPos][xPos] |= 16;
+    traceCount++;
+	}
+	
+	targetSpeedX = searchSpeed;
+	
+	while(!atCenter()) {
+		if (performedCurveTurn) {
+			remainingDist = accumulatedDist + cellDistance/2 - encCount;
+		}
+		else {
+			remainingDist = accumulatedDist + cellDistance - encCount;
+		}
+		
+		// Beginning of cell
+		if (!beginCellFlag && (remainingDist <= cellDistance))	{	// run once
+			beginCellFlag = 1;
+			useIRSensors = 1;
+			useSpeedProfile = 1;
+			
+			// Error check
+			if (distance[yPos][xPos] >= MAX_DIST) {
+				if (DEBUG) {
+					printf("Stuck... Can't find center.\n\r");
+				}
+				nextMove = STOP;
+				useSpeedProfile = 0;
+				turnMotorOff;
+				beep(10);
+				visualizeGrid();
+				return;
+			}
+			
+			// Update position
+			if (orientation == 'N') {
+				yPos += 1;
+			}
+			if (orientation == 'E') {
+				xPos += 1;
+			}
+			if (orientation == 'S') {
+				yPos -= 1;
+			}
+			if (orientation == 'W') {
+				xPos -= 1;
+			}
+		
+		}
+		
+		// Reached quarter cell
+		if (!quarterCellFlag && (remainingDist <= cellDistance*3/4))	{	// run once
+			quarterCellFlag = 1;
+		}
+		
+		// Reached half cell
+		if (!halfCellFlag && (remainingDist <= cellDistance/2)) {		// Run once
+			halfCellFlag = 1;
+			
+			// Detect left and right wall
+			if (LDSensor > leftWallThreshold)
+				hasLeftWall = 1;
+			if (RDSensor > rightWallThreshold)
+				hasRightWall = 1;		
+			
+			// Detect front wall
+			if ((LFSensor > frontWallThresholdL) && (RFSensor > frontWallThresholdR))
+				hasFrontWall = 1;
+		
+			// Store next cell's wall data
+			if (DEBUG) printf("Detecting walls\n\r");
+			detectWalls();
+			
+			// Update distance for current block
+			if (DEBUG) printf("Updating distance for current block\n\r");
+			distance[yPos][xPos] = getMin(xPos, yPos) + 1;
+			
+			// Update distances for every other block
+			if (DEBUG) printf("Updating distances\n\r");
+			updateDistanceToCenter();
+			
+			// Get distances around current block
+			distN = hasNorth(cell[yPos][xPos])? MAX_DIST : distance[yPos + 1][xPos];
+			distE = hasEast(cell[yPos][xPos])? MAX_DIST : distance[yPos][xPos + 1];
+			distS = hasSouth(cell[yPos][xPos])? MAX_DIST : distance[yPos - 1][xPos];
+			distW = hasWest(cell[yPos][xPos])? MAX_DIST : distance[yPos][xPos - 1];
+			if (DEBUG) printf("distN %d, distE %d, distS %d, distW %d\n\r", distN, distE, distS, distW);
+			
+			// Decide next movement
+			if (DEBUG) printf("Deciding next movement\n\r");
+			// 1. Pick the shortest route
+			if ( (distN < distE) && (distN < distS) && (distN < distW) )
+				nextMove = MOVEN;
+			else if ( (distE < distN) && (distE < distS) && (distE < distW) )
+				nextMove = MOVEE;
+			else if ( (distS < distE) && (distS < distN) && (distS < distW) )
+				nextMove = MOVES;
+			else if ( (distW < distE) && (distW < distS) && (distW < distN) )
+				nextMove = MOVEW;
+			 
+			// 2. If multiple equally short routes, go straight if possible
+			else if ( orientation == 'N' && !hasNorth(cell[yPos][xPos]) )
+				nextMove = MOVEN;
+			else if ( orientation == 'E' && !hasEast(cell[yPos][xPos]) )
+				nextMove = MOVEE;
+			else if ( orientation == 'S' && !hasSouth(cell[yPos][xPos]) )
+				nextMove = MOVES;
+			else if ( orientation == 'W' && !hasWest(cell[yPos][xPos]) )
+				nextMove = MOVEW;
+			 
+			// 3. Otherwise prioritize N > E > S > W
+			else if (!hasNorth(cell[yPos][xPos]))
+				nextMove = MOVEN;
+			else if (!hasEast(cell[yPos][xPos]))
+				nextMove = MOVEE;
+			else if (!hasSouth(cell[yPos][xPos]))
+				nextMove = MOVES;
+			else if (!hasWest(cell[yPos][xPos]))
+				nextMove = MOVEW;
+			
+			else {
+				if (DEBUG) {
+					printf("Stuck... Can't find center.\n\r");
+				}
+				nextMove = STOP;
+				useSpeedProfile = 0;
+				turnMotorOff;
+				beep(10);
+				visualizeGrid();
+				return;
+			}
+			
+			if (DEBUG) printf("nextMove %d\n\r", nextMove);
+			
+			// Place trace
+			if (!hasTrace(cell[yPos][xPos])) {
+				cell[yPos][xPos] |= 16;
+				traceCount++;
+			}
+			
+			// If next move is a 90 degree turn, perform curve turn
+			isCurveTurning = 1;
+			if (nextMove == MOVEN && orientation != 'N' && orientation != 'S') {
+				targetSpeedX = 0;
+				visualizeGrid();
+				moveN();
+				performedCurveTurn = 1;
+			}
+			else if (nextMove == MOVEE && orientation != 'E' && orientation != 'W') {
+				targetSpeedX = 0;
+				visualizeGrid();
+				moveE();
+				performedCurveTurn = 1;
+			}
+			else if (nextMove == MOVES && orientation != 'S' && orientation != 'N') {
+				targetSpeedX = 0;
+				visualizeGrid();
+				moveS();
+				performedCurveTurn = 1;
+			}
+			else if (nextMove == MOVEW && orientation != 'W' && orientation != 'E') {
+				targetSpeedX = 0;
+				visualizeGrid();
+				moveW();
+				performedCurveTurn = 1;
+			}
+			else {
+				performedCurveTurn = 0;
+			}
+			isCurveTurning = 0;
+			
+			if (performedCurveTurn) {
+				//cellCount++;
+				shortBeep(200, 1000);
+				accumulatedDist = encCount;
+				
+				beginCellFlag = 0;
+				quarterCellFlag = 0;
+				halfCellFlag = 0;
+				threeQuarterCellFlag = 0;
+				fullCellFlag = 0;
+				hasFrontWall = 0;
+				hasLeftWall = 0;
+				hasRightWall = 0;
+				
+				continue;
+			}
+		}
+		
+		if (remainingDist <= cellDistance/2) { // run for last half
+			// If has front wall, decelerate to 0
+			if (hasFrontWall) {
+				useIRSensors = 0;
+				if(getDecNeeded(counts_to_mm(remainingDist), curSpeedX, 0) < decX) {
+					targetSpeedX = searchSpeed;
+				}
+				else {
+					targetSpeedX = 0;
+				}
+			}
+			else 
+				targetSpeedX = searchSpeed;
+		}
+		
+		
+		// Reached full cell
+		if ((!fullCellFlag && (remainingDist <= 0))) {	// run once
+			if (DEBUG) printf("Reached full cell\n\r");
+			fullCellFlag = 1;
+			//cellCount++;
+			shortBeep(200, 1000);
+			
+			// If has front wall, align with front wall
+			if (hasFrontWall) {
+				alignFrontWall(LFvalue1, RFvalue1, alignTime);	// left, right, duration
+			}
+			
+			// Reached full cell, perform next move
+			if (nextMove == MOVEN) {
+				moveN();
+			}
+			else if (nextMove == MOVEE) {
+				moveE();
+			}
+			else if (nextMove == MOVES) {
+				moveS();
+			}
+			else if (nextMove == MOVEW) {
+				moveW();
+			}
+			
+			targetSpeedX = searchSpeed;
+			
+			accumulatedDist = encCount;
+			
+			beginCellFlag = 0;
+			quarterCellFlag = 0;
+			halfCellFlag = 0;
+			threeQuarterCellFlag = 0;
+			fullCellFlag = 0;
+			hasFrontWall = 0;
+			hasLeftWall = 0;
+			hasRightWall = 0;
+		}
+	}
+	
+
+	// Finish moving across last cell
+	while(remainingDist > 0) {
+		if (remainingDist < cellDistance/2)
+			useIRSensors = 0;
+		if (performedCurveTurn) {
+			remainingDist = accumulatedDist - encCount;
+		}
+		else {
+			remainingDist = accumulatedDist + cellDistance - encCount;
+		}
+		if(getDecNeeded(counts_to_mm(remainingDist), curSpeedX, 0) < decX) {
+			targetSpeedX = searchSpeed;
+		}
+		else {
+			targetSpeedX = 0;
+		}
+	}
+
+	
+	// Place trace
+	if (!hasTrace(cell[yPos][xPos])) {
+		cell[yPos][xPos] |= 16;
+		traceCount++;
+	}
+	
+	useSpeedProfile = 0;
+	turnMotorOff;
+			
+  //isolateDeadEnds();
+	visualizeGrid();
+	beep(3);
+	
+	isSearching = 0;
+}
+
 
 void isolateDeadEnds(void)
 {
@@ -559,18 +877,18 @@ void isolateDeadEnds(void)
 				if ( !((j == 0) && (k == 0)) && 
 						 !( (((SIZE - 1)/2 == i) || (SIZE/2 == i)) && (((SIZE - 1)/2 == j) || (SIZE/2 == j)) )) {
 					// If dead end, isolate block
-					if ((hasNorth(tempBlock[j][k]) + hasEast(tempBlock[j][k]) +
-							hasSouth(tempBlock[j][k]) + hasWest(tempBlock[j][k])) >= 3) {
-						tempBlock[j][k] |= 32;
-						tempBlock[j][k] |= 15;
+					if ((hasNorth(cell[j][k]) + hasEast(cell[j][k]) +
+							hasSouth(cell[j][k]) + hasWest(cell[j][k])) >= 3) {
+						cell[j][k] |= 32;
+						cell[j][k] |= 15;
 						if (j < SIZE - 1)  // Update adjacent wall
-							tempBlock[j + 1][k] |= 4;
+							cell[j + 1][k] |= 4;
 						if (k < SIZE - 1)  // Update adjacent wall
-							tempBlock[j][k + 1] |= 8;
+							cell[j][k + 1] |= 8;
 						if (j > 0)         // Update adjacent wall
-							tempBlock[j - 1][k]  |= 1;
+							cell[j - 1][k]  |= 1;
 						if (k > 0)         // Update adjacent wall
-							tempBlock[j][k - 1] |= 2;
+							cell[j][k - 1] |= 2;
 					}
 				}
 			}
@@ -583,32 +901,53 @@ void isolateDeadEnds(void)
 // Update distances for every other block while flooding the center
 // slow...
 void updateDistanceToCenter() {
-  
+	bool changed;
+	int temp;
   int i, j, k;
   for (i = SIZE*SIZE; i >= 0; i--) {
+		changed = 0;
     for (j = 0; j < SIZE; j++) {
       for (k = 0; k < SIZE; k++) {
 				if ( !((j == (SIZE/2)-1 || (j == SIZE/2)) &&
-						((k == (SIZE/2)-1) || (k == SIZE/2))) )
-					tempDistance[j][k] = getMin(k, j) + 1;
+						((k == (SIZE/2)-1) || (k == SIZE/2))) ) {
+					temp = distance[j][k];
+					distance[j][k] = getMin(k, j) + 1;
+					if (temp != distance[j][k]) {
+						changed = 1;
+					}
+				}
       }
     }
+		if (!changed) {
+			break;
+		}
   }
 }
 
 
 // Update distances for every other block while flooding the start
+// Terminate when nothing changes
 // slow...
 void updateDistanceToStart() {
-  
+  bool changed;
+	int temp;
   int i, j, k;
   for (i = SIZE*SIZE; i >= 0; i--) {
+		changed = 0;
     for (j = 0; j < SIZE; j++) {
       for (k = 0; k < SIZE; k++) {
-          if ( !((j == 0) && (k == 0)) )
-            tempDistance[j][k] = getMin(k, j) + 1;
+        if ( !((j == 0) && (k == 0)) ) {
+					temp = distance[j][k];
+					distance[j][k] = getMin(k, j) + 1;
+					if (temp != distance[j][k]) {
+						changed = 1;
+					}
+				}
       }
     }
+		if (!changed) {
+			break;
+		}
   }
 }
 
@@ -617,70 +956,70 @@ void detectWalls() {
   
 	if (orientation == 'N') {
 		if (hasFrontWall) {
-			tempBlock[yPos][xPos] |= 1;
+			cell[yPos][xPos] |= 1;
 			if (yPos < SIZE - 1)  // Update adjacent wall
-				tempBlock[yPos + 1][xPos] |= 4;
+				cell[yPos + 1][xPos] |= 4;
 		}
 		if (hasLeftWall) {
-			tempBlock[yPos][xPos] |= 8;
+			cell[yPos][xPos] |= 8;
 			if (xPos > 0)  // Update adjacent wall
-				tempBlock[yPos][xPos - 1] |= 2;
+				cell[yPos][xPos - 1] |= 2;
 		}
 		if (hasRightWall) {
-			tempBlock[yPos][xPos] |= 2;
+			cell[yPos][xPos] |= 2;
 			if (xPos < SIZE - 1)  // Update adjacent wall
-				tempBlock[yPos][xPos + 1] |= 8;
+				cell[yPos][xPos + 1] |= 8;
 		}		
 	}
 	else if (orientation == 'E') {
 		if (hasFrontWall) {
-			tempBlock[yPos][xPos] |= 2;
+			cell[yPos][xPos] |= 2;
 			if (xPos < SIZE - 1)  // Update adjacent wall
-				tempBlock[yPos][xPos + 1] |= 8;
+				cell[yPos][xPos + 1] |= 8;
 		}
 		if (hasLeftWall) {
-		  tempBlock[yPos][xPos] |= 1;
+		  cell[yPos][xPos] |= 1;
 			if (yPos < SIZE - 1)  // Update adjacent wall
-				tempBlock[yPos + 1][xPos] |= 4;
+				cell[yPos + 1][xPos] |= 4;
 		}
 		if (hasRightWall) {
-			tempBlock[yPos][xPos] |= 4;
+			cell[yPos][xPos] |= 4;
 			if (yPos > 0)  // Update adjacent wall
-				tempBlock[yPos - 1][xPos] |= 1;
+				cell[yPos - 1][xPos] |= 1;
 		}
 	}
 	else if (orientation == 'S') {
 		if (hasFrontWall) {
-			tempBlock[yPos][xPos] |= 4;
+			cell[yPos][xPos] |= 4;
 			if (yPos > 0)  // Update adjacent wall
-				tempBlock[yPos - 1][xPos] |= 1;
+				cell[yPos - 1][xPos] |= 1;
 		}
 		if (hasLeftWall) {
-			tempBlock[yPos][xPos] |= 2;
+			cell[yPos][xPos] |= 2;
 			if (xPos < SIZE - 1)  // Update adjacent wall
-				tempBlock[yPos][xPos + 1] |= 8;
+				cell[yPos][xPos + 1] |= 8;
 		}
 		if (hasRightWall) {
-			tempBlock[yPos][xPos] |= 8;
+			cell[yPos][xPos] |= 8;
 			if (xPos > 0)  // Update adjacent wall
-				tempBlock[yPos][xPos - 1] |= 2;
+				cell[yPos][xPos - 1] |= 2;
 		}
 	}
 	else if (orientation == 'W') {
 		if (hasFrontWall) {
-			tempBlock[yPos][xPos] |= 8;
+			cell[yPos][xPos] |= 8;
 			if (xPos > 0)  // Update adjacent wall
-				tempBlock[yPos][xPos - 1] |= 2;
+				cell[yPos][xPos - 1] |= 2;
 		}
 		if (hasLeftWall) {
-			tempBlock[yPos][xPos] |= 4;
+			cell[yPos][xPos] |= 4;
 			if (yPos > 0)  // Update adjacent wall
-				tempBlock[yPos - 1][xPos] |= 1;
+				cell[yPos - 1][xPos] |= 1;
 		}
 		if (hasRightWall) {
-			tempBlock[yPos][xPos] |= 1;
+			cell[yPos][xPos] |= 1;
 			if (yPos < SIZE - 1)  // Update adjacent wall
-				tempBlock[yPos + 1][xPos] |= 4;
+				cell[yPos + 1][xPos] |= 4;
 		}
 	}	
 }

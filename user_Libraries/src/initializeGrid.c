@@ -11,23 +11,23 @@ void initializeGrid() {
   int i, j, k;
   
   // Map known walls
-  tempBlock[0][0] |= 14;  // Starting walls
-  tempBlock[0][1] |= 12;
+  cell[0][0] |= 14;  // Starting walls
+  cell[0][1] |= 12;
 
   for (int j = 0; j < SIZE; j++) {  // Map north wall
-    tempBlock[SIZE-1][j] |= 1;
+    cell[SIZE-1][j] |= 1;
   }
 
   for (int i = 0; i < SIZE; i++) {  // Map east wall
-    tempBlock[i][SIZE-1] |= 2;
+    cell[i][SIZE-1] |= 2;
   }
 
   for (int j = 0; j < SIZE; j++) {  // Map south wall
-    tempBlock[0][j] |= 4;
+    cell[0][j] |= 4;
   }
 
   for (int i = 0; i < SIZE; i++) {  // Map west wall
-    tempBlock[i][0] |= 8;
+    cell[i][0] |= 8;
   }
   
   // Initialize distances for flood fill
@@ -35,7 +35,7 @@ void initializeGrid() {
     k = SIZE - 1;
     for (i = 0; i < SIZE; i++) {
       for (j = 0; j < SIZE; j++) {
-				tempDistance[i][j] = k;
+				distance[i][j] = k;
       if (j < SIZE/2)
         k--;
       else
@@ -51,7 +51,7 @@ void initializeGrid() {
     k = SIZE - 2;
     for ( i = 0; i < SIZE; i++ ) {
       for ( j = 0; j < SIZE; j++) {
-        tempDistance[i][j] = k;
+        distance[i][j] = k;
         if (j < (SIZE/2 - 1) )
           k--;
         else if ( (j > SIZE/2 - 1) && (j < SIZE-1) )

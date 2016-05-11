@@ -1,13 +1,37 @@
+/*
+Button 0
+1. floodcenter. speed 70, acc 60/60, delay 120/60
+2. floodcenter. speed 100, acc 90/90, delay 120/50
+3. floodcenter. save. floodstart. speed 70, acc 60/60, delay 120/60
+4. floodcenter. save. floodstart. speed 100, acc 90/90, delay 120/50
+
+Button 1
+1. speedrun pivot speed 200, acc 60/60, delay 50/50
+2. speedrun pivot speed 300, acc 80/80, delay 50/50
+3. speedrun pivot speed 500, acc 90/90, delay 50/50
+4. speedrun pivot speed 500, acc 100/100, delay 0/40
+
+Button 2
+1. speedrun curve. speed 200/60, acc 60/60
+2. speedrun curve. speed 500/60, acc 90/90
+3. speedrun curve. speed 300/100, acc 60/60
+4. speedrun curve. speed 500/100, acc 90/90
+
+Button 3
+1. save
+2. load
+3. experimental
+4. print info
+*/
+
 #include "main.h"
 
 /* Maze.h settings */
-int block[SIZE][SIZE] = {0};  //  ... 0 0 0 0       0 0 0 0
-                              //         DE TRACE   W S E N
-                              // [row] [col]
-                              // [ y ] [ x ]
-int distance[SIZE][SIZE] = {0};
-int tempBlock[SIZE][SIZE] = {0};
-int tempDistance[SIZE][SIZE] = {0};
+unsigned char cell[SIZE][SIZE] = {0};  	//  ... 0 0 0 0       0 0 0 0
+																				//         DE TRACE   W S E N
+																				// [row] [col]
+																				// [ y ] [ x ]
+unsigned char distance[SIZE][SIZE] = {0};
 
 int xPos = 0;   // 0-15
 int yPos = 0;   // 0-15
@@ -36,15 +60,15 @@ float wheelBase = 71;						// mm
 int cellDistance = 24576;
 int cellDistances[16];
 float countspermm = 136;
+int motorToBackDist = 27;
 
 /* Configure speed profile options */
 bool useIRSensors = 0;
 bool useGyro = 0;
 bool usePID = 0;
 bool useSpeedProfile = 0;
-bool useOnlyGyroFeedback = 0;
-bool useOnlyEncoderFeedback = 0;
-int moveSpeed;			// speed is in cm/s, double of actual speed
+
+int moveSpeed;			// speed is in counts/ms, double of actual speed
 int maxSpeed;			// call speed_to_counts(maxSpeed)
 int turnSpeed;		
 int searchSpeed;
@@ -64,38 +88,40 @@ int leftWallThreshold = 240;
 int rightWallThreshold = 240;
 int LDMiddleValue = 690;
 int RDMiddleValue = 740;
+int leftPostThreshold = 150;
+int rightPostThreshold = 150;
 
 int LFvalue1 = 3250;	// for front wall alignment, when mouse is at the center
-int RFvalue1 = 2810;
-int LFvalue2 = 500;		// for front wall detection during speedrun
-int RFvalue2 = 500;
+int RFvalue1 = 2760;
+int LFvalue2 = 400;		// for front wall detection during speedrun
+int RFvalue2 = 400;
 
-int LDvalue1 = 400;		// side sensor PID threshold
-int RDvalue1 = 400;
+int LDvalue1 = 500;		// side sensor PID threshold
+int RDvalue1 = 500;
 
 // Pivot turn profile
 int	turnLeft90;
 int	turnRight90;
 int	turnLeft180;
 int	turnRight180;
+int turnLeft45;
+int turnRight45;
 
 int distances[100] = {0};
 
 // Interface
 int select = 0;
 
-// Debug variables
-int debugMaxSpeed = 0;
-int debugMaxEncCountsPerMs = 0;
-
 // Curve turn settings
 int speedW;
 int t0, t1, t2, t3, t4;
 
+// Backup
+unsigned char cell_backup[SIZE][SIZE] = {0};
+unsigned char distance_backup[SIZE][SIZE] = {0};
+
+
 void systick(void) {
-	
-	debugMaxSpeed = (curSpeedX > debugMaxSpeed) ? curSpeedX : debugMaxSpeed;
-	debugMaxEncCountsPerMs = (encChange > debugMaxEncCountsPerMs) ? encChange : debugMaxEncCountsPerMs;
 	
 	// check voltage
 	lowBatCheck();	// check if < 7.00V
@@ -136,26 +162,47 @@ int main(void) {
 	
 	//Initial Speed Profile
 	maxPwm = 999;
-	alignPwm = 100;
-	moveSpeed = 50*2;
-	maxSpeed = 100*2;			
-	turnSpeed = 40*2;
-	searchSpeed = 30*2;
-	stopSpeed = 10*2;
-	alignTime = 100;
-	turnDelay = 50;
+	alignPwm = 0;
+	moveSpeed = 0;
+	maxSpeed = 0;			
+	turnSpeed = 0;
+	searchSpeed = 0;
+	stopSpeed = 0;
+	alignTime = 0;
+	turnDelay = 0;
 	
-	turnLeft90 = -820000;
-	turnRight90 = 775000;
-	turnLeft180 = -1700000;
-	turnRight180 = 1700000;
+	turnLeft90 = -815000;
+	turnRight90 = 769000;
+	turnLeft180 = -1680000;
+	turnRight180 = 1680000;
+	turnLeft45 = -400000;
+	turnRight45 = 400000;
 
-
-	while(1) {		
-		select = getLeftEncCount()/encResolution % 4;
-		if (select < 0) {
-			select = -select;
+	resetSpeedProfile();
+	
+	while(1) {
+		
+		if (getLeftEncCount() > encResolution) {
+			if (select == 3) {
+				select = 0;
+			}
+			else {
+				select++;
+			}
+			resetLeftEncCount();
+			shortBeep(50, 1000);
 		}
+		else if (getLeftEncCount() < -encResolution)  {
+			if (select == 0) {
+				select = 3;
+			}
+			else {
+				select--;
+			}
+			resetLeftEncCount();
+			shortBeep(50, 1000);
+		}
+		
 		switch(select) {
 			case 0:
 				LED1_ON;
@@ -184,77 +231,73 @@ int main(void) {
 			default:
 				;
 		}
-
+		
 	}
 }
 
 
 void button0_interrupt(void) {
-	shortBeep(200, 500);
+	shortBeep(200, 4000);
 	printf("Button 0 pressed\n\r");
 	delay_ms(1000);
 
+	waitForSignal();
+	
 	initializeGrid();
 	visualizeGrid();
 	delay_ms(100);
 	
 	switch (select) {
 		case 0:
-			alignPwm = 100;
-			moveSpeed = 100*2;
-			maxSpeed = 100*2;			
+			alignPwm = 100;	
 			turnSpeed = 40*2;
-			searchSpeed = 60*2;
+			searchSpeed = 70*2;
 			stopSpeed = 0*2;
-			alignTime = 100;
-			turnDelay = 50;
-			sensorScale = 50;
-			accX = 50;
-			decX = 50;
+			alignTime = 120;
+			turnDelay = 60;
+			sensorScale = 30;
+			accX = 60;
+			decX = 60;
 			floodCenter();
 			break;
 		case 1:
 			alignPwm = 100;
-			moveSpeed = 100*2;
-			maxSpeed = 100*2;			
 			turnSpeed = 40*2;
-			searchSpeed = 70*2;
+			searchSpeed = 100*2;
 			stopSpeed = 0*2;
-			alignTime = 100;
+			alignTime = 120;
 			turnDelay = 50;
-			sensorScale = 50;
-			accX = 60;
-			decX = 60;
+			sensorScale = 30;
+			accX = 90;
+			decX = 90;
 			floodCenter();
 			break;
 		case 2:
 			alignPwm = 100;
-			moveSpeed = 120*2;
-			maxSpeed = 120*2;			
 			turnSpeed = 40*2;
-			searchSpeed = 100*2;
+			searchSpeed = 70*2;
 			stopSpeed = 0*2;
-			alignTime = 100;
-			turnDelay = 50;
-			sensorScale = 50;
+			alignTime = 120;
+			turnDelay = 60;
+			sensorScale = 30;
 			accX = 60;
 			decX = 60;
 			floodCenter();
+			saveData();
 			floodStart();
 			break;
 		case 3:
 			alignPwm = 100;
-			moveSpeed = 100*2;
-			maxSpeed = 100*2;			
 			turnSpeed = 40*2;
-			searchSpeed = 70*2;
+			searchSpeed = 100*2;
 			stopSpeed = 0*2;
-			alignTime = 100;
+			alignTime = 120;
 			turnDelay = 50;
-			sensorScale = 50;
-			accX = 60;
-			decX = 60;
+			sensorScale = 30;
+			accX = 90;
+			decX = 90;
 			floodCenter();
+			saveData();
 			floodStart();
 			break;
 		default:
@@ -268,19 +311,19 @@ void button0_interrupt(void) {
 
 
 void button1_interrupt(void) {
-	shortBeep(200, 500);
+	shortBeep(200, 4000);
 	printf("Button 1 pressed\n\r");
 	delay_ms(1000);	
+	
+	waitForSignal();
 	
 	switch (select) {
 		case 0:
 			alignPwm = 100;
-			moveSpeed = 100*2;
-			maxSpeed = 400*2;			
+			moveSpeed = 200*2;
 			turnSpeed = 40*2;
-			searchSpeed = 70*2;
 			stopSpeed = 0*2;
-			alignTime = 50;
+			alignTime = 100;
 			turnDelay = 50;
 			sensorScale = 30;
 			accX = 60;
@@ -289,44 +332,40 @@ void button1_interrupt(void) {
 			break;
 		case 1:
 			alignPwm = 100;
-			moveSpeed = 200*2;
-			maxSpeed = 400*2;			
+			moveSpeed = 300*2;
 			turnSpeed = 40*2;
-			searchSpeed = 70*2;
 			stopSpeed = 0*2;
 			alignTime = 50;
 			turnDelay = 50;
 			sensorScale = 30;
-			accX = 60;
-			decX = 60;
+			accX = 80;
+			decX = 80;
 		
 			break;
 		case 2:
 			alignPwm = 100;
-			moveSpeed = 250*2;
-			maxSpeed = 400*2;			
+			moveSpeed = 500*2;		
 			turnSpeed = 40*2;
 			searchSpeed = 70*2;
 			stopSpeed = 0*2;
 			alignTime = 50;
 			turnDelay = 50;
 			sensorScale = 30;
-			accX = 60;
-			decX = 60;
+			accX = 90;
+			decX = 90;
 		
 			break;	
 		case 3:
 			alignPwm = 100;
-			moveSpeed = 300*2;
-			maxSpeed = 400*2;			
+			moveSpeed = 500*2;
 			turnSpeed = 40*2;
 			searchSpeed = 70*2;
 			stopSpeed = 0*2;
-			alignTime = 50;
-			turnDelay = 50;
+			alignTime = 0;
+			turnDelay = 40;
 			sensorScale = 30;
-			accX = 60;
-			decX = 60;
+			accX = 100;
+			decX = 100;
 		
 			break;			
 		default:
@@ -342,72 +381,120 @@ void button1_interrupt(void) {
 
 
 void button2_interrupt(void) {
-	shortBeep(200, 500);
+	shortBeep(200, 4000);
 	printf("Button 2 pressed\n\r");
 	delay_ms(1000);
+	
+	waitForSignal();
 
 		switch (select) {
 		case 0:
-			alignPwm = 100;
-			moveSpeed = 350*2;
-			maxSpeed = 400*2;			
-			turnSpeed = 40*2;
-			searchSpeed = 70*2;
-			stopSpeed = 0*2;
-			alignTime = 50;
-			turnDelay = 50;
-			sensorScale = 30;
-			accX = 100;
-			decX = 100;
+			resetSpeedProfile();
+		
+			moveSpeed = 200*2;
+			stopSpeed = 60*2;
+			sensorScale = 50;
+			accX = 60;
+			decX = 60;
+		
+			speedW = 81;
+			t0 = 60;
+			t1 = 40;
+			t2 = 164;
+			t3 = 40;
+			t4 = 60;
+		
+			speedRunCurve();
 		
 			break;
 		case 1:
-			alignPwm = 100;
-			moveSpeed = 400*2;
-			maxSpeed = 400*2;			
-			turnSpeed = 40*2;
-			searchSpeed = 70*2;
-			stopSpeed = 0*2;
-			alignTime = 50;
-			turnDelay = 50;
-			sensorScale = 30;
-			accX = 100;
-			decX = 100;
+			resetSpeedProfile();
 		
+			moveSpeed = 500*2;
+			stopSpeed = 60*2;
+			sensorScale = 50;
+			accX = 90;
+			decX = 90;
+		
+			speedW = 81;
+			t0 = 60;
+			t1 = 40;
+			t2 = 164;
+			t3 = 40;
+			t4 = 60;
+		
+			speedRunCurve();
 			break;
 		case 2:
-			alignPwm = 100;
-			moveSpeed = 500*2;
-			maxSpeed = 500*2;			
-			turnSpeed = 40*2;
-			searchSpeed = 70*2;
-			stopSpeed = 0*2;
-			alignTime = 50;
-			turnDelay = 50;
-			sensorScale = 30;
-			accX = 100;
-			decX = 100;
+			
+			resetSpeedProfile();
+		
+			moveSpeed = 300*2;
+			stopSpeed = 100*2;
+			sensorScale = 50;
+			accX = 60;
+			decX = 60;
+		
+			accW = 20;
+			decW = 20;
+		
+			speedW = 125;
+			t0 = 32;
+			t1 = 40;
+			t2 = 90;
+			t3 = 40;
+			t4 = 32;
+
+			speedRunCurve();
+			accW = 8;
+			decW = 8;
 		
 			break;	
 		case 3:
-			alignPwm = 100;
-			moveSpeed = 600*2;
-			maxSpeed = 600*2;
-			turnSpeed = 40*2;
-			searchSpeed = 70*2;
-			stopSpeed = 0*2;
-			alignTime = 10;
-			turnDelay = 25;
-			sensorScale = 30;
-			accX = 100;
-			decX = 100;
+			/*
+			resetSpeedProfile();
 		
+			moveSpeed = 1000*2;
+			stopSpeed = 60*2;
+			sensorScale = 40;
+			accX = 120;
+			decX = 130;
+		
+			speedW = 81;
+			t0 = 60;
+			t1 = 40;
+			t2 = 164;
+			t3 = 40;
+			t4 = 60;
+		
+			speedRunCurve();
+			*/
+		
+			resetSpeedProfile();
+		
+			moveSpeed = 500*2;
+			stopSpeed = 100*2;
+			sensorScale = 60;
+			accX = 90;
+			decX = 90;
+			
+			accW = 20;
+			decW = 20;
+		
+			speedW = 125;
+			t0 = 32;
+			t1 = 40;
+			t2 = 90;
+			t3 = 40;
+			t4 = 32;
+
+			speedRunCurve();
+			accW = 8;
+			decW = 8;
 			break;			
 		default:
 			;
 	}
-	
-	speedRun();
 	
 	printf("Finished Button 2 ISR\n\r");
 }
@@ -417,182 +504,112 @@ void button2_interrupt(void) {
 void button3_interrupt(void) {
 	shortBeep(200, 4000);
 	delay_ms(1000);
+	
 	printf("Button 3 pressed\n\r");
 	
 	switch (select) {
 		case 0:
-		
-			resetSpeedProfile();
-		
-			alignPwm = 100;
-			moveSpeed = 300*2;
-			maxSpeed = 500*2;
-			turnSpeed = 40*2;
-			searchSpeed = 70*2;
-			stopSpeed = 60*2;
-			alignTime = 10;
-			turnDelay = 25;
-			sensorScale = 30;
-			accX = 90;
-			decX = 90;
-		
-			speedW = 81;
-			t0 = 60;
-			t1 = 40;
-			t2 = 164;
-			t3 = 40;
-			t4 = 60;
-		
-			speedRunCurve();
-			
-			
 			/*
-			// Save tempBlock to block
-			for (int i = 0; i < SIZE; i++) {
-				for (int j = 0; j < SIZE; j++) {
-					block[i][j] = tempBlock[i][j];
-				}
-			}
-			// Save tempDistance to distance
-			for (int i = 0; i < SIZE; i++) {
-				for (int j = 0; j < SIZE; j++) {
-					distance[i][j] = tempDistance[i][j];
-				}
-			}
-			beep(3);
-			*/
-			break;
-		case 1:
-			
-			resetSpeedProfile();
+			initializeGrid();
+			visualizeGrid();
+			delay_ms(100);
 		
-			alignPwm = 100;
-			moveSpeed = 500*2;
-			maxSpeed = 500*2;
+			alignPwm = 100;	
 			turnSpeed = 40*2;
-			searchSpeed = 70*2;
-			stopSpeed = 60*2;
-			alignTime = 10;
-			turnDelay = 25;
-			sensorScale = 30;
-			accX = 100;
-			decX = 100;
-		
-			speedW = 81;
-			t0 = 60;
-			t1 = 40;
-			t2 = 164;
-			t3 = 40;
-			t4 = 60;
-		
-			speedRunCurve();
-		/*
-			resetSpeedProfile();
-		
-			alignPwm = 100;
-			moveSpeed = 300*2;
-			maxSpeed = 500*2;
-			turnSpeed = 40*2;
-			searchSpeed = 70*2;
-			stopSpeed = 60*2;
-			alignTime = 10;
-			turnDelay = 25;
-			sensorScale = 30;
-			accX = 90;
-			decX = 90;
-		
-			speedW = 48;
-			t0 = 0;
-			t1 = 40;
-			t2 = 290;
-			t3 = 40;
-			t4 = 0;
-		
-			speedRunCurve();
-			
-		*/
-			
-			/*
-			// Reset tempBlock to block
-			for (int i = 0; i < SIZE; i++) {
-				for (int j = 0; j < SIZE; j++) {
-					tempBlock[i][j] = block[i][j];
-				}
-			}
-			// Reset tempDistance to distance
-			for (int i = 0; i < SIZE; i++) {
-				for (int j = 0; j < SIZE; j++) {
-					tempDistance[i][j] = distance[i][j];
-				}
-			}
-			beep(3);
-			*/
-			break;
-		case 2:
-			while(1) {
-				readSensor();
-				printInfo();
-				delay_ms(1);
-			}
-			break;	
-		case 3:
-			
-			resetSpeedProfile();
-		
-			alignPwm = 100;
-			moveSpeed = 200*2;
-			maxSpeed = 600*2;
-			turnSpeed = 70*2;
-			searchSpeed = 70*2;
-			stopSpeed = 60*2;
-			alignTime = 10;
-			turnDelay = 25;
+			searchSpeed = 100*2;
+			stopSpeed = 55*2;
+			alignTime = 100;
+			turnDelay = 50;
 			sensorScale = 30;
 			accX = 60;
 			decX = 60;
 		
-			t0 = 60;
+			floodCenterCurve();
+			break;	
+			*/
+		
+			saveData();
+			beep(3);
+			break;
+		case 1:
+			loadData();
+		
+			beep(3);
+			break;
+		case 2:
+			
+			
+			resetSpeedProfile();
+		
+			moveSpeed = 500*2;
+			stopSpeed = 100*2;
+			sensorScale = 40;
+			accX = 80;
+			decX = 80;
+			
+			accW = 20;
+			decW = 20;
+		
+			speedW = 125;
+			t0 = 32;
 			t1 = 40;
-			t2 = 164;
+			t2 = 90;
 			t3 = 40;
-			t4 = 60;
+			t4 = 32;
 		
-			moveForwardHalf();
-			speedW = 81;
+			//moveForward(1);
 			//curveTurnRight();
-			curveTurnLeft();
-			curveTurnLeft();
-			curveTurnLeft();
-			curveTurnLeft();
-			//moveForwardHalf();
+			//curveTurnRight();
+			//curveTurnRight();
+			//curveTurnRight();
+			//stopSpeed = 0;
+			//turnMotorOff;
+			//useSpeedProfile = 0;
+			//accW = 8;
+			//decW = 8;
+		/*
+			moveE();
+			delay_ms(100);
+			moveS();
+			delay_ms(100);
+			moveW();
+			delay_ms(100);
+			moveN();
 		
+			delay_ms(100);
+		
+			moveW();
+			delay_ms(100);
+			moveS();
+			delay_ms(100);
+			moveE();
+			delay_ms(100);
+			moveN();	
+		
+			delay_ms(100);
+		
+			moveS();
+			delay_ms(100);
+			moveN();
+			
 			useSpeedProfile = 0;
 			turnMotorOff;
-		
-			/*
-			moveE();
-			delay_ms(1000);
-			moveS();
-			delay_ms(1000);
-			moveW();
-			delay_ms(1000);
-			moveN();
-			
-			delay_ms(1000);
-			
-			moveW();
-			delay_ms(1000);
-			moveS();
-			delay_ms(1000);
-			moveE();
-			delay_ms(1000);
-			moveN();
-			
-			delay_ms(1000);
-			moveS();
-			delay_ms(1000);
-			moveN();
+			break;
 			*/
+			break;	
+			
+		case 3:
+			resetSpeedProfile();
+			delay_ms(100);
+			while(1) {
+				readSensor();
+				printInfo();
+				delay_ms(1);
+				if (getLeftEncCount() > gearRatio*encResolution || getLeftEncCount() < -gearRatio*encResolution) {
+					break;
+				}
+			}
+			delay_ms(100);
 			break;
 		default:
 			;
