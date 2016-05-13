@@ -122,6 +122,8 @@ extern int32_t RSSensor;
 extern int32_t Outz;
 extern int32_t aSpeed;
 extern int32_t angle; 
+extern int expectedAngle;
+extern int actualAngle;
 
 // Pivot turn profile;
 extern int turnLeft90;

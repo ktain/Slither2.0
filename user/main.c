@@ -13,9 +13,9 @@ Button 1
 
 Button 2
 1. speedrun curve. speed 200/60, acc 60/60
-2. speedrun curve. speed 500/60, acc 90/90
-3. speedrun curve. speed 400/100, acc 60/60
-4. speedrun curve. speed 550/100, acc 100/100
+2. speedrun curve. speed 400/100, acc 60/60
+3. speedrun curve. speed 500/100, acc 90/90
+4. speedrun curve. speed 550/100, acc 120/120
 
 Button 3
 1. save
@@ -172,7 +172,7 @@ int main(void) {
 	turnDelay = 0;
 	
 	turnLeft90 = -805000;
-	turnRight90 = 762000;
+	turnRight90 = 765000;
 	turnLeft180 = -1670000;
 	turnRight180 = 1670000;
 	turnLeft45 = -400000;
@@ -392,17 +392,17 @@ void button2_interrupt(void) {
 			resetSpeedProfile();
 		
 			moveSpeed = 200*2;
-			stopSpeed = 63*2;
-			sensorScale = 40;
+			stopSpeed = 60*2;
+			sensorScale = 30;
 			accX = 60;
 			decX = 60;
 		
-			speedW = 81;
-			t0 = 65;
-			t1 = 40;
-			t2 = 164;
-			t3 = 40;
-			t4 = 65;
+			speedW = 65;
+			t0 = 45;
+			t1 = 30;
+			t2 = 220;
+			t3 = 30;
+			t4 = 45;
 		
 			speedRunCurve();
 		
@@ -410,40 +410,39 @@ void button2_interrupt(void) {
 		case 1:
 			resetSpeedProfile();
 		
-			moveSpeed = 500*2;
-			stopSpeed = 63*2;
-			sensorScale = 30;
-			accX = 90;
-			decX = 90;
+			moveSpeed = 400*2;
+			stopSpeed = 100*2;
+			sensorScale = 25;
+			accX = 60;
+			decX = 60;
 		
-			speedW = 81;
-			t0 = 65;
+			speedW = 120;
+			t0 = 20;
 			t1 = 40;
-			t2 = 164;
+			t2 = 92;
 			t3 = 40;
-			t4 = 65;
+			t4 = 20;
 		
 			speedRunCurve();
+			accW = 8;
+			decW = 8;
 			break;
 		case 2:
 			
 			resetSpeedProfile();
 		
-			moveSpeed = 400*2;
+			moveSpeed = 500*2;
 			stopSpeed = 100*2;
-			sensorScale = 30;
-			accX = 60;
-			decX = 60;
+			sensorScale = 25;
+			accX = 90;
+			decX = 90;
 		
-			accW = 20;
-			decW = 20;
-		
-			speedW = 125;
-			t0 = 32;
+			speedW = 120;
+			t0 = 20;
 			t1 = 40;
-			t2 = 90;
+			t2 = 92;
 			t3 = 40;
-			t4 = 32;
+			t4 = 20;
 
 			speedRunCurve();
 			accW = 8;
@@ -474,19 +473,16 @@ void button2_interrupt(void) {
 		
 			moveSpeed = 550*2;
 			stopSpeed = 100*2;
-			sensorScale = 30;
-			accX = 100;
-			decX = 100;
-			
-			accW = 20;
-			decW = 20;
+			sensorScale = 25;
+			accX = 120;
+			decX = 120;
 		
-			speedW = 125;
-			t0 = 32;
+			speedW = 120;
+			t0 = 20;
 			t1 = 40;
-			t2 = 90;
+			t2 = 92;
 			t3 = 40;
-			t4 = 32;
+			t4 = 20;
 
 			speedRunCurve();
 			accW = 8;
@@ -544,30 +540,24 @@ void button3_interrupt(void) {
 			moveSpeed = 500*2;
 			stopSpeed = 100*2;
 			sensorScale = 40;
-			accX = 100;
-			decX = 100;
-			
-			accW = 20;
-			decW = 20;
+			accX = 60;
+			decX = 60;
 		
-			speedW = 125;
-			t0 = 32;
+			speedW = 120;
+			t0 = 20;
 			t1 = 40;
-			t2 = 90;
+			t2 = 92;
 			t3 = 40;
-			t4 = 32;
+			t4 = 20;
 		
 			moveForward(1);
 			curveTurnRight();
-			curveTurnRight();
-			curveTurnRight();
-			curveTurnRight();
+			moveForward(1);
+			curveTurnLeft();
 			stopSpeed = 0;
 			moveForward(1);
 			turnMotorOff;
 			useSpeedProfile = 0;
-			accW = 8;
-			decW = 8;
 			*/
 		
 			
@@ -593,9 +583,8 @@ void button3_interrupt(void) {
 			t3 = 40;
 			t4 = 60;
 		
-			floodCenterCurve();
-		
-			/*
+			
+			
 			moveE();
 			delay_ms(100);
 			moveS();
@@ -622,7 +611,7 @@ void button3_interrupt(void) {
 			
 			useSpeedProfile = 0;
 			turnMotorOff;
-			*/
+			
 			break;	
 			
 		case 3:

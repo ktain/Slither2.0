@@ -44,4 +44,5 @@
 ..\obj\turn.o: ..\user_Libraries\inc\maze.h
 ..\obj\turn.o: ..\user_Libraries\inc\sensor_Function.h
 ..\obj\turn.o: ..\user_Libraries\inc\buzzer.h
+..\obj\turn.o: ..\user_Libraries\inc\config.h
 ..\obj\turn.o: C:\Keil_v4\ARM\ARMCC\bin\..\include\stdio.h

@@ -562,7 +562,7 @@ void floodCenterCurve(void) {
 	
 	int cellCount = 1;						// number of explored cells
 	int remainingDist = 0;				// positional distance
-	int startEncCount = 0;
+	int startEncCount = encCount;
 	bool beginCellFlag = 0;
 	bool quarterCellFlag = 0;
 	bool halfCellFlag = 0;

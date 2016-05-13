@@ -14,4 +14,7 @@
 #define MOVES 7
 #define MOVEW 8
 
+#define EXIT_SUCCESS 0
+#define EXIT_FAILURE 1
+
 #endif

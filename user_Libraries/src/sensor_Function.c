@@ -21,6 +21,8 @@ int32_t RSSensor = 0;
 int32_t Outz = 0;
 int32_t aSpeed = 0;	//angular velocity
 int32_t angle = 0; 
+int expectedAngle;
+int actualAngle;
 
 /**
  *	Read Front and Diagonal Sensors
@@ -29,8 +31,8 @@ void readSensor(void)
 {
 	u32 curt;
 	
-	LFSensor = read_LF_Sensor;	
-	RFSensor = read_RF_Sensor;	
+	LFSensor = read_LF_Sensor;
+	RFSensor = read_RF_Sensor;
 	LDSensor = read_LD_Sensor;
 	RDSensor = read_RD_Sensor;	
 	
@@ -97,7 +99,7 @@ void readGyro(void)
 	//int curt = micros();								// Uncomment when not in 1ms interrupt
 
 	int i;
-	int sampleNum = 40;
+	int sampleNum = 80;
 	aSpeed = 0;
 	for(i = 0; i < sampleNum; i++){
 		aSpeed += read_Rate;
@@ -108,6 +110,7 @@ void readGyro(void)
 	aSpeed /= 50000;						// readjust scale
 	aSpeed *= 2;
 	angle += aSpeed; 
+	actualAngle += aSpeed;
 	
 	//while( (micros() - curt) < 1000 );	// Uncomment when not in 1ms ISR
 }

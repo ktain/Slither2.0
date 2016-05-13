@@ -37,7 +37,7 @@ float kdW2 = 36;
 float accX = 50;					// acc/dec in mm/ms/ms
 float decX = 50; 				 
 float accW = 8; 					// cm/s^2
-float decW = 8;	
+float decW = 8;
 
 int leftBaseSpeed = 0;
 int rightBaseSpeed = 0;
@@ -127,7 +127,11 @@ void calculateMotorPwm(void) { // encoder PD controller
 	
 	gyroFeedback = aSpeed/gyroFeedbackRatio; 	//gyroFeedbackRatio mentioned in curve turn lecture
 
-	rotationalFeedback = encoderFeedbackW + gyroFeedback;
+	rotationalFeedback = encoderFeedbackW;
+	
+	if (useGyro) {
+		rotationalFeedback += gyroFeedback;
+	}
 	
 	// option to include sensor feedback
 		

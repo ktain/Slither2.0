@@ -9,15 +9,17 @@
 #include "maze.h"
 #include "sensor_Function.h"
 #include "buzzer.h"
+#include "config.h"
 #include <stdio.h>
 
-void pivotTurn(int degrees) {
+int pivotTurn(int degrees) {
 	useIRSensors = 0;
 	useSpeedProfile = 1;
 	targetSpeedX = 0;
 	
 	int tempAccW = accW;
 	int tempDecW = decW;
+	int errorFlag = EXIT_SUCCESS;
 	
 	accW = 100;
 	decW = 100;
@@ -31,6 +33,7 @@ void pivotTurn(int degrees) {
 			targetSpeedW = -turnSpeed;
 			delay_ms(1);
 			if (millis() - curt > 1000) {
+				errorFlag = EXIT_FAILURE;
 				break;
 			}
 		}
@@ -39,6 +42,7 @@ void pivotTurn(int degrees) {
 			targetSpeedW = turnSpeed;
 			delay_ms(1);
 			if (millis() - curt > 1000) {
+				errorFlag = EXIT_FAILURE;
 				break;
 			}
 		}
@@ -46,9 +50,12 @@ void pivotTurn(int degrees) {
 	targetSpeedW = 0;
 	accW = tempAccW;
 	decW = tempDecW;
+		
   curt = millis();
 	while(millis() - curt < turnDelay);
+		
 	useSpeedProfile = 1;
+	return errorFlag;
 }
 
 

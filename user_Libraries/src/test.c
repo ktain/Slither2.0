@@ -322,7 +322,7 @@ void speedRun(void)
 		else if (distances[i+1] == 0) {
 			int tempSpeed = stopSpeed;
 			stopSpeed = 0;
-			moveForward(distances[i]);
+			moveForward(distances[i] - 0.5); // +1
 			stopSpeed = tempSpeed;
 		}
 		else {
@@ -459,7 +459,7 @@ void speedRunCurve(void)
 		else if (distances[i+1] == 0) {
 			int tempSpeed = stopSpeed;
 			stopSpeed = 0;
-			moveForward(distances[i] - 0.4667);
+			moveForward(distances[i] - 0.5); // +0.5
 			stopSpeed = tempSpeed;
 		}
 		else {
