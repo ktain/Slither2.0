@@ -260,15 +260,21 @@ void moveForwardHalf(void) {
 void getSensorError(void)
 {
 	// Both side walls
-	if (LDSensor > LDvalue1 && RDSensor > RDvalue1)
-		sensorError = RDSensor - LDSensor;
+	//if (LDSensor > LDMiddleValue && RDSensor > RDMiddleValue)
+		//sensorError = RDSensor - LDSensor;
 	// Closer to left wall
-	else if (LDSensor > LDvalue1)
+	if (LDSensor > LDMiddleValue)
 		sensorError = LDMiddleValue - LDSensor;
 	// Closer to right wall
-	else if (RDSensor > RDvalue1)
+	else if (RDSensor > RDMiddleValue)
 		sensorError = RDSensor - RDMiddleValue;
-	
+	// Otherwise use front sensors
+	else if (LDSensor < leftWallThreshold && RDSensor < rightWallThreshold) {
+		if (LFSensor > leftPostThreshold && RFSensor < rightPostThreshold)
+			sensorError = 3*(leftPostThreshold - LFSensor);
+		else if (RFSensor > rightPostThreshold && LFSensor < leftPostThreshold)
+			sensorError = 3*(RFSensor - rightPostThreshold);
+	}
 	/*
 	else if (RDSensor > rightPostThreshold && LDSensor < leftPostThreshold)
 		sensorError = 2*(RDSensor - LDSensor);

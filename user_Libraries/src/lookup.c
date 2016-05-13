@@ -37,6 +37,7 @@ int isDeadEnd(int currentBlock) {
 
 /* Check if object at center, and place pseudo walls accordingly */
 int atCenter() {
+	// if at center
   if ( (((SIZE - 1)/2 == xPos) || (SIZE/2 == xPos)) &&
        (((SIZE - 1)/2 == yPos) || (SIZE/2 == yPos)) ) {
          
@@ -47,6 +48,17 @@ int atCenter() {
       cell[(SIZE - 1) / 2 - 1][(SIZE - 1) / 2] |= 1;
       cell[(SIZE - 1) / 2][(SIZE - 1) / 2 - 1] |= 2;
     }
+		// at southwest
+		else {
+			if (orientation == 'N') {
+				cell[(SIZE-1)/2][(SIZE-1)/2] |= 8;
+				cell[(SIZE-1)/2][(SIZE-1)/2-1] |= 2;	// west cell
+			}
+			else if (orientation == 'E') {
+				cell[(SIZE-1)/2][(SIZE-1)/2] |= 4;
+				cell[(SIZE-1)/2-1][(SIZE-1)/2] |= 1;	// south cell
+			}
+		}
     
     // not at northwest
     if ( !((yPos == SIZE/2) && (xPos == (SIZE-1)/2)) ) {
@@ -55,7 +67,18 @@ int atCenter() {
       cell[SIZE / 2 + 1][(SIZE - 1) / 2] |= 4;
       cell[SIZE / 2][(SIZE - 1) / 2 - 1] |= 2;
     }
-    
+    // at northwest
+		else {
+			if (orientation == 'S') {
+				cell[SIZE/2][(SIZE-1)/2] |= 8;
+				cell[SIZE/2][(SIZE-1)/2-1] |= 2;
+			}
+			else if (orientation == 'E') {
+				cell[SIZE/2][(SIZE-1)/2] |= 1;
+				cell[SIZE/2+1][(SIZE-1)/2] |= 4;
+			}
+		}
+		
     // not at northeast
     if ( !((yPos == SIZE/2) && (xPos == SIZE/2)) ) {
       cell[SIZE/2][SIZE/2] |= 3;        // Place pseudo walls on all sides
@@ -63,15 +86,37 @@ int atCenter() {
       cell[SIZE / 2 + 1][SIZE / 2] |= 4;
       cell[SIZE / 2][SIZE / 2 + 1] |= 8; 
     }
+		// at northeast
+		else {
+			if (orientation == 'S') {
+				cell[SIZE/2][SIZE/2] |= 2;
+				cell[SIZE/2][SIZE/2+1] |= 8;  
+			}
+			else if (orientation == 'W') {
+				cell[SIZE/2][SIZE/2] |= 1;   
+				cell[SIZE/2+1][SIZE/2] |= 4;  
+			}
+		}
     
     // not at southeast
     if ( !((yPos == (SIZE-1)/2) && (xPos == SIZE/2)) ) {
-      cell[(SIZE-1)/2][SIZE/2] |= 4;    // Place pseudo walls on all sides     
+      cell[(SIZE-1)/2][SIZE/2] |= 6;    // Place pseudo walls on all sides     
       // Update adjacent walls
       cell[(SIZE - 1) / 2 - 1][SIZE / 2] |= 1;
       cell[(SIZE - 1) / 2][SIZE / 2 + 1] |= 8;
     }
-    
+		// at southeast
+		else {
+			if (orientation == 'N') {
+				cell[(SIZE-1)/2][SIZE/2] |= 2;
+				cell[(SIZE-1)/2][SIZE/2+1] |= 8;
+			}
+			else if (orientation == 'W') {
+				cell[(SIZE-1)/2][SIZE/2] |= 4;
+				cell[(SIZE-1)/2-1][SIZE/2] |= 1;
+			}
+		}
+		 
     return 1;
     
   }

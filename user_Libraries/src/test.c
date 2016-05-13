@@ -317,7 +317,7 @@ void speedRun(void)
 	useIRSensors = 1;
   for (int i = 0; distances[i] != 0; i++) {
 		if (i == 0) {
-			moveForward(distances[i] + (0.5 - mm_to_counts(motorToBackDist)/cellDistance));
+			moveForward(distances[i] + (0.4667 - mm_to_counts(motorToBackDist)/cellDistance));
 		}
 		else if (distances[i+1] == 0) {
 			int tempSpeed = stopSpeed;
@@ -454,12 +454,12 @@ void speedRunCurve(void)
 	useIRSensors = 1;
   for (int i = 0; distances[i] != 0; i++) {
 		if (i == 0) {
-			moveForward(distances[i] - 0.5 + mm_to_counts(motorToBackDist)/cellDistance);
+			moveForward(distances[i] - 0.4667 + mm_to_counts(motorToBackDist)/cellDistance);
 		}
 		else if (distances[i+1] == 0) {
 			int tempSpeed = stopSpeed;
 			stopSpeed = 0;
-			moveForward(distances[i] - 0.5);
+			moveForward(distances[i] - 0.4667);
 			stopSpeed = tempSpeed;
 		}
 		else {
@@ -542,14 +542,14 @@ void loadData(void) {
 void waitForSignal(void) {
 	
 	// Wait for left forward sensor signal
-	while(LFSensor < 200) {
+	while(LFSensor < 700) {
 		readSensor();
 		delay_ms(5);
 	}
 	beep(2);
 	
 	// Wait for right forward sensor signal
-	while(RFSensor < 200) {
+	while(RFSensor < 700) {
 		readSensor();
 		delay_ms(5);
 	}

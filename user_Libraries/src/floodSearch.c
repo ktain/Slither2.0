@@ -560,9 +560,9 @@ void floodCenterCurve(void) {
 	isSearching = 1;
 	resetSpeedProfile();
 	
-	//int cellCount = 1;						// number of explored cells
-	int remainingDist = 0;					// remaining distance in encoder counts
-	int accumulatedDist = encCount;	// accumulate encoder counts per move
+	int cellCount = 1;						// number of explored cells
+	int remainingDist = 0;				// positional distance
+	int startEncCount = 0;
 	bool beginCellFlag = 0;
 	bool quarterCellFlag = 0;
 	bool halfCellFlag = 0;
@@ -589,12 +589,10 @@ void floodCenterCurve(void) {
 	targetSpeedX = searchSpeed;
 	
 	while(!atCenter()) {
-		if (performedCurveTurn) {
-			remainingDist = accumulatedDist + cellDistance/2 - encCount;
-		}
-		else {
-			remainingDist = accumulatedDist + cellDistance - encCount;
-		}
+		if (performedCurveTurn)
+			remainingDist = cellCount*cellDistance - encCount - cellDistance/2;
+		else
+			remainingDist = cellCount*cellDistance - encCount;
 		
 		// Beginning of cell
 		if (!beginCellFlag && (remainingDist <= cellDistance))	{	// run once
@@ -715,35 +713,33 @@ void floodCenterCurve(void) {
 			
 			if (DEBUG) printf("nextMove %d\n\r", nextMove);
 			
-			// Place trace
-			if (!hasTrace(cell[yPos][xPos])) {
-				cell[yPos][xPos] |= 16;
-				traceCount++;
-			}
-			
-			// If next move is a 90 degree turn, perform curve turn
+			// Perform curve turn at half cell
 			isCurveTurning = 1;
 			if (nextMove == MOVEN && orientation != 'N' && orientation != 'S') {
 				targetSpeedX = 0;
-				visualizeGrid();
+				delay_ms(1000);
+				startEncCount = encCount;
 				moveN();
 				performedCurveTurn = 1;
 			}
 			else if (nextMove == MOVEE && orientation != 'E' && orientation != 'W') {
 				targetSpeedX = 0;
-				visualizeGrid();
+				delay_ms(1000);
+				startEncCount = encCount;
 				moveE();
 				performedCurveTurn = 1;
 			}
 			else if (nextMove == MOVES && orientation != 'S' && orientation != 'N') {
 				targetSpeedX = 0;
-				visualizeGrid();
+				delay_ms(1000);
+				startEncCount = encCount;
 				moveS();
 				performedCurveTurn = 1;
 			}
 			else if (nextMove == MOVEW && orientation != 'W' && orientation != 'E') {
 				targetSpeedX = 0;
-				visualizeGrid();
+				delay_ms(1000);
+				startEncCount = encCount;
 				moveW();
 				performedCurveTurn = 1;
 			}
@@ -753,9 +749,7 @@ void floodCenterCurve(void) {
 			isCurveTurning = 0;
 			
 			if (performedCurveTurn) {
-				//cellCount++;
-				shortBeep(200, 1000);
-				accumulatedDist = encCount;
+				cellCount++;
 				
 				beginCellFlag = 0;
 				quarterCellFlag = 0;
@@ -770,10 +764,13 @@ void floodCenterCurve(void) {
 			}
 		}
 		
-		if (remainingDist <= cellDistance/2) { // run for last half
-			// If has front wall, decelerate to 0
-			if (hasFrontWall) {
-				useIRSensors = 0;
+		// Reached half cell
+		if ((remainingDist <= cellDistance/2)) {		// Run for last half
+			halfCellFlag = 1;
+		}
+					
+			// If has front wall or needs to turn, decelerate to 0 within half a cell distance
+			if (hasFrontWall || willTurn()) {
 				if(getDecNeeded(counts_to_mm(remainingDist), curSpeedX, 0) < decX) {
 					targetSpeedX = searchSpeed;
 				}
@@ -783,15 +780,31 @@ void floodCenterCurve(void) {
 			}
 			else 
 				targetSpeedX = searchSpeed;
+		
+		// Reached three quarter cell
+		if (!threeQuarterCellFlag && (remainingDist <= cellDistance*1/4)) {	// run once
+			threeQuarterCellFlag = 1;
 		}
 		
+		
+		if (threeQuarterCellFlag) {
+			// Check for front wall to turn off for the remaining distance
+			if (hasFrontWall)
+				useIRSensors = 0;
+		}
 		
 		// Reached full cell
 		if ((!fullCellFlag && (remainingDist <= 0))) {	// run once
 			if (DEBUG) printf("Reached full cell\n\r");
 			fullCellFlag = 1;
-			//cellCount++;
-			shortBeep(200, 1000);
+			cellCount++;
+			//shortBeep(200, 1000);
+			
+			// Place trace
+			if (!hasTrace(cell[yPos][xPos])) {
+				cell[yPos][xPos] |= 16;
+				traceCount++;
+			}
 			
 			// If has front wall, align with front wall
 			if (hasFrontWall) {
@@ -812,10 +825,6 @@ void floodCenterCurve(void) {
 				moveW();
 			}
 			
-			targetSpeedX = searchSpeed;
-			
-			accumulatedDist = encCount;
-			
 			beginCellFlag = 0;
 			quarterCellFlag = 0;
 			halfCellFlag = 0;
@@ -827,17 +836,11 @@ void floodCenterCurve(void) {
 		}
 	}
 	
-
 	// Finish moving across last cell
 	while(remainingDist > 0) {
 		if (remainingDist < cellDistance/2)
 			useIRSensors = 0;
-		if (performedCurveTurn) {
-			remainingDist = accumulatedDist - encCount;
-		}
-		else {
-			remainingDist = accumulatedDist + cellDistance - encCount;
-		}
+		remainingDist = cellCount*cellDistance - encCount;
 		if(getDecNeeded(counts_to_mm(remainingDist), curSpeedX, 0) < decX) {
 			targetSpeedX = searchSpeed;
 		}
@@ -845,7 +848,8 @@ void floodCenterCurve(void) {
 			targetSpeedX = 0;
 		}
 	}
-
+	
+	//shortBeep(200, 1000);
 	
 	// Place trace
 	if (!hasTrace(cell[yPos][xPos])) {
