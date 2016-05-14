@@ -54,3 +54,4 @@
 ..\obj\adc.o: ..\user_Libraries\inc\align.h
 ..\obj\adc.o: ..\user_Libraries\inc\speedProfile.h
 ..\obj\adc.o: ..\user_Libraries\inc\maze.h
+..\obj\adc.o: ..\user_Libraries\inc\STM32F4flash.h

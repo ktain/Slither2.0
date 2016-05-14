@@ -34,10 +34,8 @@ void moveS(void);
 void moveW(void);
 void moveBack(void);
 
-void treeSearch(char);
 void floodCenter(void);
 void floodStart(void);
-void floodCenterCurve(void);
 void updateDistanceToCenter(void);      // to center
 void updateDistanceToStart(void);  // to start
 void simulateStraight(void);

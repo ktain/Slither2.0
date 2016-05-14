@@ -112,16 +112,13 @@ void floodCenter(void) {
 			// If new cell, detect wall data
 			if (!hasTrace(cell[yPos][xPos])) {
 				// Store next cell's wall data
-				if (DEBUG) printf("Detecting walls\n\r");
 				detectWalls();
 			}
 			
 			// Update distance for current block
-			if (DEBUG) printf("Updating distance for current block\n\r");
 			distance[yPos][xPos] = getMin(xPos, yPos) + 1;
 			
 			// Update distances for every other block
-			if (DEBUG) printf("Updating distances\n\r");
 			updateDistanceToCenter();
 			
 			// Get distances around current block
@@ -129,10 +126,8 @@ void floodCenter(void) {
 			distE = hasEast(cell[yPos][xPos])? MAX_DIST : distance[yPos][xPos + 1];
 			distS = hasSouth(cell[yPos][xPos])? MAX_DIST : distance[yPos - 1][xPos];
 			distW = hasWest(cell[yPos][xPos])? MAX_DIST : distance[yPos][xPos - 1];
-			if (DEBUG) printf("distN %d, distE %d, distS %d, distW %d\n\r", distN, distE, distS, distW);
 			
 			// Decide next movement
-			if (DEBUG) printf("Deciding next movement\n\r");
 			// 1. Pick the shortest route
 			if ( (distN < distE) && (distN < distS) && (distN < distW) )
 				nextMove = MOVEN;
@@ -197,7 +192,6 @@ void floodCenter(void) {
 				return;
 			}
 			
-			if (DEBUG) printf("nextMove %d\n\r", nextMove);
 			
 		}
 		
@@ -232,7 +226,6 @@ void floodCenter(void) {
 		
 		// Reached full cell
 		if ((!fullCellFlag && (remainingDist <= 0))) {	// run once
-			if (DEBUG) printf("Reached full cell\n\r");
 			fullCellFlag = 1;
 			//cellCount++;
 			//shortBeep(200, 1000);
@@ -408,16 +401,13 @@ void floodStart(void) {
 			// If new cell, detect wall data
 			if (!hasTrace(cell[yPos][xPos])) {
 				// Store next cell's wall data
-				if (DEBUG) printf("Detecting walls\n\r");
 				detectWalls();
 			}
 			
 			// Update distance for current block
-			if (DEBUG) printf("Updating distance for current block\n\r");
 			distance[yPos][xPos] = getMin(xPos, yPos) + 1;
 			
 			// Update distances for every other block
-			if (DEBUG) printf("Updating distances\n\r");
 			updateDistanceToStart();
 			
 			// Get distances around current block
@@ -425,10 +415,8 @@ void floodStart(void) {
 			distE = hasEast(cell[yPos][xPos])? MAX_DIST : distance[yPos][xPos + 1];
 			distS = hasSouth(cell[yPos][xPos])? MAX_DIST : distance[yPos - 1][xPos];
 			distW = hasWest(cell[yPos][xPos])? MAX_DIST : distance[yPos][xPos - 1];
-			if (DEBUG) printf("distN %d, distE %d, distS %d, distW %d\n\r", distN, distE, distS, distW);
 			
 			// Decide next movement, flooding to start
-			if (DEBUG) printf("Deciding next movement\n\r");
 			// 1. Pick the shortest route
 			if ( (distN < distE) && (distN < distS) && (distN < distW) )
 				nextMove = MOVEN;
@@ -491,7 +479,6 @@ void floodStart(void) {
 				return;
 			}
 			
-			if (DEBUG) printf("nextMove %d\n\r", nextMove);
 			
 		}
 		
@@ -526,7 +513,6 @@ void floodStart(void) {
 		
 		// Reached full cell
 		if ((!fullCellFlag && (remainingDist <= 0))) {	// run once
-			if (DEBUG) printf("Reached full cell\n\r");
 			fullCellFlag = 1;
 			//cellCount++;
 			//shortBeep(200, 1000);
@@ -584,6 +570,8 @@ void floodStart(void) {
 		}
 	}
 	
+	moveBack();
+	
 	// Place trace
 	if (!hasTrace(cell[yPos][xPos])) {
 		cell[yPos][xPos] |= 16;
@@ -603,14 +591,8 @@ void floodStart(void) {
 	isSearching = 0;
 }
 
+
 /*
- * Flood fill search to center using curve turns
- */
-void floodCenterCurve(void) {
-
-}
-
-
 void isolateDeadEnds(void)
 {
    // Isolate known dead ends with pseudo walls
@@ -643,6 +625,7 @@ void isolateDeadEnds(void)
 	}
 	
 }
+*/
 
 
 // Update distances for every other block while flooding the center
@@ -847,10 +830,8 @@ void simulateStraight(void) {
 	distE = hasEast(cell[yPos][xPos])? MAX_DIST : distance[yPos][xPos + 1];
 	distS = hasSouth(cell[yPos][xPos])? MAX_DIST : distance[yPos - 1][xPos];
 	distW = hasWest(cell[yPos][xPos])? MAX_DIST : distance[yPos][xPos - 1];
-	if (DEBUG) printf("distN %d, distE %d, distS %d, distW %d\n\r", distN, distE, distS, distW);
 	
 	// Decide next movement
-	if (DEBUG) printf("Deciding next movement\n\r");
 	// 1. Pick the shortest route
 	if ( (distN < distE) && (distN < distS) && (distN < distW) )
 		nextMove = MOVEN;

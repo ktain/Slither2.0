@@ -13,12 +13,12 @@
 #include "buzzer.h"
 #include "align.h"
 #include "maze.h"
+#include "STM32F4flash.h"
 #include <stdio.h>
 
 
-/**
- *	Hug Front Wall
- */
+
+/*	Hug Front Wall
 void hugFrontWall(int LSensorVal, int RSensorVal) {
 	while (1) {
 		int curt = micros(); //start to track time in order to make one adjust every 1000us
@@ -28,12 +28,14 @@ void hugFrontWall(int LSensorVal, int RSensorVal) {
 		elapseMicros(1000, curt); //elapse 1000 micro seconds
 	}
 }
+*/
 
 
 /*
  * Random movements using pivot turns
  */
 void randomMovement(void) {
+	/*
 	isWaiting = 0;
 	isSearching = 1;
 	isSpeedRunning = 0;
@@ -165,6 +167,7 @@ void randomMovement(void) {
 			
 		}
 	}
+	*/
 }
 
 //Returns which direction to move in and sets the orientation to next move
@@ -219,7 +222,7 @@ void speedRun(void)
 	orientation = 'N';
 
 	// Close off untraced routes
-	closeUntracedCells();
+	// closeUntracedCells();
   updateDistanceToCenter();
   visualizeGrid();
 
@@ -232,25 +235,25 @@ void speedRun(void)
 			break;
 		}
 		if (orientation == 'N') {
-			while (!hasNorth(cell[yPos][xPos]) && (distance[yPos + 1][xPos] == distance[yPos][xPos] - 1)) {
+			while (!hasNorth(cell[yPos][xPos]) && (distance[yPos + 1][xPos] == distance[yPos][xPos] - 1) && hasTrace(cell[yPos + 1][xPos])) {
 				length++;
 				yPos++;
 			}
 		}
 		else if (orientation == 'E') {
-			while (!hasEast(cell[yPos][xPos]) && (distance[yPos][xPos + 1] == distance[yPos][xPos] - 1)) {
+			while (!hasEast(cell[yPos][xPos]) && (distance[yPos][xPos + 1] == distance[yPos][xPos] - 1) && hasTrace(cell[yPos][xPos + 1])) {
 				length++;
 				xPos++;
 			}
 		}
 		else if (orientation == 'S') {
-			while (!hasSouth(cell[yPos][xPos]) && (distance[yPos - 1][xPos] == distance[yPos][xPos] - 1)) {
+			while (!hasSouth(cell[yPos][xPos]) && (distance[yPos - 1][xPos] == distance[yPos][xPos] - 1) && hasTrace(cell[yPos - 1][xPos])) {
 				length++;
 				yPos--;
 			}
 		}
 		else if (orientation == 'W') {
-			while (!hasWest(cell[yPos][xPos]) && (distance[yPos][xPos - 1] == distance[yPos][xPos] - 1)) {
+			while (!hasWest(cell[yPos][xPos]) && (distance[yPos][xPos - 1] == distance[yPos][xPos] - 1) && hasTrace(cell[yPos][xPos - 1])) {
 				length++;
 				xPos--;
 			}
@@ -350,7 +353,7 @@ void speedRunCurve(void)
 	orientation = 'N';
 
 	// Close off untraced routes
-	closeUntracedCells();
+	// closeUntracedCells();
   updateDistanceToCenter();
   visualizeGrid();
 
@@ -364,25 +367,25 @@ void speedRunCurve(void)
 		}
 		
 		if (orientation == 'N') {
-			while (!hasNorth(cell[yPos][xPos]) && (distance[yPos + 1][xPos] == distance[yPos][xPos] - 1)) {
+			while (!hasNorth(cell[yPos][xPos]) && (distance[yPos + 1][xPos] == distance[yPos][xPos] - 1) && hasTrace(cell[yPos + 1][xPos])) {
 				length++;
 				yPos++;
 			}
 		}
 		else if (orientation == 'E') {
-			while (!hasEast(cell[yPos][xPos]) && (distance[yPos][xPos + 1] == distance[yPos][xPos] - 1)) {
+			while (!hasEast(cell[yPos][xPos]) && (distance[yPos][xPos + 1] == distance[yPos][xPos] - 1) && hasTrace(cell[yPos][xPos + 1])) {
 				length++;
 				xPos++;
 			}
 		}
 		else if (orientation == 'S') {
-			while (!hasSouth(cell[yPos][xPos]) && (distance[yPos - 1][xPos] == distance[yPos][xPos] - 1)) {
+			while (!hasSouth(cell[yPos][xPos]) && (distance[yPos - 1][xPos] == distance[yPos][xPos] - 1) && hasTrace(cell[yPos - 1][xPos])) {
 				length++;
 				yPos--;
 			}
 		}
 		else if (orientation == 'W') {
-			while (!hasWest(cell[yPos][xPos]) && (distance[yPos][xPos - 1] == distance[yPos][xPos] - 1)) {
+			while (!hasWest(cell[yPos][xPos]) && (distance[yPos][xPos - 1] == distance[yPos][xPos] - 1) && hasTrace(cell[yPos][xPos - 1])) {
 				length++;
 				xPos--;
 			}
@@ -454,6 +457,7 @@ void speedRunCurve(void)
 
 
 
+/*
 bool hasFrontWallInMem(void) {
 	int curBlock = cell[yPos][xPos];
 	if ( (orientation == 'N' && hasNorth(curBlock)) || (orientation == 'E' && hasEast(curBlock)) ||
@@ -462,8 +466,10 @@ bool hasFrontWallInMem(void) {
 	else
 		return 0;
 }
+*/
 
 void saveData(void) {
+	/*
 	// Save cell data
 	for (int i = 0; i < SIZE; i++) {
 		for (int j = 0; j < SIZE; j++) {
@@ -477,11 +483,13 @@ void saveData(void) {
 			distance_backup[i][j] = distance[i][j];
 		}
 	}
+	*/
 	
-	return;
+	writeFlash();
 }
 
 void loadData(void) {
+	/*
 	// Load cell data
 	for (int i = 0; i < SIZE; i++) {
 		for (int j = 0; j < SIZE; j++) {
@@ -495,8 +503,8 @@ void loadData(void) {
 			distance[i][j] = distance_backup[i][j];
 		}
 	}
-	
-	return;
+	*/
+	readFlash();
 }
 
 void waitForSignal(void) {

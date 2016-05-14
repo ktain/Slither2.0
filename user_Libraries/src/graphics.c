@@ -6,11 +6,13 @@
  * Description: Contains functions that print the grid to stdout.
  */
 
+
 /* 
  * Function name: printGrid()
  * Description: Prints the encoded wall information starting with 
  *              the topmost row and working its way down.
  */
+/*
 void printGrid() {
   for (int i = SIZE - 1; i >= 0; i--) {
     for (int j = 0; j < SIZE; j++) {
@@ -19,7 +21,7 @@ void printGrid() {
 		printf("\n\r");
   }
 }
-
+*/
 
 /* 
  * Function name: visualizeGrid()
@@ -35,14 +37,14 @@ void visualizeGrid() {
     for (int j = 0; j < SIZE; j++) {
       if ( hasNorth(cell[i][j]) )
         if (HIDEEAST)
-          printf("+---");
+          printf("+----");
         else 
-          printf("+---+");
+          printf("+----+");
       else
         if (HIDEEAST)
-          printf("+   ");
+          printf("+    ");
         else
-          printf("+   +");
+          printf("+    +");
     }
     
     if (HIDEEAST) {
@@ -54,7 +56,7 @@ void visualizeGrid() {
     
     
     /*
-     * Print west and east wall, object, and traces
+     * Print west and east wall, mouse, and traces
      */
     for (int j = 0; j < SIZE; j++) {
       
@@ -64,26 +66,26 @@ void visualizeGrid() {
       else
         printf(" ");
       
-      // Print if object present
+      // Print if mouse present
       if ( i == yPos && j == xPos ) {
         if (orientation == 'N')
-          printf(" ^ ");
+          printf("  ^ ");
         else if (orientation == 'E')
-          printf(" > ");
+          printf("  > ");
         else if (orientation == 'S')
-          printf(" v ");
+          printf("  v ");
         else if (orientation == 'W')
-          printf(" < ");
+          printf("  < ");
       }
       
       // Print markers
       else if ( isDeadEnd(cell[i][j]) )
-        printf(" x ");
+        printf("  x ");
       else if ( hasTrace(cell[i][j]) ) {
-        printf("%3d", distance[i][j]);
+        printf("%3d.", distance[i][j]);
       }
       else {
-        printf("%3d", distance[i][j]);
+        printf("%4d", distance[i][j]);
       }
       
       // Opt to print east wall
@@ -107,15 +109,15 @@ void visualizeGrid() {
       for (int j = 0; j < SIZE; j++) {
         if ( hasSouth(cell[i][j]) ) {
           if (HIDEEAST) 
-            printf("+---");
+            printf("+----");
           else
-            printf("+---+");
+            printf("+----+");
         }
         else {
           if (HIDEEAST)
-            printf("+   ");
+            printf("+    ");
           else 
-            printf("+   +");
+            printf("+    +");
         }
       }
       
@@ -131,9 +133,9 @@ void visualizeGrid() {
     if(HIDESOUTH) {
       for(int i = 0; i < SIZE; i++) {
         if(HIDEEAST)
-          printf("+---");
+          printf("+----");
         else 
-          printf("+---+");     
+          printf("+----+");     
       }
       
       if (HIDEEAST) {

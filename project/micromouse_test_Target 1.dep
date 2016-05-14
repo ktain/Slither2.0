@@ -410,8 +410,8 @@ F (..\ST_Libraries\inc\stm32f4xx_syscfg.h)(0x52CB5D0C)()
 F (..\ST_Libraries\inc\stm32f4xx_tim.h)(0x52CB5D0C)()
 F (..\ST_Libraries\inc\stm32f4xx_usart.h)(0x52CB5D0C)()
 F (..\ST_Libraries\inc\stm32f4xx_wwdg.h)(0x52CB5D0C)()
-F (..\user\main.c)(0x573794E4)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\main.o" --omf_browse "..\obj\main.crf" --depend "..\obj\main.d")
-I (..\user_Libraries\inc\main.h)(0x56EF8628)
+F (..\user\main.c)(0x5737ACCB)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\main.o" --omf_browse "..\obj\main.crf" --depend "..\obj\main.d")
+I (..\user_Libraries\inc\main.h)(0x57379B43)
 I (..\ST_Libraries\startup\stm32f4xx.h)(0x52CB5D0C)
 I (C:\Keil_v4\ARM\CMSIS\Include\core_cm4.h)(0x50070A82)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdint.h)(0x4EB1B384)
@@ -464,7 +464,8 @@ I (..\user_Libraries\inc\pid.h)(0x57378525)
 I (..\user_Libraries\inc\turn.h)(0x5735D606)
 I (..\user_Libraries\inc\align.h)(0x56F11BEA)
 I (..\user_Libraries\inc\speedProfile.h)(0x572CDF02)
-I (..\user_Libraries\inc\maze.h)(0x57375D92)
+I (..\user_Libraries\inc\maze.h)(0x5737A0EC)
+I (..\user_Libraries\inc\STM32F4flash.h)(0x57379B5E)
 F (..\user\stm32f4xx_it.c)(0x572C7798)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\stm32f4xx_it.o" --omf_browse "..\obj\stm32f4xx_it.crf" --depend "..\obj\stm32f4xx_it.d")
 I (..\user\stm32f4xx_it.h)(0x52CB5D0C)
 I (..\ST_Libraries\startup\stm32f4xx.h)(0x52CB5D0C)
@@ -504,7 +505,7 @@ I (..\ST_Libraries\inc\misc.h)(0x52CB5D0C)
 I (..\user_Libraries\inc\delay.h)(0x56C0B871)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdbool.h)(0x4EB1B388)
 I (..\user_Libraries\inc\buzzer.h)(0x57318589)
-I (..\user_Libraries\inc\main.h)(0x56EF8628)
+I (..\user_Libraries\inc\main.h)(0x57379B43)
 I (..\user_Libraries\inc\led.h)(0x571628D9)
 I (..\user_Libraries\inc\button.h)(0x569DDD45)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdio.h)(0x4EB1B386)
@@ -520,7 +521,8 @@ I (..\user_Libraries\inc\pid.h)(0x57378525)
 I (..\user_Libraries\inc\turn.h)(0x5735D606)
 I (..\user_Libraries\inc\align.h)(0x56F11BEA)
 I (..\user_Libraries\inc\speedProfile.h)(0x572CDF02)
-I (..\user_Libraries\inc\maze.h)(0x57375D92)
+I (..\user_Libraries\inc\maze.h)(0x5737A0EC)
+I (..\user_Libraries\inc\STM32F4flash.h)(0x57379B5E)
 F (..\user\stm32f4xx_conf.h)(0x52CB5D0C)()
 F (..\user\stm32f4xx_it.h)(0x52CB5D0C)()
 F (..\user_Libraries\inc\delay.h)(0x56C0B871)()
@@ -532,15 +534,16 @@ F (..\user_Libraries\inc\buzzer.h)(0x57318589)()
 F (..\user_Libraries\inc\encoder.h)(0x56DB9596)()
 F (..\user_Libraries\inc\adc.h)(0x573705FD)()
 F (..\user_Libraries\inc\sensor_Function.h)(0x57371D9D)()
-F (..\user_Libraries\inc\main.h)(0x56EF8628)()
+F (..\user_Libraries\inc\main.h)(0x57379B43)()
 F (..\user_Libraries\inc\global.h)(0x57372AE4)()
 F (..\user_Libraries\inc\config.h)(0x5735D4E9)()
 F (..\user_Libraries\inc\test.h)(0x5737855A)()
 F (..\user_Libraries\inc\turn.h)(0x5735D606)()
 F (..\user_Libraries\inc\align.h)(0x56F11BEA)()
 F (..\user_Libraries\inc\speedProfile.h)(0x572CDF02)()
-F (..\user_Libraries\inc\maze.h)(0x57375D92)()
-F (..\user_Libraries\src\delay.c)(0x56BECD1F)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\delay.o" --omf_browse "..\obj\delay.crf" --depend "..\obj\delay.d")
+F (..\user_Libraries\inc\maze.h)(0x5737A0EC)()
+F (..\user_Libraries\inc\STM32F4flash.h)(0x57379B5E)()
+F (..\user_Libraries\src\delay.c)(0x5737A805)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\delay.o" --omf_browse "..\obj\delay.crf" --depend "..\obj\delay.d")
 I (..\ST_Libraries\startup\stm32f4xx.h)(0x52CB5D0C)
 I (C:\Keil_v4\ARM\CMSIS\Include\core_cm4.h)(0x50070A82)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdint.h)(0x4EB1B384)
@@ -802,7 +805,7 @@ I (..\ST_Libraries\inc\stm32f4xx_wwdg.h)(0x52CB5D0C)
 I (..\ST_Libraries\inc\misc.h)(0x52CB5D0C)
 I (..\user_Libraries\inc\encoder.h)(0x56DB9596)
 F (..\user_Libraries\src\adc.c)(0x572424C6)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\adc.o" --omf_browse "..\obj\adc.crf" --depend "..\obj\adc.d")
-I (..\user_Libraries\inc\main.h)(0x56EF8628)
+I (..\user_Libraries\inc\main.h)(0x57379B43)
 I (..\ST_Libraries\startup\stm32f4xx.h)(0x52CB5D0C)
 I (C:\Keil_v4\ARM\CMSIS\Include\core_cm4.h)(0x50070A82)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdint.h)(0x4EB1B384)
@@ -855,7 +858,8 @@ I (..\user_Libraries\inc\pid.h)(0x57378525)
 I (..\user_Libraries\inc\turn.h)(0x5735D606)
 I (..\user_Libraries\inc\align.h)(0x56F11BEA)
 I (..\user_Libraries\inc\speedProfile.h)(0x572CDF02)
-I (..\user_Libraries\inc\maze.h)(0x57375D92)
+I (..\user_Libraries\inc\maze.h)(0x5737A0EC)
+I (..\user_Libraries\inc\STM32F4flash.h)(0x57379B5E)
 F (..\user_Libraries\src\sensor_Function.c)(0x573720CC)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\sensor_function.o" --omf_browse "..\obj\sensor_function.crf" --depend "..\obj\sensor_function.d")
 I (..\user_Libraries\inc\global.h)(0x57372AE4)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdint.h)(0x4EB1B384)
@@ -901,7 +905,7 @@ I (..\user_Libraries\inc\led.h)(0x571628D9)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdio.h)(0x4EB1B386)
 I (..\user_Libraries\inc\encoder.h)(0x56DB9596)
 I (..\user_Libraries\inc\buzzer.h)(0x57318589)
-F (..\user_Libraries\src\test.c)(0x57378554)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\test.o" --omf_browse "..\obj\test.crf" --depend "..\obj\test.d")
+F (..\user_Libraries\src\test.c)(0x5737A826)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\test.o" --omf_browse "..\obj\test.crf" --depend "..\obj\test.d")
 I (..\ST_Libraries\startup\stm32f4xx.h)(0x52CB5D0C)
 I (C:\Keil_v4\ARM\CMSIS\Include\core_cm4.h)(0x50070A82)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdint.h)(0x4EB1B384)
@@ -949,7 +953,8 @@ I (..\user_Libraries\inc\config.h)(0x5735D4E9)
 I (..\user_Libraries\inc\turn.h)(0x5735D606)
 I (..\user_Libraries\inc\buzzer.h)(0x57318589)
 I (..\user_Libraries\inc\align.h)(0x56F11BEA)
-I (..\user_Libraries\inc\maze.h)(0x57375D92)
+I (..\user_Libraries\inc\maze.h)(0x5737A0EC)
+I (..\user_Libraries\inc\STM32F4flash.h)(0x57379B5E)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdio.h)(0x4EB1B386)
 F (..\user_Libraries\src\turn.c)(0x573757BD)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\turn.o" --omf_browse "..\obj\turn.crf" --depend "..\obj\turn.d")
 I (..\user_Libraries\inc\turn.h)(0x5735D606)
@@ -993,7 +998,7 @@ I (..\ST_Libraries\inc\stm32f4xx_wwdg.h)(0x52CB5D0C)
 I (..\ST_Libraries\inc\misc.h)(0x52CB5D0C)
 I (..\user_Libraries\inc\encoder.h)(0x56DB9596)
 I (..\user_Libraries\inc\speedProfile.h)(0x572CDF02)
-I (..\user_Libraries\inc\maze.h)(0x57375D92)
+I (..\user_Libraries\inc\maze.h)(0x5737A0EC)
 I (..\user_Libraries\inc\sensor_Function.h)(0x57371D9D)
 I (..\user_Libraries\inc\buzzer.h)(0x57318589)
 I (..\user_Libraries\inc\config.h)(0x5735D4E9)
@@ -1081,10 +1086,10 @@ I (..\user_Libraries\inc\global.h)(0x57372AE4)
 I (..\user_Libraries\inc\encoder.h)(0x56DB9596)
 I (..\user_Libraries\inc\pwm.h)(0x57241C6B)
 I (..\user_Libraries\inc\config.h)(0x5735D4E9)
-I (..\user_Libraries\inc\maze.h)(0x57375D92)
+I (..\user_Libraries\inc\maze.h)(0x5737A0EC)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdio.h)(0x4EB1B386)
-F (..\user_Libraries\src\move.c)(0x5735D5C8)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\move.o" --omf_browse "..\obj\move.crf" --depend "..\obj\move.d")
-I (..\user_Libraries\inc\maze.h)(0x57375D92)
+F (..\user_Libraries\src\move.c)(0x5737A7BD)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\move.o" --omf_browse "..\obj\move.crf" --depend "..\obj\move.d")
+I (..\user_Libraries\inc\maze.h)(0x5737A0EC)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdbool.h)(0x4EB1B388)
 I (..\user_Libraries\inc\config.h)(0x5735D4E9)
 I (..\user_Libraries\inc\turn.h)(0x5735D606)
@@ -1092,16 +1097,16 @@ I (..\user_Libraries\inc\global.h)(0x57372AE4)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdint.h)(0x4EB1B384)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdio.h)(0x4EB1B386)
 F (..\user_Libraries\src\lookup.c)(0x57377654)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\lookup.o" --omf_browse "..\obj\lookup.crf" --depend "..\obj\lookup.d")
-I (..\user_Libraries\inc\maze.h)(0x57375D92)
+I (..\user_Libraries\inc\maze.h)(0x5737A0EC)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdbool.h)(0x4EB1B388)
-F (..\user_Libraries\src\graphics.c)(0x572C88B5)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\graphics.o" --omf_browse "..\obj\graphics.crf" --depend "..\obj\graphics.d")
-I (..\user_Libraries\inc\maze.h)(0x57375D92)
+F (..\user_Libraries\src\graphics.c)(0x5737A73E)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\graphics.o" --omf_browse "..\obj\graphics.crf" --depend "..\obj\graphics.d")
+I (..\user_Libraries\inc\maze.h)(0x5737A0EC)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdbool.h)(0x4EB1B388)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdio.h)(0x4EB1B386)
 F (..\user_Libraries\src\initializeGrid.c)(0x572C889B)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\initializegrid.o" --omf_browse "..\obj\initializegrid.crf" --depend "..\obj\initializegrid.d")
-I (..\user_Libraries\inc\maze.h)(0x57375D92)
+I (..\user_Libraries\inc\maze.h)(0x5737A0EC)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdbool.h)(0x4EB1B388)
-F (..\user_Libraries\src\floodSearch.c)(0x573794C0)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\floodsearch.o" --omf_browse "..\obj\floodsearch.crf" --depend "..\obj\floodsearch.d")
+F (..\user_Libraries\src\floodSearch.c)(0x5737AA5E)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\floodsearch.o" --omf_browse "..\obj\floodsearch.crf" --depend "..\obj\floodsearch.d")
 I (..\ST_Libraries\startup\stm32f4xx.h)(0x52CB5D0C)
 I (C:\Keil_v4\ARM\CMSIS\Include\core_cm4.h)(0x50070A82)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdint.h)(0x4EB1B384)
@@ -1149,8 +1154,64 @@ I (..\user_Libraries\inc\config.h)(0x5735D4E9)
 I (..\user_Libraries\inc\turn.h)(0x5735D606)
 I (..\user_Libraries\inc\buzzer.h)(0x57318589)
 I (..\user_Libraries\inc\align.h)(0x56F11BEA)
-I (..\user_Libraries\inc\maze.h)(0x57375D92)
+I (..\user_Libraries\inc\maze.h)(0x5737A0EC)
 I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdio.h)(0x4EB1B386)
+F (..\user_Libraries\src\STM32F4flash.c)(0x57379C9E)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\stm32f4flash.o" --omf_browse "..\obj\stm32f4flash.crf" --depend "..\obj\stm32f4flash.d")
+I (..\ST_Libraries\startup\stm32f4xx.h)(0x52CB5D0C)
+I (C:\Keil_v4\ARM\CMSIS\Include\core_cm4.h)(0x50070A82)
+I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdint.h)(0x4EB1B384)
+I (C:\Keil_v4\ARM\CMSIS\Include\core_cmInstr.h)(0x505A3D8C)
+I (C:\Keil_v4\ARM\CMSIS\Include\core_cmFunc.h)(0x4FDB755C)
+I (C:\Keil_v4\ARM\CMSIS\Include\core_cm4_simd.h)(0x4F592BF6)
+I (..\ST_Libraries\startup\system_stm32f4xx.h)(0x52CB5D0C)
+I (..\user\stm32f4xx_conf.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_adc.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_can.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_crc.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_cryp.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_dac.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_dbgmcu.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_dcmi.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_dma.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_exti.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_flash.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_fsmc.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_hash.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_gpio.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_i2c.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_iwdg.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_pwr.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_rcc.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_rng.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_rtc.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_sdio.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_spi.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_syscfg.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_tim.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_usart.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\stm32f4xx_wwdg.h)(0x52CB5D0C)
+I (..\ST_Libraries\inc\misc.h)(0x52CB5D0C)
+I (..\user_Libraries\inc\main.h)(0x57379B43)
+I (..\user_Libraries\inc\delay.h)(0x56C0B871)
+I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdbool.h)(0x4EB1B388)
+I (..\user_Libraries\inc\led.h)(0x571628D9)
+I (..\user_Libraries\inc\button.h)(0x569DDD45)
+I (C:\Keil_v4\ARM\ARMCC\bin\..\include\stdio.h)(0x4EB1B386)
+I (..\user_Libraries\inc\usart.h)(0x569DFC83)
+I (..\user_Libraries\inc\pwm.h)(0x57241C6B)
+I (..\user_Libraries\inc\encoder.h)(0x56DB9596)
+I (..\user_Libraries\inc\buzzer.h)(0x57318589)
+I (..\user_Libraries\inc\sensor_Function.h)(0x57371D9D)
+I (..\user_Libraries\inc\adc.h)(0x573705FD)
+I (..\user_Libraries\inc\test.h)(0x5737855A)
+I (..\user_Libraries\inc\config.h)(0x5735D4E9)
+I (..\user_Libraries\inc\global.h)(0x57372AE4)
+I (..\user_Libraries\inc\pid.h)(0x57378525)
+I (..\user_Libraries\inc\turn.h)(0x5735D606)
+I (..\user_Libraries\inc\align.h)(0x56F11BEA)
+I (..\user_Libraries\inc\speedProfile.h)(0x572CDF02)
+I (..\user_Libraries\inc\maze.h)(0x5737A0EC)
+I (..\user_Libraries\inc\STM32F4flash.h)(0x57379B5E)
 F (..\ST_Libraries\startup\startup_stm32f4xx.s)(0x52CB5D0C)(--cpu Cortex-M4.fp -g --apcs=interwork -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx --list ".\startup_stm32f4xx.lst" --xref -o "..\obj\startup_stm32f4xx.o" --depend "..\obj\startup_stm32f4xx.d")
 F (..\ST_Libraries\startup\stm32f4xx.h)(0x52CB5D0C)()
 F (..\ST_Libraries\startup\system_stm32f4xx.c)(0x52CB5D0C)(-c --cpu Cortex-M4.fp -g -O3 --apcs=interwork -I..\ST_Libraries\inc -I..\ST_Libraries\src -I..\ST_Libraries\startup -I..\user -I..\obj -I..\project -I..\user_Libraries\inc -I..\user_Libraries\src -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\CMSIS --c99 -I C:\Keil_v4\ARM\RV31\INC -I C:\Keil_v4\ARM\CMSIS\Include -I C:\Keil_v4\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -o "..\obj\system_stm32f4xx.o" --omf_browse "..\obj\system_stm32f4xx.crf" --depend "..\obj\system_stm32f4xx.d")

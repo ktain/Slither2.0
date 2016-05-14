@@ -1,25 +1,25 @@
 /*
 Button 0
-1. floodcenter. speed 70, acc 60/60, delay 150/100
+1. floodcenter. speed 70, acc 60/60, delay 200/150
 2. floodcenter. speed 100, acc 90/90, delay 150/100
-3. floodcenter. save. floodstart. speed 70, acc 60/60, delay 150/100
+3. floodcenter. save. floodstart. speed 70, acc 60/60, delay 200/150
 4. floodcenter. save. floodstart. speed 100, acc 90/90, delay 150/100
 
 Button 1
-1. speedrun pivot speed 200, acc 60/60, delay 100/50
-2. speedrun pivot speed 300, acc 80/80, delay 50/50
-3. speedrun pivot speed 500, acc 90/90, delay 50/50
-4. speedrun pivot speed 500, acc 100/100, delay 0/40
+1. speedrun pivot. floodstart. speed 200, acc 60/60, delay 100/50
+2. speedrun pivot. floodstart. speed 300, acc 80/80, delay 50/50
+3. speedrun pivot. floodstart. speed 500, acc 90/90, delay 50/50
+4. speedrun pivot. floodstart. speed 500, acc 100/100, delay 0/40
 
 Button 2
-1. speedrun curve. speed 200/60, acc 60/60
-2. speedrun curve. speed 400/100, acc 60/60
-3. speedrun curve. speed 500/100, acc 90/90
-4. speedrun curve. speed 550/100, acc 120/120
+1. speedrun curve. floodstart. speed 200/60, acc 60/60
+2. speedrun curve. floodstart. speed 400/100, acc 60/60
+3. speedrun curve. floodstart. speed 500/100, acc 90/90
+4. speedrun curve. floodstart. speed 550/100, acc 120/120
 
 Button 3
-1. save
-2. load
+1. save to flash
+2. load from flash
 3. experimental
 4. print info
 */
@@ -323,8 +323,6 @@ void button0_interrupt(void) {
 		default:
 			;
 	}
-
-	printf("Finished Button 0 ISR\n\r");
 	
 }
 
@@ -394,11 +392,41 @@ void button1_interrupt(void) {
 			break;			
 		default:
 			;
+		
+		speedRun();
+		
+		alignPwm = 100;
+		searchSpeed = 70*2;
+		moveSpeed = 400*2;
+		stopSpeed = 60*2;
+		turnSpeed = 40*2;
+		stopSpeed = 0*2;
+		alignTime = 200;
+		turnDelay = 150;
+		sensorScale = 40;
+		postScale = 12;
+		accX = 60;
+		decX = 60;
+		
+		floodStart();
 	}
 	
 	speedRun();
 	
-	printf("Finished Button 1 ISR\n\r");
+	alignPwm = 100;
+	searchSpeed = 70*2;
+	moveSpeed = 200*2;
+	stopSpeed = 60*2;
+	turnSpeed = 40*2;
+	stopSpeed = 0*2;
+	alignTime = 200;
+	turnDelay = 150;
+	sensorScale = 40;
+	postScale = 12;
+	accX = 60;
+	decX = 60;
+	
+	floodStart();
 	
 }
 
@@ -410,7 +438,6 @@ void button2_interrupt(void) {
 	delay_ms(1000);
 	
 	waitForSignal();
-	printf("Expected angle %d, actual angle %d\n\r", expectedAngle, actualAngle);
 	
 		switch (select) {
 		case 0:
@@ -430,8 +457,6 @@ void button2_interrupt(void) {
 			t3 = 30;
 			t4 = 45;
 		
-			speedRunCurve();
-		
 			break;
 		case 1:
 			resetSpeedProfile();
@@ -449,8 +474,6 @@ void button2_interrupt(void) {
 			t2 = 220;
 			t3 = 30;
 			t4 = 45;
-		
-			speedRunCurve();
 		
 			break;
 		case 2:
@@ -470,8 +493,6 @@ void button2_interrupt(void) {
 			t2 = 92;
 			t3 = 40;
 			t4 = 20;
-
-			speedRunCurve();
 		
 			break;	
 		case 3:
@@ -510,14 +531,26 @@ void button2_interrupt(void) {
 			t3 = 40;
 			t4 = 20;
 
-			speedRunCurve();
 			break;			
 		default:
 			;
 	}
-	
-	printf("Expected angle %d, actual angle %d\n\r", expectedAngle, actualAngle);
-	printf("Finished Button 2 ISR\n\r");
+		speedRunCurve();
+		
+		alignPwm = 100;
+		searchSpeed = 70*2;
+		moveSpeed = 200*2;
+		stopSpeed = 60*2;
+		turnSpeed = 40*2;
+		stopSpeed = 0*2;
+		alignTime = 200;
+		turnDelay = 150;
+		sensorScale = 40;
+		postScale = 12;
+		accX = 60;
+		decX = 60;
+		
+		floodStart();
 }
 
 
@@ -530,66 +563,16 @@ void button3_interrupt(void) {
 	
 	switch (select) {
 		case 0:
-			/*
-			initializeGrid();
-			visualizeGrid();
-			delay_ms(100);
-		
-			alignPwm = 100;	
-			turnSpeed = 40*2;
-			searchSpeed = 100*2;
-			stopSpeed = 55*2;
-			alignTime = 100;
-			turnDelay = 50;
-			sensorScale = 30;
-			accX = 60;
-			decX = 60;
-		
-			floodCenterCurve();
-			break;	
-			*/
-		
 			saveData();
 			beep(3);
 			break;
 		case 1:
 			loadData();
-		
+			updateDistanceToCenter();
+			visualizeGrid();
 			beep(3);
 			break;
 		case 2:
-			
-			/*
-			resetSpeedProfile();
-			actualAngle = 0;
-			printf("actual angle %d\n\r", actualAngle);
-		
-			moveSpeed = 500*2;
-			stopSpeed = 100*2;
-			sensorScale = 40;
-			accX = 60;
-			decX = 60;
-		
-			speedW = 120;
-			t0 = 20;
-			t1 = 40;
-			t2 = 92;
-			t3 = 40;
-			t4 = 20;
-		
-			moveForward(1);
-			curveTurnLeft();
-			//moveForward(1);
-			//curveTurnLeft();
-			stopSpeed = 0;
-			moveForward(1);
-			turnMotorOff;
-			useSpeedProfile = 0;
-
-			printf("actual angle %d\n\r", actualAngle);
-			break;
-			*/
-			
 			
 			resetSpeedProfile();
 		
@@ -667,8 +650,6 @@ void button3_interrupt(void) {
 		default:
 			;
 	}
-	
-	printf("Finished Button 3 ISR\n\r");
 	
 }
 

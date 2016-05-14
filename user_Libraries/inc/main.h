@@ -20,6 +20,7 @@
 #include "align.h"
 #include "speedProfile.h"
 #include "maze.h"
+#include "STM32F4flash.h"
 
 void systick(void);
 void button0_interrupt(void);

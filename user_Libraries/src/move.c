@@ -11,8 +11,6 @@
  
  /* Move north */
 void moveN() {
-
-	if (DEBUG) printf("Moving north\n\r");
 	
   if ( orientation == 'N' ) {
 
@@ -40,8 +38,6 @@ void moveN() {
 
 /* Move east */
 void moveE() {
-
-	if (DEBUG) printf("Moving east\n\r");
 	
   if ( orientation == 'N' ) {
 		if (isCurveTurning)
@@ -68,8 +64,6 @@ void moveE() {
 
 /* Move south */
 void moveS() {
-	
-	if (DEBUG) printf("Moving south\n\r");
 
   if ( orientation == 'N' ) {
 		pivotTurn(turnLeft180);
@@ -97,8 +91,6 @@ void moveS() {
 
 /* Move west */
 void moveW() {
-
-	if (DEBUG) printf("Moving west\n\r");
 	
   if ( orientation == 'N' ) {
 		if (isCurveTurning)
