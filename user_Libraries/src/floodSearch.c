@@ -262,7 +262,6 @@ void floodCenter(void) {
 				moveW();
 			}
 			
-			updateDistanceToCenter();
 			simulateStraight();
 			stopSpeed = 0;
 			
@@ -557,6 +556,9 @@ void floodStart(void) {
 				moveW();
 			}
 			
+			simulateStraight();
+			stopSpeed = 0;
+			
 			accumDist = encCount;
 			beginCellFlag = 0;
 			quarterCellFlag = 0;
@@ -587,9 +589,6 @@ void floodStart(void) {
 		cell[yPos][xPos] |= 16;
 		traceCount++;
 	}
-	
-	// Turn back
-	moveBack();
 	
 	useSpeedProfile = 0;
 	turnMotorOff;

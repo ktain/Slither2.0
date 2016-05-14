@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\obj\micromouse_test.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\obj\micromouse_test.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.02 [Build 28]: Last Updated: Sat May 14 13:56:31 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.02 [Build 28]: Last Updated: Sat May 14 14:13:14 2016
 <BR><P>
 <H3>Maximum Stack Usage =        688 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -2050,7 +2050,13 @@ Global Symbols
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveN
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveE
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
+<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
+</UL>
+
+<P><STRONG><a name="[12d]"></a>willTurn</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, floodsearch.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
 <P><STRONG><a name="[114]"></a>updateDistanceToCenter</STRONG> (Thumb, 100 bytes, Stack size 32 bytes, floodsearch.o(.text))
@@ -2064,11 +2070,6 @@ Global Symbols
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
-<P><STRONG><a name="[12d]"></a>willTurn</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, floodsearch.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
-</UL>
-
 <P><STRONG><a name="[12c]"></a>detectWalls</STRONG> (Thumb, 354 bytes, Stack size 20 bytes, floodsearch.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = detectWalls
 </UL>
@@ -2076,7 +2077,7 @@ Global Symbols
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodCenter
 </UL>
 
-<P><STRONG><a name="[b5]"></a>floodCenter</STRONG> (Thumb, 2180 bytes, Stack size 56 bytes, floodsearch.o(.text))
+<P><STRONG><a name="[b5]"></a>floodCenter</STRONG> (Thumb, 2176 bytes, Stack size 56 bytes, floodsearch.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 232 + Unknown Stack Size
 <LI>Call Chain = floodCenter &rArr; visualizeGrid &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -2117,13 +2118,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;floodStart
 </UL>
 
-<P><STRONG><a name="[b7]"></a>floodStart</STRONG> (Thumb, 2174 bytes, Stack size 56 bytes, floodsearch.o(.text))
+<P><STRONG><a name="[b7]"></a>floodStart</STRONG> (Thumb, 2196 bytes, Stack size 56 bytes, floodsearch.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 232 + Unknown Stack Size
 <LI>Call Chain = floodStart &rArr; visualizeGrid &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateDistanceToStart
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;detectWalls
 <LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;willTurn
+<LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;simulateStraight
 <LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getMin
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atStart
 <LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;moveBack
@@ -2153,7 +2155,7 @@ Global Symbols
 
 <P><STRONG><a name="[222]"></a>floodCenterCurve</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, floodsearch.o(.text), UNUSED)
 
-<P><STRONG><a name="[130]"></a>isolateDeadEnds</STRONG> (Thumb, 190 bytes, Stack size 32 bytes, floodsearch.o(.text), UNUSED)
+<P><STRONG><a name="[130]"></a>isolateDeadEnds</STRONG> (Thumb, 188 bytes, Stack size 32 bytes, floodsearch.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasWest
 <LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasSouth
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hasNorth
