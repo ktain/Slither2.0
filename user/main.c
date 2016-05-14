@@ -263,10 +263,11 @@ void button0_interrupt(void) {
 		case 0:
 			alignPwm = 100;	
 			turnSpeed = 40*2;
+			moveSpeed = 200*2;
 			searchSpeed = 70*2;
 			stopSpeed = 0*2;
-			alignTime = 150;
-			turnDelay = 100;
+			alignTime = 200;
+			turnDelay = 150;
 			sensorScale = 40;
 			postScale = 12;
 			accX = 60;
@@ -276,6 +277,7 @@ void button0_interrupt(void) {
 		case 1:
 			alignPwm = 100;
 			turnSpeed = 40*2;
+			moveSpeed = 300*2;
 			searchSpeed = 100*2;
 			stopSpeed = 0*2;
 			alignTime = 150;
@@ -289,10 +291,11 @@ void button0_interrupt(void) {
 		case 2:
 			alignPwm = 100;
 			turnSpeed = 40*2;
+			moveSpeed = 200*2;
 			searchSpeed = 70*2;
 			stopSpeed = 0*2;
-			alignTime = 150;
-			turnDelay = 100;
+			alignTime = 200;
+			turnDelay = 150;
 			sensorScale = 40;
 			postScale = 12;
 			accX = 60;
@@ -304,6 +307,7 @@ void button0_interrupt(void) {
 		case 3:
 			alignPwm = 100;
 			turnSpeed = 40*2;
+			moveSpeed = 300*2;
 			searchSpeed = 100*2;
 			stopSpeed = 0*2;
 			alignTime = 150;

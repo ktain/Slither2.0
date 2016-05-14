@@ -179,7 +179,6 @@ void resetSpeedProfile(void)
 	oldPosErrorX = 0;
 	oldPosErrorW = 0;
   leftEncOld = 0;
-
 	rightEncOld = 0;	
 	leftEncCount = 0;
 	rightEncCount = 0;
@@ -225,6 +224,9 @@ inline float abs (float number) {
  *	Straight movement
  */
 void moveForward(float cells) {
+	if (cells < 0) {
+		cells = 0;
+	}
 	
 	useIRSensors = 1;
 	useSpeedProfile = 1;

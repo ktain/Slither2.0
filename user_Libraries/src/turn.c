@@ -13,17 +13,17 @@
 #include <stdio.h>
 
 int pivotTurn(int degrees) {
+	resetSpeedProfile();
 	useIRSensors = 0;
-	rightEncChange = leftEncChange = 0;
-	useSpeedProfile = 1;
 	targetSpeedX = 0;
+	useSpeedProfile = 1;
 	
 	int tempAccW = accW;
 	int tempDecW = decW;
 	int errorFlag = EXIT_SUCCESS;
 	
-	accW = 200;
-	decW = 200;
+	accW = 100;
+	decW = 100;
 	int curt = millis();
 	while(millis() - curt < turnDelay);
 
@@ -32,7 +32,6 @@ int pivotTurn(int degrees) {
 	if (degrees > 0)
 		while( angle < degrees ) {
 			targetSpeedW = -turnSpeed;
-			delay_ms(1);
 			if (millis() - curt > 1000) {
 				errorFlag = EXIT_FAILURE;
 				break;
@@ -41,7 +40,6 @@ int pivotTurn(int degrees) {
 	else
 		while( angle > degrees ) {
 			targetSpeedW = turnSpeed;
-			delay_ms(1);
 			if (millis() - curt > 1000) {
 				errorFlag = EXIT_FAILURE;
 				break;
@@ -56,7 +54,6 @@ int pivotTurn(int degrees) {
 	while(millis() - curt < turnDelay);
 		
 	useSpeedProfile = 1;
-	rightEncChange = leftEncChange = 0;
 	return errorFlag;
 }
 

@@ -40,6 +40,7 @@ void floodStart(void);
 void floodCenterCurve(void);
 void updateDistanceToCenter(void);      // to center
 void updateDistanceToStart(void);  // to start
+void simulateStraight(void);
 
 int hasNorth(int);
 int hasEast(int);
