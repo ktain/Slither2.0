@@ -54,7 +54,7 @@ int32_t oldEncCount = 0;
 int sensorError = 0;
 int sensorScale = 50;
 
-int gyroFeedbackRatio = 5700;
+int gyroFeedbackRatio = -5700;
 
 
 
@@ -126,12 +126,14 @@ void calculateMotorPwm(void) { // encoder PD controller
 	encoderFeedbackW = rightEncChange - leftEncChange;
 	
 	gyroFeedback = aSpeed/gyroFeedbackRatio; 	//gyroFeedbackRatio mentioned in curve turn lecture
-
-	rotationalFeedback = encoderFeedbackW;
 	
-	if (useGyro) {
+	rotationalFeedback += encoderFeedbackW;
+	
+	
+	if (useGyro || 1) {
 		rotationalFeedback += gyroFeedback;
 	}
+	
 	
 	// option to include sensor feedback
 		
@@ -251,6 +253,8 @@ void moveForward(float cells) {
 void moveForwardHalf(void) {
 	useIRSensors = 1;
 	useSpeedProfile = 1;
+	if (useGyroCorrection) 
+		useGyro = 1;
 
 	targetSpeedX = stopSpeed;
 	int startEncCount = (getLeftEncCount() + getRightEncCount()) / 2;
@@ -258,6 +262,7 @@ void moveForwardHalf(void) {
 		targetSpeedX = stopSpeed;
 	}
 	targetSpeedX = stopSpeed;
+	useGyro = 0;
 }
 
 
@@ -267,17 +272,23 @@ void getSensorError(void)
 	//if (LDSensor > LDMiddleValue && RDSensor > RDMiddleValue)
 		//sensorError = RDSensor - LDSensor;
 	// Closer to left wall
-	if (LDSensor > LDMiddleValue)
+	if (LDSensor > LDMiddleValue + 50)
 		sensorError = LDMiddleValue - LDSensor;
 	// Closer to right wall
-	else if (RDSensor > RDMiddleValue)
+	else if (RDSensor > RDMiddleValue + 50)
 		sensorError = RDSensor - RDMiddleValue;
 	// Otherwise use front sensors
 	else if (LDSensor < leftWallThreshold && RDSensor < rightWallThreshold) {
-		if (LFSensor > leftPostThreshold && RFSensor < rightPostThreshold)
-			sensorError = 3*(leftPostThreshold - LFSensor);
-		else if (RFSensor > rightPostThreshold && LFSensor < leftPostThreshold)
-			sensorError = 3*(RFSensor - rightPostThreshold);
+		if (LFSensor > leftPostThreshold && RFSensor < rightPostThreshold) {
+			sensorError = postScale*(leftPostThreshold - (LFSensor - RFSensor));
+			if (sensorError > 0)
+				sensorError = 0;
+		}
+		else if (RFSensor > rightPostThreshold && LFSensor < leftPostThreshold) {
+			sensorError = postScale*((RFSensor - LFSensor) - rightPostThreshold);
+			if (sensorError < 0)
+				sensorError = 0;
+		}
 	}
 	/*
 	else if (RDSensor > rightPostThreshold && LDSensor < leftPostThreshold)

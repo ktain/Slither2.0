@@ -264,10 +264,6 @@ void speedRun(void)
 	closeUntracedCells();
   updateDistanceToCenter();
   visualizeGrid();
-	
-	resetSpeedProfile();
-	isSpeedRunning = 1;
-	useSpeedProfile = 1;
 
 	// Simulate path
 	for (int i = 0; !atCenter(); i++) {
@@ -311,10 +307,17 @@ void speedRun(void)
 		printf("distances[%d] = %d | nextDir[%d] = %d\n\r", i, distances[i], i, nextDir[i]);
 	*/
 	
+	// Run path
+	delay_ms(1000);
+	setGyroRef();
+	
 	orientation = 'N';
 	
-	// Run path
 	useIRSensors = 1;
+	resetSpeedProfile();
+	isSpeedRunning = 1;
+	useSpeedProfile = 1;
+	
   for (int i = 0; distances[i] != 0; i++) {
 		if (i == 0) {
 			moveForward(distances[i] + (0.4667 - mm_to_counts(motorToBackDist)/cellDistance));
@@ -322,7 +325,7 @@ void speedRun(void)
 		else if (distances[i+1] == 0) {
 			int tempSpeed = stopSpeed;
 			stopSpeed = 0;
-			moveForward(distances[i] - 0.5); // +1
+			moveForward(distances[i] + 0); // +1
 			stopSpeed = tempSpeed;
 		}
 		else {
@@ -381,7 +384,6 @@ void closeUntracedCells(void) {
 
 void speedRunCurve(void) 
 {
-
   int nextDir[100] = {0};
 	int length = 0;
   
@@ -394,10 +396,6 @@ void speedRunCurve(void)
   updateDistanceToCenter();
   visualizeGrid();
 
-	resetSpeedProfile();
-	isSpeedRunning = 1;
-	useSpeedProfile = 1;
-	
 	// Simulate path
 	for (int i = 0; !atCenter(); i++) {
 		
@@ -443,9 +441,13 @@ void speedRunCurve(void)
 		printf("distances[%d] = %d | nextDir[%d] = %d\n\r", i, distances[i], i, nextDir[i]);
 	*/
 	
-	orientation = 'N';
 	
 	// Run path
+	delay_ms(1000);
+	setGyroRef();
+	
+	orientation = 'N';
+	
 	isSpeedRunning = 1;
 	resetSpeedProfile();
 	useIRSensors = 0;

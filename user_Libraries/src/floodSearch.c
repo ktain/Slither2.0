@@ -19,8 +19,12 @@
  * Flood fill search to center using pivot turns
  */
 void floodCenter(void) {
+	delay_ms(1000);
+	setGyroRef();
+	
 	isSearching = 1;
 	resetSpeedProfile();
+	useGyro = 1;
 	
 	int cellCount = 1;						// number of explored cells
 	int remainingDist = 0;				// positional distance
@@ -279,6 +283,9 @@ void floodCenter(void) {
  * Flood fill search to start using pivot turns
  */
 void floodStart(void) {
+	delay_ms(1000);
+	setGyroRef();
+	
 	isSearching = 1;
 	resetSpeedProfile();
 	
@@ -399,8 +406,18 @@ void floodStart(void) {
 				nextMove = MOVES;
 			else if ( (distW < distE) && (distW < distS) && (distW < distN) )
 				nextMove = MOVEW;
+			
+			// 2. If multiple equally short routes, go straight if untraced
+			else if ( !hasNorth(cell[yPos][xPos]) && !hasTrace(cell[yPos + 1][xPos]) && orientation == 'N')
+				nextMove = MOVEN;
+			else if ( !hasEast(cell[yPos][xPos]) && !hasTrace(cell[yPos][xPos + 1]) && orientation == 'E')
+				nextMove = MOVEE;
+			else if ( !hasSouth(cell[yPos][xPos]) && !hasTrace(cell[yPos - 1][xPos]) && orientation == 'S')
+				nextMove = MOVES;
+			else if ( !hasWest(cell[yPos][xPos]) && !hasTrace(cell[yPos][xPos - 1]) && orientation == 'W')
+				nextMove = MOVEW;
 			 
-			// 2. If multiple equally short routes, choose untraced route N > E > S > W
+			// 3. Else, choose untraced route prioritizing N > E > S > W
 			else if ( !hasNorth(cell[yPos][xPos]) && !hasTrace(cell[yPos + 1][xPos]))
 				nextMove = MOVEN;
 			else if ( !hasEast(cell[yPos][xPos]) && !hasTrace(cell[yPos][xPos + 1]))
@@ -410,7 +427,7 @@ void floodStart(void) {
 			else if ( !hasWest(cell[yPos][xPos]) && !hasTrace(cell[yPos][xPos - 1]))
 				nextMove = MOVEW;
 			 
-			// 3. Else, go straight if possible
+			// 4. Else, go straight if possible
 			else if ( orientation == 'N' && !hasNorth(cell[yPos][xPos]) )
 				nextMove = MOVEN;
 			else if ( orientation == 'E' && !hasEast(cell[yPos][xPos]) )
@@ -420,7 +437,7 @@ void floodStart(void) {
 			else if ( orientation == 'W' && !hasWest(cell[yPos][xPos]) )
 				nextMove = MOVEW;
 			
-			// 4. Otherwise prioritize N > E > S > W
+			// 5. Otherwise prioritize N > E > S > W
 			else if (!hasNorth(cell[yPos][xPos]))
 				nextMove = MOVEN;
 			else if (!hasEast(cell[yPos][xPos]))

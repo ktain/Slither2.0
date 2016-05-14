@@ -7,5 +7,6 @@ void readSensor(void);
 void readGyro(void);
 void readVolMeter(void);
 void lowBatCheck(void);
+void setGyroRef(void);
 
 #endif

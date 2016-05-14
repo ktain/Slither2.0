@@ -14,6 +14,7 @@
 
 int pivotTurn(int degrees) {
 	useIRSensors = 0;
+	rightEncChange = leftEncChange = 0;
 	useSpeedProfile = 1;
 	targetSpeedX = 0;
 	
@@ -21,8 +22,8 @@ int pivotTurn(int degrees) {
 	int tempDecW = decW;
 	int errorFlag = EXIT_SUCCESS;
 	
-	accW = 100;
-	decW = 100;
+	accW = 200;
+	decW = 200;
 	int curt = millis();
 	while(millis() - curt < turnDelay);
 
@@ -55,6 +56,7 @@ int pivotTurn(int degrees) {
 	while(millis() - curt < turnDelay);
 		
 	useSpeedProfile = 1;
+	rightEncChange = leftEncChange = 0;
 	return errorFlag;
 }
 
@@ -64,6 +66,7 @@ void curveTurnRight(void) {
 	useSpeedProfile = 1;
 	useIRSensors = 0;
 	targetSpeedX = stopSpeed;
+	rightEncChange = leftEncChange = 0;
 	
 	//int startLeftEncCount = leftEncCount;
 	//int startRightEncCount = rightEncCount;
@@ -86,11 +89,13 @@ void curveTurnRight(void) {
 	
 	targetSpeedW = 0;
 	
+	expectedAngle = curveRight90;
+
 	curt = millis();
 	while (millis() - curt < t3 + t4);
-	
 	useSpeedProfile = 1;
 	
+	rightEncChange = leftEncChange = 0;
 	//setLeftEncCount(startLeftEncCount);
 	//setRightEncCount(startRightEncCount);
 }
@@ -99,6 +104,7 @@ void curveTurnLeft(void) {
 	useSpeedProfile = 1;
 	useIRSensors = 0;
 	targetSpeedX = stopSpeed;
+	rightEncChange = leftEncChange = 0;
 	
 	//int startLeftEncCount = leftEncCount;
 	//int startRightEncCount = rightEncCount;
@@ -119,11 +125,13 @@ void curveTurnLeft(void) {
 	while (millis() - curt < t1 + t2);
 	targetSpeedW = 0;
 	
+	expectedAngle = curveLeft90;
 	curt = millis();
-	while (millis() - curt < t3 + t4);
+	while (millis() - curt < t3 + t4) {
+	}
 	
 	useSpeedProfile = 1;
-
+	rightEncChange = leftEncChange = 0;
 	//setLeftEncCount(startLeftEncCount);
 	//setRightEncCount(startRightEncCount);
 }

@@ -35,6 +35,7 @@ extern int cellDistances[16];
 // Speed profile options
 extern bool useIRSensors;
 extern bool useGyro;
+extern bool useGyroCorrection;
 extern bool usePID;
 extern bool useSpeedProfile;
 extern bool useOnlyGyroFeedback;
@@ -108,6 +109,7 @@ extern int frontWallThresholdL;
 extern int frontWallThresholdR;
 extern int leftPostThreshold;
 extern int rightPostThreshold;
+extern int postScale;
 
 // Gyro
 extern int reflectionRate;
@@ -124,6 +126,7 @@ extern int32_t aSpeed;
 extern int32_t angle; 
 extern int expectedAngle;
 extern int actualAngle;
+extern int aSpeedScale;
 
 // Pivot turn profile;
 extern int turnLeft90;
@@ -132,6 +135,10 @@ extern int turnLeft180;
 extern int turnRight180;
 extern int turnLeft45;
 extern int turnRight45;
+
+// Curve turn profile;
+extern int curveRight90;
+extern int curveLeft90;
 
 extern int distances[100];
 

@@ -99,17 +99,17 @@ void readGyro(void)
 	//int curt = micros();								// Uncomment when not in 1ms interrupt
 
 	int i;
-	int sampleNum = 80;
+	int sampleNum = 20;
 	aSpeed = 0;
 	for(i = 0; i < sampleNum; i++){
-		aSpeed += read_Rate;
+		aSpeed += read_Outz;
 	}
 	
   aSpeed *= 50000/sampleNum;	// scale by 50000 before dividing by number of samples
-	aSpeed -= 105054500;					// 1861 scaled by 50000
+	aSpeed -= aSpeedScale;					// 1866 scaled by 50000
 	aSpeed /= 50000;						// readjust scale
-	aSpeed *= 2;
-	angle += aSpeed; 
+	aSpeed *= -1;								// clockwise is positive
+	angle += aSpeed;
 	actualAngle += aSpeed;
 	
 	//while( (micros() - curt) < 1000 );	// Uncomment when not in 1ms ISR
@@ -143,4 +143,12 @@ void lowBatCheck(void)
 	}
 }
 
-
+void setGyroRef(void) {
+	double avg_Outz = 0;
+	for (int i = 0; i < 1000; i++) {
+		avg_Outz += read_Outz;
+		delay_ms(1);
+	}
+	avg_Outz /= 1000;
+	aSpeedScale = avg_Outz * 50000;
+}

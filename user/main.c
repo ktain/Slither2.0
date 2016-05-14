@@ -60,11 +60,12 @@ float wheelBase = 71;						// mm
 int cellDistance = 24576;
 int cellDistances[16];
 float countspermm = 136;
-int motorToBackDist = 27;
+int motorToBackDist = 26;
 
 /* Configure speed profile options */
 bool useIRSensors = 0;
 bool useGyro = 0;
+bool useGyroCorrection = 0;
 bool usePID = 0;
 bool useSpeedProfile = 0;
 
@@ -90,6 +91,7 @@ int LDMiddleValue = 630;
 int RDMiddleValue = 750;
 int leftPostThreshold = 100;
 int rightPostThreshold = 80;
+int postScale = 8;
 
 int LFvalue1 = 3215;	// for front wall alignment, when mouse is at the center
 int RFvalue1 = 2864;
@@ -107,6 +109,10 @@ int	turnRight180;
 int turnLeft45;
 int turnRight45;
 
+// Curve turn profile
+int curveLeft90;
+int curveRight90;
+
 int distances[100] = {0};
 
 // Interface
@@ -120,6 +126,8 @@ int t0, t1, t2, t3, t4;
 unsigned char cell_backup[SIZE][SIZE] = {0};
 unsigned char distance_backup[SIZE][SIZE] = {0};
 
+// Gyro settings
+int aSpeedScale = 93323000;
 
 void systick(void) {
 	
@@ -171,14 +179,18 @@ int main(void) {
 	alignTime = 0;
 	turnDelay = 0;
 	
-	turnLeft90 = -805000;
-	turnRight90 = 765000;
-	turnLeft180 = -1670000;
-	turnRight180 = 1670000;
-	turnLeft45 = -400000;
-	turnRight45 = 400000;
+	turnLeft90 = -69200;
+	turnRight90 = 69500;
+	turnLeft180 = -143000;
+	turnRight180 = 143000;
+	turnLeft45 = -36000;
+	turnRight45 = 36000;
+
+	curveLeft90 = -58200;
+	curveRight90 = 51200;
 
 	resetSpeedProfile();
+	angle = 0;
 	
 	while(1) {
 		
@@ -255,7 +267,8 @@ void button0_interrupt(void) {
 			stopSpeed = 0*2;
 			alignTime = 150;
 			turnDelay = 100;
-			sensorScale = 35;
+			sensorScale = 40;
+			postScale = 12;
 			accX = 60;
 			decX = 60;
 			floodCenter();
@@ -267,7 +280,8 @@ void button0_interrupt(void) {
 			stopSpeed = 0*2;
 			alignTime = 150;
 			turnDelay = 100;
-			sensorScale = 35;
+			sensorScale = 40;
+			postScale = 12;
 			accX = 90;
 			decX = 90;
 			floodCenter();
@@ -279,7 +293,8 @@ void button0_interrupt(void) {
 			stopSpeed = 0*2;
 			alignTime = 150;
 			turnDelay = 100;
-			sensorScale = 35;
+			sensorScale = 40;
+			postScale = 12;
 			accX = 60;
 			decX = 60;
 			floodCenter();
@@ -293,7 +308,8 @@ void button0_interrupt(void) {
 			stopSpeed = 0*2;
 			alignTime = 150;
 			turnDelay = 100;
-			sensorScale = 35;
+			sensorScale = 40;
+			postScale = 12;
 			accX = 90;
 			decX = 90;
 			floodCenter();
@@ -325,7 +341,8 @@ void button1_interrupt(void) {
 			stopSpeed = 0*2;
 			alignTime = 100;
 			turnDelay = 50;
-			sensorScale = 50;
+			sensorScale = 40;
+			postScale = 14;
 			accX = 60;
 			decX = 60;
 		
@@ -338,8 +355,9 @@ void button1_interrupt(void) {
 			alignTime = 50;
 			turnDelay = 50;
 			sensorScale = 40;
+			postScale = 14;
 			accX = 80;
-			decX = 80;
+			decX = 100;
 		
 			break;
 		case 2:
@@ -350,9 +368,10 @@ void button1_interrupt(void) {
 			stopSpeed = 0*2;
 			alignTime = 50;
 			turnDelay = 50;
-			sensorScale = 30;
+			sensorScale = 40;
+			postScale = 14;
 			accX = 90;
-			decX = 90;
+			decX = 110;
 		
 			break;	
 		case 3:
@@ -363,9 +382,10 @@ void button1_interrupt(void) {
 			stopSpeed = 0*2;
 			alignTime = 0;
 			turnDelay = 40;
-			sensorScale = 30;
-			accX = 100;
-			decX = 100;
+			sensorScale = 40;
+			postScale = 14;
+			accX = 110;
+			decX = 120;
 		
 			break;			
 		default:
@@ -386,16 +406,18 @@ void button2_interrupt(void) {
 	delay_ms(1000);
 	
 	waitForSignal();
-
+	printf("Expected angle %d, actual angle %d\n\r", expectedAngle, actualAngle);
+	
 		switch (select) {
 		case 0:
 			resetSpeedProfile();
 		
 			moveSpeed = 200*2;
 			stopSpeed = 60*2;
-			sensorScale = 30;
+			sensorScale = 25;
+			postScale = 12;
 			accX = 60;
-			decX = 60;
+			decX = 90;
 		
 			speedW = 65;
 			t0 = 45;
@@ -411,21 +433,21 @@ void button2_interrupt(void) {
 			resetSpeedProfile();
 		
 			moveSpeed = 400*2;
-			stopSpeed = 100*2;
+			stopSpeed = 60*2;
 			sensorScale = 25;
-			accX = 60;
-			decX = 60;
+			postScale = 12;
+			accX = 90;
+			decX = 110;
 		
-			speedW = 120;
-			t0 = 20;
-			t1 = 40;
-			t2 = 92;
-			t3 = 40;
-			t4 = 20;
+			speedW = 65;
+			t0 = 45;
+			t1 = 30;
+			t2 = 220;
+			t3 = 30;
+			t4 = 45;
 		
 			speedRunCurve();
-			accW = 8;
-			decW = 8;
+		
 			break;
 		case 2:
 			
@@ -434,8 +456,9 @@ void button2_interrupt(void) {
 			moveSpeed = 500*2;
 			stopSpeed = 100*2;
 			sensorScale = 25;
+			postScale = 12;
 			accX = 90;
-			decX = 90;
+			decX = 110;
 		
 			speedW = 120;
 			t0 = 20;
@@ -445,8 +468,6 @@ void button2_interrupt(void) {
 			t4 = 20;
 
 			speedRunCurve();
-			accW = 8;
-			decW = 8;
 		
 			break;	
 		case 3:
@@ -474,7 +495,8 @@ void button2_interrupt(void) {
 			moveSpeed = 550*2;
 			stopSpeed = 100*2;
 			sensorScale = 25;
-			accX = 120;
+			postScale = 12;
+			accX = 110;
 			decX = 120;
 		
 			speedW = 120;
@@ -485,13 +507,12 @@ void button2_interrupt(void) {
 			t4 = 20;
 
 			speedRunCurve();
-			accW = 8;
-			decW = 8;
 			break;			
 		default:
 			;
 	}
 	
+	printf("Expected angle %d, actual angle %d\n\r", expectedAngle, actualAngle);
 	printf("Finished Button 2 ISR\n\r");
 }
 
@@ -536,6 +557,8 @@ void button3_interrupt(void) {
 			
 			/*
 			resetSpeedProfile();
+			actualAngle = 0;
+			printf("actual angle %d\n\r", actualAngle);
 		
 			moveSpeed = 500*2;
 			stopSpeed = 100*2;
@@ -551,15 +574,18 @@ void button3_interrupt(void) {
 			t4 = 20;
 		
 			moveForward(1);
-			curveTurnRight();
-			moveForward(1);
 			curveTurnLeft();
+			//moveForward(1);
+			//curveTurnLeft();
 			stopSpeed = 0;
 			moveForward(1);
 			turnMotorOff;
 			useSpeedProfile = 0;
+
+			printf("actual angle %d\n\r", actualAngle);
+			break;
 			*/
-		
+			
 			
 			resetSpeedProfile();
 		
@@ -582,8 +608,10 @@ void button3_interrupt(void) {
 			t2 = 164;
 			t3 = 40;
 			t4 = 60;
-		
 			
+			
+			setGyroRef();
+			useGyro = 0;
 			
 			moveE();
 			delay_ms(100);
@@ -612,11 +640,16 @@ void button3_interrupt(void) {
 			useSpeedProfile = 0;
 			turnMotorOff;
 			
+			useGyro = 0;
+			
 			break;	
+			
 			
 		case 3:
 			resetSpeedProfile();
-			delay_ms(100);
+			delay_ms(1000);
+			angle = 0;
+			setGyroRef();
 			while(1) {
 				readSensor();
 				printInfo();
