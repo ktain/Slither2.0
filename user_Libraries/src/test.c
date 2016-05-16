@@ -222,7 +222,7 @@ void speedRun(void)
 	orientation = 'N';
 
 	// Close off untraced routes
-	// closeUntracedCells();
+	closeUntracedCells();
   updateDistanceToCenter();
   visualizeGrid();
 
@@ -315,7 +315,6 @@ void speedRun(void)
 	
 	useSpeedProfile = 0;
 	turnMotorOff;
-	beep(3);
 	
 	isSpeedRunning = 0;
 }
@@ -353,7 +352,7 @@ void speedRunCurve(void)
 	orientation = 'N';
 
 	// Close off untraced routes
-	// closeUntracedCells();
+	closeUntracedCells();
   updateDistanceToCenter();
   visualizeGrid();
 
@@ -450,7 +449,6 @@ void speedRunCurve(void)
 	
 	useSpeedProfile = 0;
 	turnMotorOff;
-	beep(3);
 	
 	isSpeedRunning = 0;
 }
@@ -512,14 +510,14 @@ void waitForSignal(void) {
 	// Wait for left forward sensor signal
 	while(LFSensor < 700) {
 		readSensor();
-		delay_ms(5);
+		delay_ms(10);
 	}
 	beep(2);
 	
 	// Wait for right forward sensor signal
 	while(RFSensor < 700) {
 		readSensor();
-		delay_ms(5);
+		delay_ms(10);
 	}
 	beep(2);
 

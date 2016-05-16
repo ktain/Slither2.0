@@ -296,7 +296,6 @@ void floodCenter(void) {
 			
   //isolateDeadEnds();
 	visualizeGrid();
-	beep(3);
 	
 	isSearching = 0;
 }
@@ -570,8 +569,6 @@ void floodStart(void) {
 		}
 	}
 	
-	moveBack();
-	
 	// Place trace
 	if (!hasTrace(cell[yPos][xPos])) {
 		cell[yPos][xPos] |= 16;
@@ -585,8 +582,6 @@ void floodStart(void) {
 			
   //isolateDeadEnds();
 	visualizeGrid();
-	
-	beep(3);
 	
 	isSearching = 0;
 }

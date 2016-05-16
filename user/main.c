@@ -1,21 +1,21 @@
 /*
 Button 0
 1. floodcenter. speed 70, acc 60/60, delay 200/150
-2. floodcenter. speed 100, acc 90/90, delay 150/100
+2. floodcenter. speed 100, acc 60/60, delay 150/100
 3. floodcenter. save. floodstart. speed 70, acc 60/60, delay 200/150
-4. floodcenter. save. floodstart. speed 100, acc 90/90, delay 150/100
+4. floodcenter. save. floodstart. speed 100, acc 60/60, delay 150/100
 
 Button 1
-1. speedrun pivot. floodstart. speed 200, acc 60/60, delay 100/50
-2. speedrun pivot. floodstart. speed 300, acc 80/80, delay 50/50
-3. speedrun pivot. floodstart. speed 500, acc 90/90, delay 50/50
-4. speedrun pivot. floodstart. speed 500, acc 100/100, delay 0/40
+1. speedrun pivot. load. floodstart. speed 200, acc 60/60, delay 100/50
+2. speedrun pivot. load. floodstart. speed 300, acc 80/100, delay 50/50
+3. speedrun pivot. load. floodstart. speed 500, acc 90/110, delay 50/50
+4. speedrun pivot. load. floodstart. speed 500, acc 110/120, delay 0/40
 
 Button 2
-1. speedrun curve. floodstart. speed 200/60, acc 60/60
-2. speedrun curve. floodstart. speed 400/100, acc 60/60
-3. speedrun curve. floodstart. speed 500/100, acc 90/90
-4. speedrun curve. floodstart. speed 550/100, acc 120/120
+1. speedrun curve. load. floodstart. speed 200/60, acc 60/80
+2. speedrun curve. load. floodstart. speed 300/100, acc 80/100
+3. speedrun curve. load. floodstart. speed 500/100, acc 90/110
+4. speedrun curve. load. floodstart. speed 550/100, acc 110/120
 
 Button 3
 1. save to flash
@@ -85,18 +85,18 @@ bool isCurveTurning = 0;
 // Sensor Thresholds
 int frontWallThresholdL = 150;		// to detect presence of a front wall
 int frontWallThresholdR = 120;
-int leftWallThreshold = 200;
-int rightWallThreshold = 200;
+int leftWallThreshold = 240;
+int rightWallThreshold = 240;
 int LDMiddleValue = 630;				
-int RDMiddleValue = 750;
-int leftPostThreshold = 100;
-int rightPostThreshold = 80;
+int RDMiddleValue = 630;
+int leftPostThreshold = 120;
+int rightPostThreshold = 100;
 int postScale = 8;
 
-int LFvalue1 = 3215;	// for front wall alignment, when mouse is at the center
-int RFvalue1 = 2864;
-int LFvalue2 = 340;		// for front wall detection during speedrun
-int RFvalue2 = 310;		// 10mm
+int LFvalue1 = 3250;	// for front wall alignment, when mouse is at the center
+int RFvalue1 = 3070;
+int LFvalue2 = 460;		// for front wall detection during speedrun
+int RFvalue2 = 460;		// 10mm
 
 int LDvalue1 = 430;		// side sensor PID threshold
 int RDvalue1 = 530;
@@ -257,36 +257,41 @@ void button0_interrupt(void) {
 	
 	initializeGrid();
 	visualizeGrid();
+	resetSpeedProfile();
 	delay_ms(100);
 	
 	switch (select) {
 		case 0:
 			alignPwm = 100;	
 			turnSpeed = 40*2;
-			moveSpeed = 200*2;
+			moveSpeed = 100*2;
 			searchSpeed = 70*2;
 			stopSpeed = 0*2;
 			alignTime = 200;
 			turnDelay = 150;
-			sensorScale = 40;
-			postScale = 12;
+			sensorScale = 60;
+			postScale = 8;
 			accX = 60;
 			decX = 60;
+		
 			floodCenter();
+			beep(3);
 			break;
 		case 1:
 			alignPwm = 100;
 			turnSpeed = 40*2;
-			moveSpeed = 300*2;
+			moveSpeed = 200*2;
 			searchSpeed = 100*2;
 			stopSpeed = 0*2;
 			alignTime = 150;
 			turnDelay = 100;
 			sensorScale = 40;
 			postScale = 12;
-			accX = 90;
-			decX = 90;
+			accX = 60;
+			decX = 60;
+		
 			floodCenter();
+			beep(3);
 			break;
 		case 2:
 			alignPwm = 100;
@@ -300,9 +305,12 @@ void button0_interrupt(void) {
 			postScale = 12;
 			accX = 60;
 			decX = 60;
+		
 			floodCenter();
 			saveData();
+			beep(3);
 			floodStart();
+			beep(3);
 			break;
 		case 3:
 			alignPwm = 100;
@@ -312,13 +320,16 @@ void button0_interrupt(void) {
 			stopSpeed = 0*2;
 			alignTime = 150;
 			turnDelay = 100;
-			sensorScale = 40;
+			sensorScale = 60;
 			postScale = 12;
-			accX = 90;
-			decX = 90;
+			accX = 60;
+			decX = 60;
+		
 			floodCenter();
 			saveData();
+			beep(3);
 			floodStart();
+			beep(3);
 			break;
 		default:
 			;
@@ -334,6 +345,8 @@ void button1_interrupt(void) {
 	delay_ms(1000);	
 	
 	waitForSignal();
+	resetSpeedProfile();
+	delay_ms(100);
 	
 	switch (select) {
 		case 0:
@@ -378,7 +391,7 @@ void button1_interrupt(void) {
 			break;	
 		case 3:
 			alignPwm = 100;
-			moveSpeed = 500*2;
+			moveSpeed = 550*2;
 			turnSpeed = 40*2;
 			searchSpeed = 70*2;
 			stopSpeed = 0*2;
@@ -392,27 +405,14 @@ void button1_interrupt(void) {
 			break;			
 		default:
 			;
-		
-		speedRun();
-		
-		alignPwm = 100;
-		searchSpeed = 70*2;
-		moveSpeed = 400*2;
-		stopSpeed = 60*2;
-		turnSpeed = 40*2;
-		stopSpeed = 0*2;
-		alignTime = 200;
-		turnDelay = 150;
-		sensorScale = 40;
-		postScale = 12;
-		accX = 60;
-		decX = 60;
-		
-		floodStart();
 	}
 	
 	speedRun();
+	loadData();
+	updateDistanceToStart();
+	beep(3);
 	
+	resetSpeedProfile();
 	alignPwm = 100;
 	searchSpeed = 70*2;
 	moveSpeed = 200*2;
@@ -427,7 +427,7 @@ void button1_interrupt(void) {
 	decX = 60;
 	
 	floodStart();
-	
+	beep(3);
 }
 
 
@@ -438,17 +438,17 @@ void button2_interrupt(void) {
 	delay_ms(1000);
 	
 	waitForSignal();
+	resetSpeedProfile();
+	delay_ms(100);
 	
 		switch (select) {
 		case 0:
-			resetSpeedProfile();
-		
 			moveSpeed = 200*2;
 			stopSpeed = 60*2;
 			sensorScale = 25;
 			postScale = 12;
 			accX = 60;
-			decX = 90;
+			decX = 80;
 		
 			speedW = 65;
 			t0 = 45;
@@ -459,27 +459,21 @@ void button2_interrupt(void) {
 		
 			break;
 		case 1:
-			resetSpeedProfile();
-		
-			moveSpeed = 400*2;
-			stopSpeed = 60*2;
+			moveSpeed = 300*2;
+			stopSpeed = 100*2;
 			sensorScale = 25;
 			postScale = 12;
-			accX = 90;
-			decX = 110;
+			accX = 80;
+			decX = 100;
 		
-			speedW = 65;
-			t0 = 45;
-			t1 = 30;
-			t2 = 220;
-			t3 = 30;
-			t4 = 45;
-		
+			speedW = 120;
+			t0 = 20;
+			t1 = 40;
+			t2 = 92;
+			t3 = 40;
+			t4 = 20;
 			break;
 		case 2:
-			
-			resetSpeedProfile();
-		
 			moveSpeed = 500*2;
 			stopSpeed = 100*2;
 			sensorScale = 25;
@@ -496,27 +490,6 @@ void button2_interrupt(void) {
 		
 			break;	
 		case 3:
-			/*
-			resetSpeedProfile();
-		
-			moveSpeed = 1000*2;
-			stopSpeed = 60*2;
-			sensorScale = 40;
-			accX = 120;
-			decX = 130;
-		
-			speedW = 81;
-			t0 = 60;
-			t1 = 40;
-			t2 = 164;
-			t3 = 40;
-			t4 = 60;
-		
-			speedRunCurve();
-			*/
-		
-			resetSpeedProfile();
-		
 			moveSpeed = 550*2;
 			stopSpeed = 100*2;
 			sensorScale = 25;
@@ -535,22 +508,27 @@ void button2_interrupt(void) {
 		default:
 			;
 	}
-		speedRunCurve();
-		
-		alignPwm = 100;
-		searchSpeed = 70*2;
-		moveSpeed = 200*2;
-		stopSpeed = 60*2;
-		turnSpeed = 40*2;
-		stopSpeed = 0*2;
-		alignTime = 200;
-		turnDelay = 150;
-		sensorScale = 40;
-		postScale = 12;
-		accX = 60;
-		decX = 60;
-		
-		floodStart();
+	
+	speedRunCurve();
+	loadData();
+	updateDistanceToStart();
+	beep(3);
+	
+	alignPwm = 100;
+	searchSpeed = 70*2;
+	moveSpeed = 200*2;
+	stopSpeed = 60*2;
+	turnSpeed = 40*2;
+	stopSpeed = 0*2;
+	alignTime = 200;
+	turnDelay = 150;
+	sensorScale = 40;
+	postScale = 12;
+	accX = 60;
+	decX = 60;
+	
+	floodStart();
+	beep(3);
 }
 
 
